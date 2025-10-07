@@ -1,14 +1,33 @@
-\documentclass{article}
-\usepackage{graphicx} % Required for inserting images
+\documentclass[12pt]{report}
 
-\title{tesi_tommaso_bagiana}
-\author{Tommaso bagiana}
-\date{October 2025}
+\input{settings/prelude}
+
+\title{Approccio Deep Learning al Topic Modeling: Analisi di annunci di lavoro tramite BERT}
+\author{Tommaso Bagiana}
+\date{Ottobre 2025}
 
 \begin{document}
 
-\maketitle
+\onehalfspacing
 
-\section{Introduction}
+\input{settings/frontmatter}
+\newpage
+
+\input{dedica}
+\newpage
+
+\tableofcontents
+\newpage
+
+\input{1introduzione}
+\input{2datacleaning}
+\input{3bertopic}
+\input{4risultatifinali}
+\input{5conclusioni}
+
+\bibliographystyle{unsrt}
+\bibliography{bibliografia}
+
+\input{ringraziamenti}
 
 \end{document}

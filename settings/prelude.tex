@@ -1,0 +1,52 @@
+% Thesis common preamble -------------------------------------------------
+\usepackage[italian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{hyperref}
+
+% Hyperref configuration tuned for the thesis PDF metadata
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=black,
+    urlcolor=black,
+    citecolor=black,
+    pdftitle={Approccio Deep Learning al Topic Modeling: Analisi di annunci di lavoro tramite BERT},
+    pdfauthor={Tommaso Bagiana},
+    pdfpagemode=FullScreen,
+}
+
+% Graphics base path so figures can be referenced with relative names
+\graphicspath{{./img/}}
+
+% Simple listings styles for command/output blocks
+\colorlet{mycoolgray}{gray!40}
+
+\lstdefinestyle{output}{
+    numbers=none,
+    numberstyle=\tiny,
+    backgroundcolor=\color{darkgray},
+    basicstyle=\ttfamily\color{white},
+    captionpos=b,
+    breaklines=true,
+    breakatwhitespace=false,
+}
+
+\lstdefinestyle{cmd}{
+    numbers=none,
+    numberstyle=\tiny,
+    backgroundcolor=\color{mycoolgray},
+    basicstyle=\ttfamily\color{black},
+    captionpos=b,
+    breaklines=true,
+    breakatwhitespace=false,
+}
+% -----------------------------------------------------------------------

@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1759846490.26207 "main.aux" "main.bbl" "main" 1759846491.35536 0
+["bibtex main"] 1759848859.75264 "main.aux" "main.bbl" "main" 1759848860.8817 0
   "./bibliografia.bib" 1759843666.4964 222 83b3d6021c19cea3855e2f84b272a680 ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/unsrt.bst" 1292289607 18030 1376b4b231b50c66211e47e42eda2875 ""
-  "main.aux" 1759846491.01916 3812 33bf502bc8a268a9667360975b58c058 "pdflatex"
+  "main.aux" 1759848860.55409 3811 b498bdd418f5e07082cfa96378d9ffb8 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1759846490.38814 "/home/tommaso/tesi/tesi_triennale/main.tex" "main.pdf" "main" 1759846491.35553 0
+["pdflatex"] 1759848859.90771 "/home/tommaso/tesi/tesi_triennale/main.tex" "main.pdf" "main" 1759848860.88193 0
   "/etc/texmf/web2c/texmf.cnf" 1759787235.72431 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/tommaso/tesi/tesi_triennale/main.tex" 1759845841.83138 524 c08141ba666524dbaa762731fa47ee6b ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -21,6 +21,7 @@
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm1200.tfm" 1136768653 3584 f80ddd985bd00e29e9a6047ebd9d4781 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm1440.tfm" 1136768653 3584 3169d30142b88a27d4ab0e3468e963a2 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm1728.tfm" 1136768653 3584 3c76ccb63eda935a68ba65ba9da29f1a ""
+  "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm2074.tfm" 1136768653 3584 8e2870ec7aa9776f59654942b0923f51 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm2488.tfm" 1136768653 3584 406ad7b70d9a41f7833f92b6313150c8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecti1200.tfm" 1136768653 3072 8b5a64dc91775463bc95e2d818524028 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm" 1136768653 1536 74b7293ec3713bb7fdca8dd1bd1f469c ""
@@ -120,12 +121,13 @@
   "/usr/share/texmf/fonts/type1/public/cm-super/sfcc1728.pfb" 1759787252.08448 107203 e671936e3a8639d41d1d76852217c874 ""
   "/usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb" 1759787252.28848 136101 f533469f523533d38317ab5729d00c8a ""
   "/usr/share/texmf/fonts/type1/public/cm-super/sfrm1440.pfb" 1759787252.28848 131078 d96015a2fa5c350129e933ca070b2484 ""
+  "/usr/share/texmf/fonts/type1/public/cm-super/sfrm2074.pfb" 1759787252.29248 131290 ea265c7de37664eae04a6f91a1f7a51f ""
   "/usr/share/texmf/fonts/type1/public/cm-super/sfrm2488.pfb" 1759787252.29648 131381 2285dee019b5f465b19f189dee464723 ""
   "/usr/share/texmf/fonts/type1/public/cm-super/sfti1200.pfb" 1759787252.48048 198221 ca5aa71411090ef358a6cc78b7458365 ""
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1759787263.92061 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1759787332 8212934 1f31c896aee701a90eb7624b8dc4e089 ""
-  "1introduzione.tex" 1759846489.01516 6809 63d170151d4cac4fccd5d406925b7b95 ""
+  "1introduzione.tex" 1759848283.50239 6811 95a7ee357fc26c233c919bf3dcbc6902 ""
   "2datacleaning.tex" 1759845894.33128 700 d020d1fa84e2151e09f4b146cd81c240 ""
   "3bertopic.tex" 1759845908.36726 1050 40e5ae3669432782a4c41a89e64b401f ""
   "4risultatifinali.tex" 1759845917.98724 282 08544455c4889dea4367d9ffb1789ca4 ""
@@ -133,13 +135,13 @@
   "dedica.tex" 1759843821.84075 292 30dbb453069b8b68077ed66bbce49c90 ""
   "img/logoDMI.jpg" 1759843595.4165 70611 ec95c56f2b831fb97fbeb316f4ef0ecf ""
   "img/logoUniPg.jpg" 1759843595.4125 158221 58b7fcc5f36773d17dbfeab4360b61ed ""
-  "main.aux" 1759846491.01916 3812 33bf502bc8a268a9667360975b58c058 "pdflatex"
-  "main.bbl" 1759846490.37916 49 0eba253fc001332e731e8aba3f23127b "bibtex main"
-  "main.out" 1759846491.01916 3976 29817edb244b2ded5ce378f03f6fc333 "pdflatex"
+  "main.aux" 1759848860.55409 3811 b498bdd418f5e07082cfa96378d9ffb8 "pdflatex"
+  "main.bbl" 1759848859.90208 49 0eba253fc001332e731e8aba3f23127b "bibtex main"
+  "main.out" 1759848860.55409 3976 29817edb244b2ded5ce378f03f6fc333 "pdflatex"
   "main.tex" 1759845841.83138 524 c08141ba666524dbaa762731fa47ee6b ""
-  "main.toc" 1759846491.01916 2161 3baa527f2826bcfae642a540f1b12351 "pdflatex"
+  "main.toc" 1759848860.55409 2160 c8d2694c504409df89c472665c354d03 "pdflatex"
   "ringraziamenti.tex" 1759843662.00866 262 c5dc02d863aa9391f02b8e56c6bdd7c1 ""
-  "settings/frontmatter.tex" 1759844236.48804 936 0d4ffe3cd3d70f1721f691a34c761295 ""
+  "settings/frontmatter.tex" 1759848283.50239 972 c773c5df1f6aac2b5d6e27c3201f4778 ""
   "settings/prelude.tex" 1759844239.96788 1367 e133549c56d8f95cca9a4d3b097422a9 ""
   (generated)
   "main.aux"

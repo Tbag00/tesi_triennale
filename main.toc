@@ -3,18 +3,25 @@
 \contentsline {chapter}{\numberline {1}Introduzione}{6}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Cos'è il Topic Modeling}{6}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Analisi del paper \emph {The Dynamics of Data Analytics Job Skills: a Longitudinal Analysis}}{6}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Approccio con BERT}{7}{section.1.3}%
-\contentsline {chapter}{\numberline {2}Data Cleaning}{8}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Strategie di data cleaning usate}{8}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Divisione in paragrafi}{8}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Classificazione paragrafi}{8}{section.2.3}%
-\contentsline {chapter}{\numberline {3}BERTopic}{9}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Pipeline}{9}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Embedding}{9}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}Dimensionality Reduction}{9}{subsection.3.1.2}%
-\contentsline {subsection}{\numberline {3.1.3}Clustering}{10}{subsection.3.1.3}%
-\contentsline {subsection}{\numberline {3.1.4}Tokenizer}{10}{subsection.3.1.4}%
-\contentsline {subsection}{\numberline {3.1.5}Cosa si può migliorare}{10}{subsection.3.1.5}%
-\contentsline {chapter}{\numberline {4}Risultati finali}{11}{chapter.4}%
-\contentsline {chapter}{\numberline {5}Conclusioni}{12}{chapter.5}%
-\contentsline {chapter}{Ringraziamenti}{14}{chapter*.3}%
+\contentsline {subsection}{\numberline {1.2.1}Obiettivi e motivazioni}{7}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Novità nella letteratura}{7}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Metodologia}{7}{subsection.1.2.3}%
+\contentsline {subsection}{\numberline {1.2.4}Risultati}{8}{subsection.1.2.4}%
+\contentsline {subsection}{\numberline {1.2.5}Evoluzione del vocabolario}{9}{subsection.1.2.5}%
+\contentsline {subsection}{\numberline {1.2.6}Conclusioni}{9}{subsection.1.2.6}%
+\contentsline {subsection}{\numberline {1.2.7}Rilevanza per questo progetto}{9}{subsection.1.2.7}%
+\contentsline {section}{\numberline {1.3}Approccio con BERT}{10}{section.1.3}%
+\contentsline {chapter}{\numberline {2}Data Cleaning}{11}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Strategie di data cleaning usate}{11}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Divisione in paragrafi}{11}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Classificazione paragrafi}{11}{section.2.3}%
+\contentsline {chapter}{\numberline {3}BERTopic}{12}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Pipeline}{12}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Embedding}{12}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Dimensionality Reduction}{12}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}Clustering}{13}{subsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.1.4}Tokenizer}{13}{subsection.3.1.4}%
+\contentsline {subsection}{\numberline {3.1.5}Cosa si può migliorare}{13}{subsection.3.1.5}%
+\contentsline {chapter}{\numberline {4}Risultati finali}{14}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Conclusioni}{15}{chapter.5}%
+\contentsline {chapter}{Ringraziamenti}{17}{chapter*.3}%

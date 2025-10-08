@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.6)  7 OCT 2025 16:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.6)  8 OCT 2025 19:05
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -366,12 +366,12 @@ Package hyperref Info: Link coloring ON on input line 9.
 \openout3 = `main.out'.
 
  (./settings/frontmatter.tex
-<img/logoUniPg.jpg, id=104, 401.5pt x 401.5pt>
+<img/logoUniPg.jpg, id=108, 401.5pt x 401.5pt>
 File: img/logoUniPg.jpg Graphic file (type jpg)
 <use img/logoUniPg.jpg>
 Package pdftex.def Info: img/logoUniPg.jpg  used on input line 5.
 (pdftex.def)             Requested size: 58.49762pt x 58.49475pt.
-<img/logoDMI.jpg, id=105, 401.5pt x 401.5pt>
+<img/logoDMI.jpg, id=109, 401.5pt x 401.5pt>
 File: img/logoDMI.jpg Graphic file (type jpg)
 <use img/logoDMI.jpg>
 Package pdftex.def Info: img/logoDMI.jpg  used on input line 11.
@@ -401,25 +401,31 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 Capitolo 1.
 [5
 
-] [6] [7{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [8]) (./2datacleaning.tex [9]
+] [6] [7{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [8]) (./3bertopic.tex [9]
 Capitolo 2.
-) (./3bertopic.tex [10
+[10
+
+]) (./2datacleaning.tex [11]
+Capitolo 3.
+[12
 
 ]
-Capitolo 3.
-[11
-
-]) (./4risultatifinali.tex [12]
+<./img/cleaning/garbage_barplot.png, id=211, 1003.75pt x 501.875pt>
+File: ./img/cleaning/garbage_barplot.png Graphic file (type png)
+<use ./img/cleaning/garbage_barplot.png>
+Package pdftex.def Info: ./img/cleaning/garbage_barplot.png  used on input line 30.
+(pdftex.def)             Requested size: 390.0pt x 195.00294pt.
+ [13 <./img/cleaning/garbage_barplot.png>] [14] [15] [16]) (./4risultatifinali.tex [17] [18]
 Capitolo 4.
-) (./5conclusioni.tex [13
+) (./5conclusioni.tex [19
 
 ]
 Capitolo 5.
-) (./main.bbl [14
+) (./main.bbl [20
 
-]) (./ringraziamenti.tex [15
+]) (./ringraziamenti.tex [21
 
-]) [16
+]) [22
 
 ] (./main.aux)
  ***********
@@ -427,21 +433,21 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 29817EDB244B2DED5CE378F03F6FC333;3976.
+(rerunfilecheck)             Checksum: 38D16BB38B730A5256A8B376166686E1;4232.
  ) 
 Here is how much of TeX's memory you used:
- 13894 strings out of 474222
- 218758 string characters out of 5748733
+ 13935 strings out of 474222
+ 219643 string characters out of 5748733
  1931975 words of memory out of 5000000
- 35897 multiletter control sequences out of 15000+600000
+ 35928 multiletter control sequences out of 15000+600000
  572731 words of font info for 68 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 80i,6n,82p,585b,613s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 80i,7n,82p,1132b,613s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbi1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm2074.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1200.pfb>
-Output written on main.pdf (16 pages, 478262 bytes).
+Output written on main.pdf (22 pages, 540580 bytes).
 PDF statistics:
- 302 PDF objects out of 1000 (max. 8388607)
- 250 compressed objects within 3 object streams
- 51 named destinations out of 1000 (max. 500000)
- 211 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 341 PDF objects out of 1000 (max. 8388607)
+ 281 compressed objects within 3 object streams
+ 61 named destinations out of 1000 (max. 500000)
+ 224 words of extra memory for PDF output out of 10000 (max. 10000000)
 

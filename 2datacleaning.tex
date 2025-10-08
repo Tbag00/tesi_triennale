@@ -1,5 +1,85 @@
+\definecolor{roleColor}{HTML}{1F77B4}
+\definecolor{skillColor}{HTML}{2CA02C}
+\definecolor{responsibilityColor}{HTML}{FF7F0E}
+\definecolor{benefitColor}{HTML}{9467BD}
+\definecolor{companyBlurbColor}{HTML}{8C564B}
+\definecolor{callToActionColor}{HTML}{D62728}
+\definecolor{inclusivityColor}{HTML}{7F7F7F}
+\definecolor{applicationColor}{HTML}{17BECF}
+
+\newcommand{\legenditem}[2]{\textcolor{#2}{\rule{0.8em}{0.8em}}\hspace{0.5em}\textbf{#1}}
+
 \chapter{Data Cleaning}
-Introdurre le fasi preliminari di pulizia dati e il razionale delle scelte effettuate.
+\section{Perché il Data Cleaning è necessario}
+
+Come abbiamo visto nel capitolo precedente, gli \textit{embeddings} dei documenti ne rappresentano la \textbf{semantica}. Di conseguenza due documenti di simile significato saranno convertiti in vettori vicini.
+
+I documenti che sono \textbf{vicini} nello spazio semantico e che si trovano in una \textbf{zona densa} di punti vengono quindi inseriti nello stesso cluster. Questo pone due importanti restrizioni nel dataset:
+
+\begin{enumerate}
+    \item I documenti devono essere \textbf{semanticamente coerenti}, poiché ogni frase inutile influisce sulla posizione del documento nello spazio semantico; di conseguenza il rumore compromette la \textbf{coerenza dei cluster}.
+    \item Le frasi che riguardano argomenti non importanti per lo studio (e.g. stipendi, paragrafi legali, descrizioni aziendali, ecc.), oltre a influire sulla posizione dell'\textit{embedding} nello spazio, creano cluster non utili ai fini dell'analisi, poiché comparendo in quasi tutti i documenti generano zone dense.
+\end{enumerate}
+
+Il secondo punto è particolarmente delicato, perché cluster fittizi che raggruppano documenti in base a fattori irrilevanti non solo creano ``topic spazzatura'', cioè non informativi, ma riducono anche la sensibilità ai dettagli distintivi di un documento (e.g. mansioni, abilità richieste), sottraendo ai cluster effettivi documenti importanti.
+
+Per visualizzare l'effetto di un data cleaning accurato confrontiamo il comportamento del modello su un dataset non preprocessato (Figura~\ref{fig:garbage-barplot}).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{cleaning/garbage_barplot.png}
+    \caption{Barplot ottenuto da \textit{topic modeling} senza \textit{preprocess}.}
+    \label{fig:garbage-barplot}
+\end{figure}
+
+Come visto nel capitolo precedente, a ogni parola è associato uno \textit{score} che ne rappresenta l'importanza all'interno del topic. Questo barplot ci permette di fare alcune considerazioni importanti sulla natura del dataset e sulla direzione che deve assumere la pulizia dei dati. Innanzitutto notiamo che i nomi delle aziende, come TikTok e Netflix, hanno un peso molto grande; ciò è coerente con la natura del dataset, composto da offerte di lavoro basate negli USA, quindi è plausibile che Big Tech e altre multinazionali compaiano nella maggior parte degli annunci. Altre parole poco informative che compaiono in più topic sono legate al gergo aziendale (e.g. mission, team) e derivano dal \textit{blurb} aziendale spesso presente negli annunci. Già con queste considerazioni preliminari otteniamo un buon punto di partenza per stabilire \textbf{cosa} eliminare dal dataset.
+
+Questo rappresenta un buon punto di partenza, ma non è sufficiente. Per capire bene cosa eliminare dobbiamo osservare i dati grezzi e comprendere meglio la natura del corpus. Riportiamo di seguito un esempio che riteniamo rappresentativo, frutto dell'analisi di centinaia di annunci di lavoro, che ci ha permesso di decidere quali porzioni di testo andavano rimosse e quali invece preservate.
+
+\begin{center}
+\begin{tabular}{ll}
+\legenditem{Ruolo}{roleColor} & \legenditem{Responsabilità}{responsibilityColor} \\
+\legenditem{Abilità}{skillColor} & \legenditem{Benefit}{benefitColor} \\
+\legenditem{Blurb aziendale}{companyBlurbColor} & \legenditem{Call to action}{callToActionColor} \\
+\legenditem{Disclaimer su inclusività}{inclusivityColor} & \legenditem{Come inviare curriculum}{applicationColor}
+\end{tabular}
+\end{center}
+
+\noindent\textbf{\textcolor{roleColor}{Ruolo}}\par
+\noindent We are seeking an experienced and proactive Business Intelligence Engineer or lead to join our dynamic team. As a BI Engineer, you will be responsible for day-to-day tasks involving Extract, Transform, Load (ETL) processes, data integration, data modeling, and analytical skills, mentoring junior developers. Scope of role: this person will help bring discipline in day-to-day operations \& production support.\par
+\noindent{\color{roleColor}\rule{\textwidth}{0.6pt}}\par\medskip
+
+\noindent\textbf{\textcolor{skillColor}{Abilità}}\par
+\noindent Ability to work in a fast-paced, high-energy environment and bring sense of urgency \& attention to detail skills to the table. Coordinates closely with other BI team members to help ensure meaningful prioritization. Escalates potential issues in timely fashion and seeks paths for resolution. Excellent communication skills and ability to manage expectations.\par
+\noindent{\color{skillColor}\rule{\textwidth}{0.6pt}}\par\medskip
+
+\noindent\textbf{\textcolor{responsibilityColor}{Responsabilità}}\par
+\noindent Responsibilities: ETL processes — design, develop, and maintain ETL processes using Informatica IICS (Integration Cloud Services) and IDMC (Intelligent Data Management Cloud), ensuring efficient data extraction, transformation, and loading from various source systems. Data modeling and warehousing — work with modern data warehousing platforms, including Snowflake, building schemas, SCDs, hierarchy flattening, and profiling. SQL expertise — write complex SQL queries to extract, transform, and load data efficiently. Big data technologies — collaborate with data engineers and data scientists, leveraging platforms like Databricks for data exploration, transformation, and machine learning. Business intelligence — create advanced Power BI dashboards and reports to support decision-making. Knowledge of SAP BODS and Alteryx ETL tools. Strong experience with cloud-based data solutions. Understanding of AI/ML concepts. Experience in the manufacturing industry. Strong leadership skills.\par
+\noindent{\color{responsibilityColor}\rule{\textwidth}{0.6pt}}\par\medskip
+
+\noindent\textbf{\textcolor{benefitColor}{Benefit}}\par
+\noindent Expected salary ranges between 100,000 and 150,000 USD annually. Compensation is based on a variety of factors when extending offers, including but not limited to the role, responsibilities, candidate experience, education, qualifications, and business considerations. Benefits include medical, dental, vision and prescription drug coverage; spending accounts (HSA, Health Care FSA and Dependent Care FSA); paid time off and holidays; a 401k retirement plan with matching employer contributions; life and accidental death \& dismemberment (AD\&D) insurance; paid leaves; tuition assistance.\par
+\noindent{\color{benefitColor}\rule{\textwidth}{0.6pt}}\par\medskip
+
+\noindent\textbf{\textcolor{companyBlurbColor}{Blurb aziendale}}\par
+\noindent About Regal Rexnord. Regal Rexnord is a publicly held global industrial manufacturer with 30,000 associates around the world who help create a better tomorrow by providing sustainable solutions that power, transmit, and control motion. The company's electric motors and air moving subsystems provide the power to create motion. A portfolio of highly engineered power transmission components and subsystems efficiently transmits motion to power industrial applications. The company's automation offering, comprised of controls, actuators, drives, and precision motors, controls motion in applications ranging from factory automation to precision control in surgical tools.\par\smallskip
+\noindent The company's end markets benefit from meaningful secular demand tailwinds, and include factory automation, food and beverage, aerospace, medical, data center, warehouse, alternative energy, residential and commercial buildings, general industrial, construction, metals and mining, and agriculture.\par\smallskip
+\noindent Regal Rexnord is comprised of three operating segments: Industrial Powertrain Solutions, Power Efficiency Solutions, and Automation \& Motion Control. Regal Rexnord has offices and manufacturing, sales, and service facilities worldwide.\par
+\noindent{\color{companyBlurbColor}\rule{\textwidth}{0.6pt}}\par\medskip
+
+\noindent\textbf{\textcolor{callToActionColor}{Call to action}}\par
+\noindent For more information, including a copy of our Sustainability Report, visit RegalRexnord.com.\par
+\noindent{\color{callToActionColor}\rule{\textwidth}{0.6pt}}\par\medskip
+
+\noindent\textbf{\textcolor{inclusivityColor}{Disclaimer su inclusività}}\par
+\noindent Equal Employment Opportunity Statement. Regal Rexnord is an Equal Opportunity and Affirmative Action Employer. All qualified applicants will receive consideration for employment without regard to race, color, religion, sex/gender, sexual orientation, gender identity, pregnancy, age, ancestry, national origin, genetic information, marital status, citizenship status (unless required by applicable law or government contract), disability or protected veteran status, or any other status or characteristic protected by law. Regal Rexnord is committed to a diverse and inclusive workforce and to building a team that represents diverse backgrounds, perspectives, and skills. To view a copy of the company's affirmative action plan for protected veterans or individuals with disabilities, please email Recruiting@RegalRexnord.com. Candidates who need a reasonable accommodation to search for a job opening or to submit an online application can email Recruiting@RegalRexnord.com. Equal Employment Opportunity Posters.\par
+\noindent{\color{inclusivityColor}\rule{\textwidth}{0.6pt}}\par\medskip
+
+\noindent\textbf{\textcolor{applicationColor}{Come inviare curriculum}}\par
+\noindent Notification to agencies: please note that Regal Rexnord Corporation and its affiliates and subsidiaries (``Regal Rexnord'') do not accept unsolicited resumes or calls from third-party recruiters or employment agencies. In the absence of a signed Master Service Agreement or similar contract and approval from HR to submit resumes for a specific requisition, Regal Rexnord will not consider or approve payment to any third parties for hires made.\par
+\noindent{\color{applicationColor}\rule{\textwidth}{0.6pt}}\par\medskip
+
+Questa struttura si riscontra nella maggior parte degli annunci analizzati. I paragrafi che riteniamo cruciali per gli obiettivi dello studio sono \textit{Ruolo}, \textit{Abilità} e \textit{Responsabilità}, perché descrivono la \textbf{natura del lavoro}. Gli altri blocchi — ovvero \textit{Benefit}, \textit{Blurb aziendale}, \textit{Call to action}, \textit{Disclaimer su inclusività} e \textit{Come inviare curriculum} — costituiscono il rumore che intendiamo rimuovere. Abbiamo quindi identificato \textbf{cosa} eliminare; nel seguito vediamo \textbf{come}.
 
 \section{Strategie di data cleaning usate}
 Elencare le tecniche applicate (rimozione stopword, normalizzazione, gestione dei duplicati, anonimizzazione, ecc.) indicando per ciascuna motivazioni e strumenti.

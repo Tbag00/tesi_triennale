@@ -83,13 +83,70 @@ please note that Regal Rexnord Corporation and its affiliates and subsidiaries (
 Questa struttura si riscontra nella maggior parte degli annunci analizzati. I paragrafi che riteniamo cruciali per gli obiettivi dello studio sono \textit{Ruolo}, \textit{Abilità} e \textit{Responsabilità}, perché descrivono la \textbf{natura del lavoro}. Gli altri blocchi, ovvero \textit{Benefit}, \textit{Blurb aziendale}, \textit{Call to action}, \textit{Disclaimer su inclusività} e \textit{Come inviare curriculum}, costituiscono il rumore che intendiamo rimuovere. Abbiamo quindi identificato \textbf{cosa} eliminare; nella successiva sezione ci occuperemo del \textbf{come}.
 
 \section{Divisione in paragrafi}
-La suddivisione di un testo in paragrafi semanticamente coerenti è un problema aperto nella disciplina dell' _nlp_, ed è stato uno dei problemi più complessi affrontati in questo studio. Un primo approccio che abbiamo tentato è stato suddividere le descrizioni degli annunci in base a segni di punteggiatura, caratteri speciali (e.g. "\n") e numero di parole. Il problema di questo approccio è che introduce dei metaparametri, come ad esempio numero di divisioni massime, lunghezza minima, ecc., che poco hanno a che fare con il significato del testo. Come risultato abbiamo ottenuto una divisione abbastanza omogenea nella lunghezza, ma grossolana nella coerenza semantica. Inoltre gli annunci di lavoro hanno una struttura ortografica poco coerente: qualche annuncio suddivide le informazioni con un elenco, altri separano tramite newline, altri ancora non separano affatto i paragrafi. Si è reso quindi necessario una ricerca di un' altro tipo di struttura comune, o se non altro fortemente ricorrente, nella segmentazione degli annunci.
-Studiando nuovamente il dataset abbiamo notato che molti paragrafi iniziano con un'intestazione: nell'esempio sopra possiamo notare: "Responsabilities:" e "Equal Employment Opportunity Statement". Moltissimi annunci usano questa divisione, probabilmente  per motivi di leggibilità data la lunghezza, ma non tutti; dunque abbiamo scelto la divisione basata su intestazioni come strategia principale e la vecchia strategia basata sulla punteggiatura come _fallback_ nel caso di paragrafi troppo lunghi, questo perché se un paragrafo è lungo è probabile che contenga frasi con significati distanti, inoltre il modello che vedremo nella sezione successiva predilige blocchi di testo con poche frasi.
-Come riconoscere un'intestazione è più complicato di come si potrebbe pensare, un primo tentativo che abbiamo svolto utilizzava delle _espressioni regolari_, ad esempio:
-JOB_CUES_PAT = re.compile(r"(?i)\b(job\s+description|about\s+the\s+role|responsabilit|activit|"
-                          r"requirements?|qualifications?|what\s+you(?:’|'|)ll\s+(do|be\s+doing)|"
-                          r"skills|nice\s+to\s+have|profilo)\b")
 
+\noindent La suddivisione di un testo in paragrafi semanticamente coerenti è un problema aperto nella disciplina dell'\textit{nlp}, ed è stato uno dei problemi più complessi affrontati in questo studio. Un primo approccio che abbiamo tentato è stato suddividere le descrizioni degli annunci in base a segni di punteggiatura, caratteri speciali (e.g. \texttt{\textbackslash n}) e numero di parole. Il problema di questo approccio è che introduce dei metaparametri, come ad esempio numero di divisioni massime, lunghezza minima, ecc., che poco hanno a che fare con il significato del testo. Come risultato abbiamo ottenuto una divisione abbastanza omogenea nella lunghezza, ma grossolana nella coerenza semantica. Inoltre gli annunci di lavoro hanno una struttura ortografica poco coerente: qualche annuncio suddivide le informazioni con un elenco, altri separano tramite newline, altri ancora non separano affatto i paragrafi. Si è reso quindi necessario una ricerca di un' altro tipo di struttura comune, o se non altro fortemente ricorrente, nella segmentazione degli annunci.
+
+\medskip
+
+\noindent Studiando nuovamente il dataset abbiamo notato che molti paragrafi iniziano con un'intestazione: nell'esempio sopra possiamo notare: "Responsabilities:" e "Equal Employment Opportunity Statement". Moltissimi annunci usano questa divisione, probabilmente  per motivi di leggibilità data la lunghezza, ma non tutti; dunque abbiamo scelto la divisione basata su intestazioni come strategia principale e la vecchia strategia basata sulla punteggiatura come \textit{fallback} nel caso di paragrafi troppo lunghi, questo perché se un paragrafo è lungo è probabile che contenga frasi con significati distanti, inoltre il modello che vedremo nella sezione successiva predilige blocchi di testo con poche frasi.
+
+\medskip
+
+\noindent Come riconoscere un'intestazione è più complicato di come si potrebbe pensare, un primo tentativo che abbiamo svolto utilizzava delle \textit{espressioni regolari}, ad esempio:
+
+\begin{lstlisting}[language=python,style=python]
+JOB_CUES_PAT = re.compile(r"(?i)\b(job\s+description|about\s+the\s+role|responsabilit|activit|"
+                          r"requirements?|qualifications?|what\s+you(?:'|)ll\s+(do|be\s+doing)|"
+                          r"skills|nice\s+to\s+have|profilo)\b")
+\end{lstlisting}
+
+\noindent Però le regex si sono rivelate troppo rigide allo scopo, ad esempio un intestazione tipo "At Google you will:" non verrebbe catturata.
+
+\medskip
+
+\noindent Un altro tentativo è stato quello di selezionare le righe che fossero composte da massimo n parole o che terminassero con un carattere \textit{newline}, chiaramente anche questo tentativo è risultato fallimentare poiché alcune intestazioni si rivelano ben più lunghe di quanto si potrebbe immaginare, mentre altre frasi brevi potrebbero essere confuse per intestazioni. Dunque ci serve un metodo che sia sufficentemente flessibile, per questo abbiamo scelto di addestrare una rete neurale.
+
+\medskip
+
+\noindent La libreria scelta per l'addestramento è \textit{Spacy}.
+
+\medskip
+
+\noindent Cos'è spacy?
+
+\noindent Spacy è una libreria per \textit{nlp} basata su \textit{pipelines} composte da moduli modificabili e allenabili. Questa componente altamente personalizzabile della libreria la rende ideale per il nostro studio, infatti in momenti diversi utilizzeremo componenti differenti a seconda del bisogno.
+
+\noindent Le \textit{pipelines} elaborano un testo e restituiscono un \textit{Doc}, un oggetto che permette di accedere alle informazioni del testo ottenute dalla pipeline. Un Doc è una sequenza di Python composta da \textit{token}. In spacy i token sono parole o segni di punteggiatura.
+\noindent Gli \textit{span} invece sono sottosequenze del documento, composta da token contigui.
+
+\begin{lstlisting}[language=python]
+nlp = spacy.blank("en")     # Creazione pipeline default
+doc = nlp("Hello world!")
+
+for token in doc:
+    print(token.text)
+\end{lstlisting}
+
+\noindent \textbf{Output:}
+
+\begin{lstlisting}[style=output]
+Hello
+world
+!
+\end{lstlisting}
+
+\begin{lstlisting}[language=python,style=python]
+span = doc[1:3]
+print(span.text)
+\end{lstlisting}
+
+\noindent \textbf{Output:}
+
+\begin{lstlisting}[style=output]
+world!
+\end{lstlisting}
+
+\noindent I moduli della pipeline lavorano salvando le informazioni sui token, sugli span o sul Doc. Uno dei moduli custom allenabili è lo SpanCategorizer (spancat in breve) che permette di riconoscere ed etichettare span. Possiamo quindi interpretare le intestazioni come \textit{span} e allenare un modello per riconoscerle.
 
 
 \section{Classificazione paragrafi}

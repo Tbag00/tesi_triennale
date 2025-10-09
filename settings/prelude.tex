@@ -28,7 +28,7 @@
 \graphicspath{{./img/}}
 
 % Simple listings styles for command/output blocks
-\colorlet{mycoolgray}{gray!40}
+\colorlet{mycoolgray}{gray!20}
 
 \lstdefinestyle{output}{
     numbers=none,
@@ -37,7 +37,23 @@
     basicstyle=\ttfamily\color{white},
     captionpos=b,
     breaklines=true,
-    breakatwhitespace=false,
+    breakatwhitespace=true,
+    showstringspaces=false,
+}
+
+\lstdefinestyle{python}{
+    language=python,
+    numbers=left,
+    numberstyle=\tiny,
+    backgroundcolor=\color{mycoolgray},
+    basicstyle=\ttfamily\color{black},
+    keywordstyle=\bfseries\color{blue!70!black},
+    stringstyle=\color{green!50!black},
+    commentstyle=\itshape\color{gray!70},
+    captionpos=b,
+    breaklines=true,
+    breakatwhitespace=true,
+    showstringspaces=false,
 }
 
 \lstdefinestyle{cmd}{
@@ -47,6 +63,7 @@
     basicstyle=\ttfamily\color{black},
     captionpos=b,
     breaklines=true,
-    breakatwhitespace=false,
+    breakatwhitespace=true,
+    showstringspaces=false,
 }
 % -----------------------------------------------------------------------

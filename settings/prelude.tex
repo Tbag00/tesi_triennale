@@ -40,8 +40,8 @@
     breakatwhitespace=true,
     showstringspaces=false,
     showspaces=false,
+    keepspaces=true,
 }
-
 \lstdefinestyle{python}{
     language=python,
     numbers=left,
@@ -56,8 +56,8 @@
     breakatwhitespace=true,
     showstringspaces=false,
     showspaces=false,
+    keepspaces=true,
 }
-
 \lstdefinestyle{cmd}{
     numbers=none,
     numberstyle=\tiny,
@@ -68,5 +68,15 @@
     breakatwhitespace=true,
     showstringspaces=false,
     showspaces=false,
+    keepspaces=true,
 }
+
+\lstset{
+    showstringspaces=false,
+    showspaces=false
+}
+
+\makeatletter
+\lst@AddToHook{Init}{\def\lst@visiblespace{\kern0.3em}}
+\makeatother
 % -----------------------------------------------------------------------

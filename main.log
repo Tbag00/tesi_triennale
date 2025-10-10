@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.6)  9 OCT 2025 16:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.6)  10 OCT 2025 18:10
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -366,12 +366,12 @@ Package hyperref Info: Link coloring ON on input line 9.
 \openout3 = `main.out'.
 
  (./settings/frontmatter.tex
-<img/logoUniPg.jpg, id=108, 401.5pt x 401.5pt>
+<img/logoUniPg.jpg, id=116, 401.5pt x 401.5pt>
 File: img/logoUniPg.jpg Graphic file (type jpg)
 <use img/logoUniPg.jpg>
 Package pdftex.def Info: img/logoUniPg.jpg  used on input line 5.
 (pdftex.def)             Requested size: 58.49762pt x 58.49475pt.
-<img/logoDMI.jpg, id=109, 401.5pt x 401.5pt>
+<img/logoDMI.jpg, id=117, 401.5pt x 401.5pt>
 File: img/logoDMI.jpg Graphic file (type jpg)
 <use img/logoDMI.jpg>
 Package pdftex.def Info: img/logoDMI.jpg  used on input line 11.
@@ -410,7 +410,7 @@ Capitolo 3.
 [12
 
 ]
-<./img/cleaning/garbage_barplot.png, id=211, 1003.75pt x 501.875pt>
+<./img/cleaning/garbage_barplot.png, id=221, 1003.75pt x 501.875pt>
 File: ./img/cleaning/garbage_barplot.png Graphic file (type png)
 <use ./img/cleaning/garbage_barplot.png>
 Package pdftex.def Info: ./img/cleaning/garbage_barplot.png  used on input line 30.
@@ -422,39 +422,41 @@ File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 ) [16] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
-LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 98.
-
-Overfull \hbox (222.66113pt too wide) in paragraph at lines 98--99
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]  
- []
-
-
-Overfull \hbox (321.19336pt too wide) in paragraph at lines 99--100
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]  
+Overfull \hbox (75.19043pt too wide) in paragraph at lines 100--101
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 [17]
-Overfull \hbox (84.1289pt too wide) in paragraph at lines 100--101
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]  
+Overfull \hbox (96.33545pt too wide) in paragraph at lines 101--102
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (4.70703pt too wide) in paragraph at lines 123--124
+Overfull \hbox (4.70703pt too wide) in paragraph at lines 126--127
 [][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[18]) (./4risultatifinali.tex [19]
+[18]
+Overfull \hbox (7.34187pt too wide) in paragraph at lines 158--159
+\T1/cmr/m/n/12 Per con-fi-gu-ra-re il mo-del-lo (e l'al-le-na-men-to), spa-Cy ri-chie-de un fi-le \T1/cmtt/m/n/12 config.cfg\T1/cmr/m/n/12 ,
+ []
+
+[19]
+Overfull \hbox (15.22974pt too wide) in paragraph at lines 165--166
+[][]  
+ []
+
+[20] [21]) (./4risultatifinali.tex [22]
 Capitolo 4.
-) (./5conclusioni.tex [20
+) (./5conclusioni.tex [23
 
 ]
 Capitolo 5.
-) (./main.bbl [21
+) (./main.bbl [24
 
-]) (./ringraziamenti.tex [22
+]) (./ringraziamenti.tex [25
 
-]) [23
+]) [26
 
 ] (./main.aux)
  ***********
@@ -462,21 +464,21 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: FFD7D8F5C1FB20368433D1825FEA8327;4273.
+(rerunfilecheck)             Checksum: E8D81731A4AA972880AE17076F6B0EA8;4452.
  ) 
 Here is how much of TeX's memory you used:
- 14418 strings out of 474222
- 224648 string characters out of 5748733
- 1940975 words of memory out of 5000000
- 36383 multiletter control sequences out of 15000+600000
- 573810 words of font info for 70 fonts, out of 8000000 for 9000
+ 14544 strings out of 474222
+ 226179 string characters out of 5748733
+ 1970975 words of memory out of 5000000
+ 36460 multiletter control sequences out of 15000+600000
+ 577351 words of font info for 81 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 80i,7n,82p,1275b,2162s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbi1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0600.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm2074.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on main.pdf (23 pages, 597765 bytes).
+ 80i,8n,82p,1275b,2096s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbi1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0700.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm2074.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb>
+Output written on main.pdf (26 pages, 656954 bytes).
 PDF statistics:
- 379 PDF objects out of 1000 (max. 8388607)
- 313 compressed objects within 4 object streams
- 81 named destinations out of 1000 (max. 500000)
- 224 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 465 PDF objects out of 1000 (max. 8388607)
+ 392 compressed objects within 4 object streams
+ 125 named destinations out of 1000 (max. 500000)
+ 240 words of extra memory for PDF output out of 10000 (max. 10000000)
 

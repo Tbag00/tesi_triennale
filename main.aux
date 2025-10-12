@@ -40,10 +40,22 @@
 \@writefile{toc}{\contentsline {section}{\numberline {3.2}Divisione in paragrafi}{15}{section.3.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Spacy}{16}{subsection.3.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{Suggester}{18}{section*.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Tok2Vec}{18}{section*.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Reducer}{19}{section*.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Configurazione del \textit  {suggester}: usa il componente \texttt  {spacy.ngram\_suggester.v1} e valuta tutti gli span fino a 20 token per coprire la varietà degli header.}}{18}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:cfg-suggester}{{3.3}{18}{Configurazione del \textit {suggester}: usa il componente \texttt {spacy.ngram\_suggester.v1} e valuta tutti gli span fino a 20 token per coprire la varietà degli header}{figure.caption.5}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Tok2Vec}{18}{section*.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Configurazione dell'\textit  {embedder}: vettori da 96 dimensioni con attributi morfologici distinti (\texttt  {NORM}, \texttt  {PREFIX}, \texttt  {SUFFIX}, \texttt  {SHAPE}) e hash table calibrate su 5000/1000/2500/2500 voci; gli embedding esterni non vengono usati.}}{18}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:cfg-embed}{{3.4}{18}{Configurazione dell'\textit {embedder}: vettori da 96 dimensioni con attributi morfologici distinti (\texttt {NORM}, \texttt {PREFIX}, \texttt {SUFFIX}, \texttt {SHAPE}) e hash table calibrate su 5000/1000/2500/2500 voci; gli embedding esterni non vengono usati}{figure.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Encoder \texttt  {MaxoutWindowEncoder}: stesso spazio vettoriale a 96 dimensioni, quattro strati con finestra contestuale di un token per lato e tre proiezioni Maxout per modellare non linearità.}}{19}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:cfg-encode}{{3.5}{19}{Encoder \texttt {MaxoutWindowEncoder}: stesso spazio vettoriale a 96 dimensioni, quattro strati con finestra contestuale di un token per lato e tre proiezioni Maxout per modellare non linearità}{figure.caption.8}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Reducer}{19}{section*.9}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces Reducer \texttt  {mean\_max}: combina media e massimo dei token in un vettore di dimensione 128 prima dello strato di scoring.}}{20}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:cfg-reducer}{{3.6}{20}{Reducer \texttt {mean\_max}: combina media e massimo dei token in un vettore di dimensione 128 prima dello strato di scoring}{figure.caption.10}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Scorer}{20}{subsection.3.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Allenamento}{20}{section*.7}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces Scorer logistico lineare: un'unica uscita sigmoide (\texttt  {nO = 1}) alimentata dal vettore di dimensione 128 prodotto dal reducer.}}{20}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:cfg-scorer}{{3.7}{20}{Scorer logistico lineare: un'unica uscita sigmoide (\texttt {nO = 1}) alimentata dal vettore di dimensione 128 prodotto dal reducer}{figure.caption.11}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Allenamento}{21}{section*.12}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces Parametri di training: dropout fissato a 0.1, aggiornamento dopo ogni batch (\texttt  {accumulate\_gradient = 1}), early stopping con \texttt  {patience} 1600 valutazioni e \texttt  {max\_steps} 20000; valutazione sul dev ogni 200 step.}}{21}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:cfg-training}{{3.8}{21}{Parametri di training: dropout fissato a 0.1, aggiornamento dopo ogni batch (\texttt {accumulate\_gradient = 1}), early stopping con \texttt {patience} 1600 valutazioni e \texttt {max\_steps} 20000; valutazione sul dev ogni 200 step}{figure.caption.13}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {3.3}Classificazione paragrafi}{22}{section.3.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3.4}Altre strategie di data cleaning usate}{22}{section.3.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {chapter}{\numberline {4}Risultati finali}{23}{chapter.4}\protected@file@percent }
@@ -58,5 +70,5 @@
 \bibcite{almgerbi2025dynamics}{1}
 \bibcite{grootendorst2022bertopic}{2}
 \bibcite{devlin2019bert}{3}
-\@writefile{toc}{\contentsline {chapter}{Ringraziamenti}{26}{chapter*.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{Ringraziamenti}{26}{chapter*.15}\protected@file@percent }
 \gdef \@abspage@last{26}

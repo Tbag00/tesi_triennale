@@ -162,61 +162,91 @@ world!
 \subsubsection{Suggester}
 Il \textit{Suggester} utilizzato è quello di default, \texttt{spacy.ngram\_suggester.v1}, che marca come candidati tutti gli span possibili entro una certa lunghezza.
 
+\begin{figure}[H]
+    \centering
+    \scriptsize
 \begin{lstlisting}[style=cmd]
 [components.spancat.suggester]
 @misc = "spacy.ngram_suggester.v1"
 sizes = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
 \end{lstlisting}
+    \caption{Configurazione del \textit{suggester}: usa il componente \texttt{spacy.ngram\_suggester.v1} e valuta tutti gli span fino a 20 token per coprire la varietà degli header.}
+    \label{fig:cfg-suggester}
+\end{figure}
 
 \noindent Ho impostato 20 come lunghezza massima a causa della varietà degli header: il modello risulta molto flessibile, ma anche più pesante, perché all'aumentare degli n-grammi possibili aumentano i controlli da effettuare.
 Vediamo adesso come è composta la rete neurale, partendo dalla sua prima componente: \textbf{Tok2Vec}.
 \subsubsection{Tok2Vec}
 \noindent È suddiviso in due sottoreti embedder ed encoder. L'\textit{embedder} converte i token in vettori ignorando il contesto.
 
+\begin{figure}[H]
+    \centering
+    \scriptsize
 \begin{lstlisting}[style=cmd]
 [components.tok2vec.model.embed]
 @architectures = "spacy.MultiHashEmbed.v2"
-width = 96 # dimensione output
+width = 96
 attrs = ["NORM","PREFIX","SUFFIX","SHAPE"]
-rows = [5000,1000,2500,2500]    # numero massimo di slot per ogni tabella
-include_static_vectors = false  # indica di non usare vettori pre-addestrati esterni
+rows = [5000,1000,2500,2500]
+include_static_vectors = false
 \end{lstlisting}
+    \caption{Configurazione dell'\textit{embedder}: vettori da 96 dimensioni con attributi morfologici distinti (\texttt{NORM}, \texttt{PREFIX}, \texttt{SUFFIX}, \texttt{SHAPE}) e hash table calibrate su 5000/1000/2500/2500 voci; gli embedding esterni non vengono usati.}
+    \label{fig:cfg-embed}
+\end{figure}
 
 \noindent Gli attributi indicano quali caratteristiche del token contribuiscono all'embedding e forniscono alla rete informazioni morfologiche e ortografiche utili per riconoscere pattern linguistici: \texttt{NORM} è la parola normalizzata (senza maiuscole, accenti o varianti equivalenti, e.g. \texttt{'s} diventa \texttt{is}); \texttt{PREFIX} e \texttt{SUFFIX} sono autoesplicativi; \texttt{SHAPE} descrive la forma ortografica (\texttt{Data}: \texttt{Xxxx}, \texttt{NASA}: \texttt{XXXX}, \texttt{2025}: \texttt{dddd}). Il componente \texttt{MultiHashEmbed.v2} crea embedding separati per ciascun attributo,\footnote{\url{https://spacy.io/api/architectures\#MultiHashEmbed}} così ogni token è rappresentato dal significato, dalla forma ortografica e da porzioni specifiche della parola. In \texttt{rows} impostiamo la dimensione massima della tabella hash per ogni attributo; trattandosi di matrici che associano a ciascun valore un vettore, abbiamo dimensionato le tabelle in base alla varietà attesa degli attributi, prevedendo ad esempio molte più forme normalizzate rispetto ai prefissi e rimanendo entro il bound consigliato (1000--10000).
 
 \noindent L'\textit{encoder} modifica i vettori in funzione del \textit{contesto}.
 
+\begin{figure}[H]
+    \centering
+    \scriptsize
 \begin{lstlisting}[style=cmd]
 [components.tok2vec.model.encode]
 @architectures = "spacy.MaxoutWindowEncoder.v2"
-width = 96          # grandezza input e output, obbligatoriamente uguali
-depth = 4           # numero di layer convolutivi
-window_size = 1     # numero di parole adiacenti da considerare
-maxout_pieces = 3   # calcola 3 proiezioni diverse e ne prende il massimo
+width = 96
+depth = 4
+window_size = 1
+maxout_pieces = 3
 \end{lstlisting}
+    \caption{Encoder \texttt{MaxoutWindowEncoder}: stesso spazio vettoriale a 96 dimensioni, quattro strati con finestra contestuale di un token per lato e tre proiezioni Maxout per modellare non linearità.}
+    \label{fig:cfg-encode}
+\end{figure}
 
 \noindent I vettori vengono processati da una rete \textit{feed-forward}: ogni strato calcola tre proiezioni lineari e applica \textit{Maxout}, scegliendo quella con valore massimo per ogni finestra. L'uso di \textit{Maxout}, al posto di una semplice ReLU, permette di modellare dipendenze contestuali più complesse.
 \subsubsection{Reducer}
 
 \noindent Questo componente sintetizza uno span in un unico vettore di dimensione \texttt{hidden\_size}.
 
+\begin{figure}[H]
+    \centering
+    \scriptsize
 \begin{lstlisting}[style=cmd]
 [components.spancat.model.reducer]
 @layers = "spacy.mean_max_reducer.v1"
 hidden_size = 128
 \end{lstlisting}
+    \caption{Reducer \texttt{mean\_max}: combina media e massimo dei token in un vettore di dimensione 128 prima dello strato di scoring.}
+    \label{fig:cfg-reducer}
+\end{figure}
 
 \noindent Il componente \texttt{MeanMaxReducer} calcola la media dei token, il massimo dei token e concatena i due vettori in un'unica rappresentazione, sulla quale applica un \textit{hidden layer}; la documentazione indica la presenza del layer ma non ne esplicita la struttura.\footnote{\url{https://spacy.io/api/architectures\#mean\_max\_reducer}}
 \subsection{Scorer}
 
 \noindent Il layer finale mappa il vettore dello span sulla probabilità di classe, utilizzando una funzione di attivazione \textbf{sigmoide}.
 
+\begin{figure}[H]
+    \centering
+    \scriptsize
 \begin{lstlisting}[style=cmd]
 [components.spancat.model.scorer]
 @layers = "spacy.LinearLogistic.v1"
-nO = 1    # dimensione output (ho una sola classe)
-nI = null # dimensione input (in questo caso 128)
+nO = 1
+nI = null
 \end{lstlisting}
+    \caption{Scorer logistico lineare: un'unica uscita sigmoide (\texttt{nO = 1}) alimentata dal vettore di dimensione 128 prodotto dal reducer.}
+    \label{fig:cfg-scorer}
+\end{figure}
 Il layer usato qui è uno strato lineare seguito da una \textbf{sigmoide}.
 Poiché SBERT (usato per la classificazione dei paragrafi) predilige documenti composti da poche frasi, e per limitare il numero di paragrafi spuri (cioè che comprendono informazioni di classi diverse), abbiamo scelto 0.2 come probabilità minima per classificare uno span come header, in modo da avere una segmentazione più fine.
 Il contro di questo approccio è che se il documento è troppo corto SBERT non ha il contesto necessario per fare una classificazione robusta, parleremo del problema nella sezione successiva.
@@ -227,19 +257,25 @@ Il contro di questo approccio è che se il documento è troppo corto SBERT non h
 
 \noindent Abbiamo quindi suddiviso il corpus in \textit{train} usato per l'allenamento e \textit{dev} usato per la valutazione. la grandezza del \textit{dev set} è del 10\% del corpus, siamo consci del fatto che sia una porzione di dati troppo esigua per avere delle valutazioni statistiche robuste, cionondimeno abbiamo deciso volutamente di creare una disparità in favore del training set poiché il modello è composto da più strati, tutti da allenare (embedder, encoder, reducer e scorer), dunque abbiamo evitato di sottrarre informazioni utili all'apprendimento. Vediamo adesso nello specifico come è impostato il training:
 
+\begin{figure}[H]
+    \centering
+    \scriptsize
 \begin{lstlisting}[style=cmd]
 [training]
 dev_corpus = "corpora.dev"
 train_corpus = "corpora.train"
 seed = ${system.seed}
 gpu_allocator = ${system.gpu_allocator}
-dropout = 0.1    # neuroni spenti ad ogni update
-accumulate_gradient = 1 # update dopo ogni batch
-patience = 1600  # numero massimo di valutazioni senza miglioramento prima di early stopping
-max_epochs = 0   # 0 implica che il numero di epoche viene ignorato, usa solo max_step
-max_steps = 20000 # criterio di early stopping
-eval_frequency = 200 # frequenza di valutazione su dev (in step)
+dropout = 0.1
+accumulate_gradient = 1
+patience = 1600
+max_epochs = 0
+max_steps = 20000
+eval_frequency = 200
 \end{lstlisting}
+    \caption{Parametri di training: dropout fissato a 0.1, aggiornamento dopo ogni batch (\texttt{accumulate\_gradient = 1}), early stopping con \texttt{patience} 1600 valutazioni e \texttt{max\_steps} 20000; valutazione sul dev ogni 200 step.}
+    \label{fig:cfg-training}
+\end{figure}
 
 \noindent Il corpo viene suddiviso in batch di grandezza variabile, i batch non sono composti da documenti, ma da token, per miglioreare le performance qualndo l'allenamento avviene su GPU. A ogni passo di training, la dimensione del batch viene moltiplicata per un fattore 1.001, partendo da 100 token fino a un massimo di 1000; in questo modo batch piccoli vengono usati all'inizio del training, per avere gradienti più rumorosi ma anche più esplorativi, man mano che il training prosegue si prediligono batch sempre più grandi per avere gradienti più stabili e precisi. \textit{Nota: valutare se inserire info riguardo l'ottimizzatore che è Adam.}
 

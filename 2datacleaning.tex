@@ -268,7 +268,8 @@ seed = ${system.seed}
 gpu_allocator = ${system.gpu_allocator}
 dropout = 0.1
 accumulate_gradient = 1
-patience = 1600
+patience = 1600.
+L'F-score rimane buono in entrambi i casi, questo vuol dire che il modello generalizza bene, anche se perde qualche intestazione marginale.
 max_epochs = 0
 max_steps = 20000
 eval_frequency = 200
@@ -279,6 +280,17 @@ eval_frequency = 200
 
 \noindent Il corpo viene suddiviso in batch di grandezza variabile, i batch non sono composti da documenti, ma da token, per miglioreare le performance qualndo l'allenamento avviene su GPU. A ogni passo di training, la dimensione del batch viene moltiplicata per un fattore 1.001, partendo da 100 token fino a un massimo di 1000; in questo modo batch piccoli vengono usati all'inizio del training, per avere gradienti più rumorosi ma anche più esplorativi, man mano che il training prosegue si prediligono batch sempre più grandi per avere gradienti più stabili e precisi. \textit{Nota: valutare se inserire info riguardo l'ottimizzatore che è Adam.}
 
+\subsection{Valutazione del modello}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{cleaning/header_metrics_comparison.png}
+    \caption{Confronto delle metriche \textit{precision}, \textit{recall} e \textit{F-score} tra la valutazione fatta nel dev set e quella nel test set.}
+    \label{fig:header-metrics}
+\end{figure}
+
+\noindent Il \textit{test set} è composto da altre 20 descrizioni per un totale di 150 intestazioni.
+\noindent Il modello mostra una \textit{precisione} elevata e una \textit{sensibilità} complessivamente soddisfacente. La \textit{recall}, come evidenziato in Figura~\ref{fig:header-metrics}, diminuisce in modo sensibile, ma rimane entro un intervallo accettabile per l'obiettivo di segmentazione. L'\textit{F-score} resta stabile e su valori buoni, a indicare che la rete generalizza bene: qualche intestazione marginale viene persa, ma il bilanciamento tra falsi positivi e falsi negativi rimane favorevole.
 \section{Classificazione paragrafi}
 Spiegare il processo di etichettatura o clustering preliminare dei paragrafi, specificando se è supervisionato o meno e come si valida la coerenza delle classi.
 

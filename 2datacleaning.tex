@@ -292,6 +292,57 @@ eval_frequency = 200
 \noindent Il \textit{test set} è composto da altre 20 descrizioni per un totale di 150 intestazioni.
 \noindent Il modello mostra una \textit{precisione} elevata e una \textit{sensibilità} complessivamente soddisfacente. La \textit{recall}, come evidenziato in Figura~\ref{fig:header-metrics}, diminuisce in modo sensibile, ma rimane entro un intervallo accettabile per l'obiettivo di segmentazione. L'\textit{F-score} resta stabile e su valori buoni, a indicare che la rete generalizza bene: qualche intestazione marginale viene persa, ma il bilanciamento tra falsi positivi e falsi negativi rimane favorevole.
 \section{Classificazione paragrafi}
-Spiegare il processo di etichettatura o clustering preliminare dei paragrafi, specificando se è supervisionato o meno e come si valida la coerenza delle classi.
+
+\noindent Una volta completata la divisione in paragrafi, analizziamo come abbiamo affrontato la classificazione. Dobbiamo gestire testi di lunghezza variabile ma comunque limitati a poche frasi. Abbiamo deciso di utilizzare un modello della libreria \textit{Sentence Transformers} per creare gli embedding dei paragrafi, a cui abbiamo poi applicato un layer di \textit{Logistic Regression} che classifica gli embedding. Anche in questo caso abbiamo adottato \textit{all-mpnet-base-v2}, poiché fornisce embedding semantici di alta qualità, come visto nel capitolo precedente.
+
+\subsection{Etichettatura}
+
+\noindent Il primo step per l'allenamento del modello è creare il \textit{training set} e il \textit{test set}. Un test preliminare è stato effettuato etichettando 178 paragrafi con 10 etichette diverse; di seguito riportiamo le etichette con il relativo numero di paragrafi:
+
+\begin{center}
+\begin{tabular}{ll}
+\textbf{JOB} & 91 \\
+\textbf{BLURB} & 25 \\
+\textbf{BENEFIT} & 23 \\
+\textbf{DEI} & 15 \\
+\textbf{LEGAL} & 10 \\
+\textbf{LOCATION} & 5 \\
+\textbf{SCHEDULE} & 3 \\
+\textbf{CONTRACT} & 3 \\
+\textbf{CALL TO ACTION} & 2 \\
+\textbf{HOW TO APPLY} & 1 \\
+\end{tabular}
+\end{center}
+
+\noindent In particolare, \textbf{JOB} contiene i paragrafi che abbiamo precedentemente identificato con ``Ruolo'', ``Abilità'' e ``Responsabilità''; \textbf{DEI} include i paragrafi dedicati alle politiche di inclusione ed equità; \textbf{LEGAL} raggruppa i disclaimer legali; \textbf{CONTRACT} raccoglie le specifiche burocratiche del contratto.
+
+\noindent Come è facile notare solo la classe \textbf{JOB} risulta ben rappresentata; le uniche altre due classi con un numero sufficiente di esempi sono \textbf{BLURB} e \textbf{BENEFIT}. Per questo motivo abbiamo deciso di fondere le classi sottorappresentate, così da evitare un crollo delle performance sulle classi più piccole. La scelta della fusione è ricaduta su due opzioni alternative:
+
+\begin{enumerate}
+    \item \textbf{Binario semplice}
+    \item \textbf{Multi-classe intermedia}
+\end{enumerate}
+
+\noindent Il binario semplice risolve il problema della sotto-rappresentazione, ma rischia di generalizzare peggio poiché le classi \textbf{JOB} e \textbf{NON-JOB} risultano molto eterogenee. Il multi-classe, invece, aiuta SBERT a strutturare meglio lo spazio semantico; di contro richiede più dati per garantire una rappresentazione adeguata di tutte le classi. Abbiamo quindi optato per il multi-classe, incrementando significativamente la dimensione del \textit{training set} per ottenere un addestramento più stabile.
+
+\noindent Le classi finali adottate sono tre:
+
+\begin{itemize}
+    \item \textbf{JOB}: come definita precedentemente.
+    \item \textbf{BLURB-LEGAL}: unione di blurb, DEI, legal, call to action e how to apply.
+    \item \textbf{OFFER-DETAIL}: unione di benefit, location, schedule, contract.
+\end{itemize}
+
+\noindent Useremo dunque più classi in fase di addestramento, ma il modello verrà impiegato come classificatore binario scartando le classi diverse da \textbf{JOB}. Il \textit{training set} finale è composto da 1315 paragrafi così etichettati:
+
+\begin{center}
+\begin{tabular}{ll}
+\textbf{JOB} & 700 \\
+\textbf{BLURB-LEGAL} & 340 \\
+\textbf{OFFER-DETAIL} & 275 \\
+\end{tabular}
+\end{center}
+
+\noindent Lo sbilanciamento a favore di \textbf{JOB} potrebbe apparire problematico: quando le classi sono sbilanciate un classificatore tende a privilegiare la classe maggioritaria, con il rischio di introdurre un \textit{bias} verso \textbf{JOB}. Tuttavia il nostro obiettivo è pulire il dataset \textit{evitando di tagliare informazioni potenzialmente rilevanti} per lo studio; di conseguenza, nel caso in cui il modello fosse incerto, è preferibile preservare il paragrafo per non eliminare contenuti importanti. In quest'ottica avere un'unica classe \textbf{JOB} (anziché distinguere Ruolo, Abilità e Responsabilità) può rivelarsi un vantaggio. Questa politica di ``favoritismo'' verso la classe \textbf{JOB} verrà riutilizzata sia nel training dell'embedder sia nelle politiche di cancellazione dei paragrafi post-classificazione, come illustrato nelle sezioni successive.
 
 \section{Altre strategie di data cleaning usate}

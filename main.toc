@@ -20,15 +20,15 @@
 \contentsline {subsection}{\numberline {2.1.5}Cosa si può migliorare}{11}{subsection.2.1.5}%
 \contentsline {chapter}{\numberline {3}Data Cleaning}{12}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Perché il Data Cleaning è necessario}{12}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Divisione in paragrafi}{16}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Spacy}{17}{subsection.3.2.1}%
-\contentsline {subsubsection}{Suggester}{18}{section*.3}%
-\contentsline {subsubsection}{Tok2Vec}{19}{section*.4}%
-\contentsline {subsubsection}{Reducer}{20}{section*.5}%
-\contentsline {subsection}{\numberline {3.2.2}Scorer}{21}{subsection.3.2.2}%
-\contentsline {subsubsection}{Allenamento}{21}{section*.6}%
-\contentsline {section}{\numberline {3.3}Classificazione paragrafi}{23}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Altre strategie di data cleaning usate}{23}{section.3.4}%
-\contentsline {chapter}{\numberline {4}Risultati finali}{24}{chapter.4}%
-\contentsline {chapter}{\numberline {5}Conclusioni}{25}{chapter.5}%
-\contentsline {chapter}{Ringraziamenti}{27}{chapter*.8}%
+\contentsline {section}{\numberline {3.2}Divisione in paragrafi}{15}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Spacy}{16}{subsection.3.2.1}%
+\contentsline {subsubsection}{Suggester}{18}{section*.4}%
+\contentsline {subsubsection}{Tok2Vec}{18}{section*.5}%
+\contentsline {subsubsection}{Reducer}{19}{section*.6}%
+\contentsline {subsection}{\numberline {3.2.2}Scorer}{20}{subsection.3.2.2}%
+\contentsline {subsubsection}{Allenamento}{20}{section*.7}%
+\contentsline {section}{\numberline {3.3}Classificazione paragrafi}{22}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Altre strategie di data cleaning usate}{22}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Risultati finali}{23}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Conclusioni}{24}{chapter.5}%
+\contentsline {chapter}{Ringraziamenti}{26}{chapter*.9}%

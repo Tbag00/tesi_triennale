@@ -34,53 +34,56 @@ Per visualizzare l'effetto di un data cleaning accurato confrontiamo il comporta
 
 Come visto nel capitolo precedente, a ogni parola è associato uno \textit{score} che ne rappresenta l'importanza all'interno del topic. Questo barplot ci permette di fare alcune considerazioni importanti sulla natura del dataset e sulla direzione che deve assumere la pulizia dei dati. Innanzitutto notiamo che i nomi delle aziende, come TikTok e Netflix, hanno un peso molto grande; ciò è coerente con la natura del dataset, composto da offerte di lavoro basate negli USA, quindi è plausibile che Big Tech e altre multinazionali compaiano nella maggior parte degli annunci. Altre parole poco informative che compaiono in più topic sono legate al gergo aziendale (e.g. mission, team) e derivano dal \textit{blurb} aziendale spesso presente negli annunci. Già con queste considerazioni preliminari otteniamo un buon punto di partenza per stabilire \textbf{cosa} eliminare dal dataset.
 
-Questo rappresenta un buon punto di partenza, ma non è sufficiente. Per capire bene cosa eliminare dobbiamo osservare i dati grezzi e comprendere meglio la natura del corpus. Riportiamo di seguito un esempio che riteniamo rappresentativo, frutto dell'analisi di centinaia di annunci di lavoro, che ci ha permesso di decidere quali porzioni di testo andavano rimosse e quali invece preservate.
+Un buon punto di partenza, ma non sufficiente. Per capire bene cosa eliminare dobbiamo osservare i dati grezzi e comprendere meglio la natura del corpus. Riportiamo di seguito un esempio che riteniamo rappresentativo, frutto dell'analisi dei dati grezzi, che ci ha permesso di decidere quali porzioni di testo andassero rimosse e quali invece preservate.
 
-\begin{center}
-\begin{tabular}{ll}
-\legenditem{Ruolo}{roleColor} & \legenditem{Responsabilità}{responsibilityColor} \\
-\legenditem{Abilità}{skillColor} & \legenditem{Benefit}{benefitColor} \\
-\legenditem{Blurb aziendale}{companyBlurbColor} & \legenditem{Call to action}{callToActionColor} \\
-\legenditem{Disclaimer su inclusività}{inclusivityColor} & \legenditem{Come inviare curriculum}{applicationColor}
-\end{tabular}
-\end{center}
+\begin{figure}[H]
+    \centering
+    \scriptsize
+\begin{minipage}[t]{0.47\textwidth}
+    \raggedright
+    \textbf{\textcolor{roleColor}{Ruolo}}\par
+    We are seeking an experienced and proactive Business Intelligence Engineer or lead to join our dynamic team. As a BI Engineer, you will be responsible for [...]\par
+    {\color{roleColor}\rule{\linewidth}{0.6pt}}\par\medskip
 
-\noindent\textbf{\textcolor{roleColor}{Ruolo}}\par
-\noindent We are seeking an experienced and proactive Business Intelligence Engineer or lead to join our dynamic team. As a BI Engineer, you will be responsible for [...]\par
-\noindent{\color{roleColor}\rule{\textwidth}{0.6pt}}\par\medskip
+    \textbf{\textcolor{skillColor}{Abilità}}\par
+    Ability to work in a fast-paced, high-energy environment and bring sense of urgency \& attention to detail skills to the table. [...] \par
+    {\color{skillColor}\rule{\linewidth}{0.6pt}}\par\medskip
 
-\noindent\textbf{\textcolor{skillColor}{Abilità}}\par
-\noindent Ability to work in a fast-paced, high-energy environment and bring sense of urgency \& attention to detail skills to the table. [...] \par
-\noindent{\color{skillColor}\rule{\textwidth}{0.6pt}}\par\medskip
+    \textbf{\textcolor{responsibilityColor}{Responsabilità}}\par
+    Responsibilities:\par\smallskip
+    ETL processes — design, develop, and maintain ETL processes using Informatica IICS (Integration Cloud Services) and IDMC (Intelligent Data Management Cloud), ensuring efficient data extraction, transformation, and loading from various source systems. [...]\par
+    {\color{responsibilityColor}\rule{\linewidth}{0.6pt}}\par\medskip
 
-\noindent\textbf{\textcolor{responsibilityColor}{Responsabilità}}\par
-\noindent Responsibilities:\par\smallskip
-ETL processes — design, develop, and maintain ETL processes using Informatica IICS (Integration Cloud Services) and IDMC (Intelligent Data Management Cloud), ensuring efficient data extraction, transformation, and loading from various source systems. [...]\par
-\noindent{\color{responsibilityColor}\rule{\textwidth}{0.6pt}}\par\medskip
+    \textbf{\textcolor{benefitColor}{Benefit}}\par
+    Expected salary ranges between 100,000 and 150,000 USD annually. [...]\par
+    {\color{benefitColor}\rule{\linewidth}{0.6pt}}\par\medskip
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.47\textwidth}
+    \raggedright
+    \textbf{\textcolor{companyBlurbColor}{Blurb aziendale}}\par
+    About Regal Rexnord. Regal Rexnord is a publicly held global industrial manufacturer with 30,000 associates around the world who help create a better tomorrow [...]\par
+    {\color{companyBlurbColor}\rule{\linewidth}{0.6pt}}\par\medskip
 
-\noindent\textbf{\textcolor{benefitColor}{Benefit}}\par
-\noindent Expected salary ranges between 100,000 and 150,000 USD annually. [...]
-\noindent{\color{benefitColor}\rule{\textwidth}{0.6pt}}\par\medskip
+    \textbf{\textcolor{callToActionColor}{Call to action}}\par
+    For more information, including a copy of our Sustainability Report, visit RegalRexnord.com.\par
+    {\color{callToActionColor}\rule{\linewidth}{0.6pt}}\par\medskip
 
-\noindent\textbf{\textcolor{companyBlurbColor}{Blurb aziendale}}\par
-\noindent About Regal Rexnord. Regal Rexnord is a publicly held global industrial manufacturer with 30,000 associates around the world who help create a better tomorrow [...]\par
-\noindent{\color{companyBlurbColor}\rule{\textwidth}{0.6pt}}\par\medskip
+    \textbf{\textcolor{inclusivityColor}{Disclaimer su inclusività}}\par
+    Equal Employment Opportunity Statement.\par\smallskip
+    Regal Rexnord is an Equal Opportunity and Affirmative Action Employer. All qualified applicants will receive consideration for employment without regard to race, color, religion [...]\par
+    {\color{inclusivityColor}\rule{\linewidth}{0.6pt}}\par\medskip
 
-\noindent\textbf{\textcolor{callToActionColor}{Call to action}}\par
-\noindent For more information, including a copy of our Sustainability Report, visit RegalRexnord.com.\par
-\noindent{\color{callToActionColor}\rule{\textwidth}{0.6pt}}\par\medskip
+    \textbf{\textcolor{applicationColor}{Come inviare curriculum}}\par
+    Notification to agencies:\par\smallskip
+    please note that Regal Rexnord Corporation and its affiliates and subsidiaries (``Regal Rexnord'') do not accept unsolicited resumes or calls from third-party recruiters or employment agencies. [...]\par 
+    {\color{applicationColor}\rule{\linewidth}{0.6pt}}\par\medskip
+\end{minipage}
 
-\noindent\textbf{\textcolor{inclusivityColor}{Disclaimer su inclusività}}\par
-\noindent Equal Employment Opportunity Statement.\par\smallskip
-Regal Rexnord is an Equal Opportunity and Affirmative Action Employer. All qualified applicants will receive consideration for employment without regard to race, color, religion [...]\par
-\noindent{\color{inclusivityColor}\rule{\textwidth}{0.6pt}}\par\medskip
-
-\noindent\textbf{\textcolor{applicationColor}{Come inviare curriculum}}\par
-\noindent Notification to agencies:\par\smallskip
-please note that Regal Rexnord Corporation and its affiliates and subsidiaries (``Regal Rexnord'') do not accept unsolicited resumes or calls from third-party recruiters or employment agencies. [...]\par 
-\noindent{\color{applicationColor}\rule{\textwidth}{0.6pt}}\par\medskip
-
-Questa struttura si riscontra nella maggior parte degli annunci analizzati. I paragrafi che riteniamo cruciali per gli obiettivi dello studio sono \textit{Ruolo}, \textit{Abilità} e \textit{Responsabilità}, perché descrivono la \textbf{natura del lavoro}. Gli altri blocchi, ovvero \textit{Benefit}, \textit{Blurb aziendale}, \textit{Call to action}, \textit{Disclaimer su inclusività} e \textit{Come inviare curriculum}, costituiscono il rumore che intendiamo rimuovere. Abbiamo quindi identificato \textbf{cosa} eliminare; nella successiva sezione ci occuperemo del \textbf{come}.
+    \caption{Esempio annotato di annuncio di lavoro e sezioni considerate nella fase di data cleaning.}
+    \label{fig:job-offer-example}
+\end{figure}
+\noindent Questa struttura si riscontra nella maggior parte degli annunci analizzati. I paragrafi che riteniamo cruciali per gli obiettivi dello studio sono \textit{Ruolo}, \textit{Abilità} e \textit{Responsabilità}, perché descrivono la \textbf{natura del lavoro}. Gli altri blocchi, ovvero \textit{Benefit}, \textit{Blurb aziendale}, \textit{Call to action}, \textit{Disclaimer su inclusività} e \textit{Come inviare curriculum}, costituiscono il rumore che intendiamo rimuovere. Abbiamo quindi identificato \textbf{cosa} eliminare; nella successiva sezione ci occuperemo del \textbf{come}.
 
 \section{Divisione in paragrafi}
 
@@ -108,7 +111,7 @@ JOB_CUES_PAT = re.compile(
 
 \medskip
 
-\noindent Un altro tentativo è stato quello di selezionare le righe che fossero composte da massimo n parole o che terminassero con un carattere \textit{newline}, chiaramente anche questo tentativo è risultato fallimentare poiché alcune intestazioni si rivelano ben più lunghe di quanto si potrebbe immaginare, mentre altre frasi brevi potrebbero essere confuse per intestazioni. Dunque ci serve un metodo che sia sufficentemente flessibile, per questo abbiamo scelto di addestrare una rete neurale.
+\noindent Un altro tentativo è stato quello di selezionare le righe che fossero composte da massimo n parole o che terminassero con un carattere \textit{":"}, chiaramente anche questo tentativo è risultato fallimentare poiché alcune intestazioni si rivelano ben più lunghe di quanto si potrebbe immaginare, mentre altre frasi brevi potrebbero essere confuse per intestazioni. Dunque ci serve un metodo che sia sufficentemente flessibile, per questo abbiamo scelto di addestrare una rete neurale.
 
 \medskip
 

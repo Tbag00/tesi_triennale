@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1760112647.60021 "main.aux" "main.bbl" "main" 1760112649.35714 0
+["bibtex main"] 1760272679.53537 "main.aux" "main.bbl" "main" 1760272693.39331 0
   "./bibliografia.bib" 1759849052.98581 971 fa1a2006e640a6246255abf4be8f1e60 ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/unsrt.bst" 1292289607 18030 1376b4b231b50c66211e47e42eda2875 ""
-  "main.aux" 1760112648.88421 4994 5bf7ee5f71989817e769360c12c2fbba "pdflatex"
+  "main.aux" 1760272693.03555 5094 f98a7e5a79c09e1718493e443494cf0a "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1760112647.74332 "/home/tommaso/tesi/tesi_triennale/main.tex" "main.pdf" "main" 1760112649.35746 0
+["pdflatex"] 1760272692.27793 "/home/tommaso/tesi/tesi_triennale/main.tex" "main.pdf" "main" 1760272693.39352 0
   "/etc/texmf/web2c/texmf.cnf" 1759787235.72431 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/tommaso/tesi/tesi_triennale/main.tex" 1759933320.46322 535 3e207c73981b4e715aee734ac98908db ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -141,7 +141,7 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1759787263.92061 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1759787332 8212934 1f31c896aee701a90eb7624b8dc4e089 ""
   "1introduzione.tex" 1759848283.50239 6811 95a7ee357fc26c233c919bf3dcbc6902 ""
-  "2datacleaning.tex" 1760112643.88812 18741 7c27151467aa66e7d1c511d134dd73ab ""
+  "2datacleaning.tex" 1760272692.06722 19679 3f409d6c3d049c61264e41fbc301eb1c ""
   "3bertopic.tex" 1759845908.36726 1050 40e5ae3669432782a4c41a89e64b401f ""
   "4risultatifinali.tex" 1759845917.98724 282 08544455c4889dea4367d9ffb1789ca4 ""
   "5conclusioni.tex" 1759843656.64098 99 000ac90a5fbc2ff3d865f1cea06a2d85 ""
@@ -149,11 +149,11 @@
   "img/cleaning/garbage_barplot.png" 1759938598.43393 74864 7a8d42cef198406cb4fa3070be528d12 ""
   "img/logoDMI.jpg" 1759843595.4165 70611 ec95c56f2b831fb97fbeb316f4ef0ecf ""
   "img/logoUniPg.jpg" 1759843595.4125 158221 58b7fcc5f36773d17dbfeab4360b61ed ""
-  "main.aux" 1760112648.88421 4994 5bf7ee5f71989817e769360c12c2fbba "pdflatex"
-  "main.bbl" 1760112647.73219 825 25732c2ba0296ad84f1ba50d175eec3a "bibtex main"
-  "main.out" 1760112648.88821 4452 e8d81731a4aa972880ae17076f6b0ea8 "pdflatex"
+  "main.aux" 1760272693.03555 5094 f98a7e5a79c09e1718493e443494cf0a "pdflatex"
+  "main.bbl" 1760272679.64297 825 25732c2ba0296ad84f1ba50d175eec3a "bibtex main"
+  "main.out" 1760272693.03955 4444 9dd8d4a2108971274a9c5225d7dae59b "pdflatex"
   "main.tex" 1759933320.46322 535 3e207c73981b4e715aee734ac98908db ""
-  "main.toc" 1760112648.88821 2589 9792805ce59bba10338011408e8fa06b "pdflatex"
+  "main.toc" 1760272693.03955 2648 81e74dee38dddbc941fb4ae5b6f49a1c "pdflatex"
   "ringraziamenti.tex" 1759843662.00866 262 c5dc02d863aa9391f02b8e56c6bdd7c1 ""
   "settings/frontmatter.tex" 1760021414.72181 972 c773c5df1f6aac2b5d6e27c3201f4778 ""
   "settings/prelude.tex" 1760108560.60898 2088 044455bbd33718d0c605da23c56f4d9a ""

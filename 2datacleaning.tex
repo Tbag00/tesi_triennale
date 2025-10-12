@@ -46,11 +46,11 @@ Questo rappresenta un buon punto di partenza, ma non è sufficiente. Per capire 
 \end{center}
 
 \noindent\textbf{\textcolor{roleColor}{Ruolo}}\par
-\noindent We are seeking an experienced and proactive Business Intelligence Engineer or lead to join our dynamic team. As a BI Engineer, you will be responsible for day-to-day tasks involving Extract, Transform, Load (ETL) processes, data integration, data modeling, and analytical skills, mentoring junior developers. Scope of role: this person will help bring discipline in day-to-day operations \& production support.\par
+\noindent We are seeking an experienced and proactive Business Intelligence Engineer or lead to join our dynamic team. As a BI Engineer, you will be responsible for [...]\par
 \noindent{\color{roleColor}\rule{\textwidth}{0.6pt}}\par\medskip
 
 \noindent\textbf{\textcolor{skillColor}{Abilità}}\par
-\noindent Ability to work in a fast-paced, high-energy environment and bring sense of urgency \& attention to detail skills to the table. Coordinates closely with other BI team members to help ensure meaningful prioritization. Escalates potential issues in timely fashion and seeks paths for resolution. Excellent communication skills and ability to manage expectations.\par
+\noindent Ability to work in a fast-paced, high-energy environment and bring sense of urgency \& attention to detail skills to the table. [...] \par
 \noindent{\color{skillColor}\rule{\textwidth}{0.6pt}}\par\medskip
 
 \noindent\textbf{\textcolor{responsibilityColor}{Responsabilità}}\par
@@ -59,11 +59,11 @@ ETL processes — design, develop, and maintain ETL processes using Informatica 
 \noindent{\color{responsibilityColor}\rule{\textwidth}{0.6pt}}\par\medskip
 
 \noindent\textbf{\textcolor{benefitColor}{Benefit}}\par
-\noindent Expected salary ranges between 100,000 and 150,000 USD annually. Compensation is based on a variety of factors when extending offers, including but not limited to the role, responsibilities, candidate experience, education, qualifications, and business considerations. Benefits include medical, dental, vision and prescription drug coverage; spending accounts (HSA, Health Care FSA and Dependent Care FSA); paid time off and holidays; a 401k retirement plan with matching employer contributions; life and accidental death \& dismemberment (AD\&D) insurance; paid leaves; tuition assistance.\par
+\noindent Expected salary ranges between 100,000 and 150,000 USD annually. [...]
 \noindent{\color{benefitColor}\rule{\textwidth}{0.6pt}}\par\medskip
 
 \noindent\textbf{\textcolor{companyBlurbColor}{Blurb aziendale}}\par
-\noindent About Regal Rexnord. Regal Rexnord is a publicly held global industrial manufacturer with 30,000 associates around the world who help create a better tomorrow by providing sustainable solutions that power, transmit, and control motion. The company's electric motors and air moving subsystems provide the power to create motion. A portfolio of highly engineered power transmission components and subsystems efficiently transmits motion to power industrial applications. The company's automation offering, comprised of controls, actuators, drives, and precision motors, controls motion in applications ranging from factory automation to precision control in surgical tools.[...]\par
+\noindent About Regal Rexnord. Regal Rexnord is a publicly held global industrial manufacturer with 30,000 associates around the world who help create a better tomorrow [...]\par
 \noindent{\color{companyBlurbColor}\rule{\textwidth}{0.6pt}}\par\medskip
 
 \noindent\textbf{\textcolor{callToActionColor}{Call to action}}\par
@@ -72,12 +72,12 @@ ETL processes — design, develop, and maintain ETL processes using Informatica 
 
 \noindent\textbf{\textcolor{inclusivityColor}{Disclaimer su inclusività}}\par
 \noindent Equal Employment Opportunity Statement.\par\smallskip
-Regal Rexnord is an Equal Opportunity and Affirmative Action Employer. All qualified applicants will receive consideration for employment without regard to race, color, religion, sex/gender, sexual orientation, gender identity, pregnancy, age, ancestry, national origin, genetic information, marital status, citizenship status (unless required by applicable law or government contract), disability or protected veteran status, or any other status or characteristic protected by law. Regal Rexnord is committed to a diverse and inclusive workforce and to building a team that represents diverse backgrounds, perspectives, and skills.\par
+Regal Rexnord is an Equal Opportunity and Affirmative Action Employer. All qualified applicants will receive consideration for employment without regard to race, color, religion [...]\par
 \noindent{\color{inclusivityColor}\rule{\textwidth}{0.6pt}}\par\medskip
 
 \noindent\textbf{\textcolor{applicationColor}{Come inviare curriculum}}\par
 \noindent Notification to agencies:\par\smallskip
-please note that Regal Rexnord Corporation and its affiliates and subsidiaries (``Regal Rexnord'') do not accept unsolicited resumes or calls from third-party recruiters or employment agencies. In the absence of a signed Master Service Agreement or similar contract and approval from HR to submit resumes for a specific requisition, Regal Rexnord will not consider or approve payment to any third parties for hires made.\par
+please note that Regal Rexnord Corporation and its affiliates and subsidiaries (``Regal Rexnord'') do not accept unsolicited resumes or calls from third-party recruiters or employment agencies. [...]\par 
 \noindent{\color{applicationColor}\rule{\textwidth}{0.6pt}}\par\medskip
 
 Questa struttura si riscontra nella maggior parte degli annunci analizzati. I paragrafi che riteniamo cruciali per gli obiettivi dello studio sono \textit{Ruolo}, \textit{Abilità} e \textit{Responsabilità}, perché descrivono la \textbf{natura del lavoro}. Gli altri blocchi, ovvero \textit{Benefit}, \textit{Blurb aziendale}, \textit{Call to action}, \textit{Disclaimer su inclusività} e \textit{Come inviare curriculum}, costituiscono il rumore che intendiamo rimuovere. Abbiamo quindi identificato \textbf{cosa} eliminare; nella successiva sezione ci occuperemo del \textbf{come}.
@@ -120,7 +120,7 @@ JOB_CUES_PAT = re.compile(
 \noindent Spacy è una libreria per \textit{nlp} basata su \textit{pipelines} composte da moduli modificabili e allenabili. Questa componente altamente personalizzabile della libreria la rende ideale per il nostro studio, infatti in momenti diversi utilizzeremo componenti differenti a seconda del bisogno.
 
 \noindent Le \textit{pipelines} elaborano un testo e restituiscono un \textit{Doc}, un oggetto che permette di accedere alle informazioni del testo ottenute dalla pipeline. Un Doc è una sequenza di Python composta da \textit{token}. In spacy i token sono parole o segni di punteggiatura.
-\noindent Gli \textit{span} invece sono sottosequenze del documento, composta da token contigui.
+\noindent Gli \textit{span} invece sono sottosequenze del documento, composte da token contigui.
 
 \begin{lstlisting}[language=python]
 nlp = spacy.blank("en")     # Creazione pipeline default
@@ -155,9 +155,9 @@ world!
     \item Rete neurale responsabile della classificazione, suddivisa in più sottoreti
 \end{enumerate}
 
-\noindent Per configurare il modello (e l'allenamento), spaCy richiede un file \texttt{config.cfg}, vediamo adesso il suggester e tutte le componenti della rete neurale
+\noindent Per configurare il modello (e l'allenamento), spaCy richiede un file \texttt{config.cfg}, vediamo adesso il suggester e tutte le componenti della rete neurale.
 \subsubsection{Suggester}
-Come \textit{Suggester} ho utilizzato quello di default, \texttt{spacy.ngram\_suggester.v1}, che marca come candidati tutti gli span possibili entro una certa lunghezza.
+Il \textit{Suggester} utilizzato è quello di default, \texttt{spacy.ngram\_suggester.v1}, che marca come candidati tutti gli span possibili entro una certa lunghezza.
 
 \begin{lstlisting}[style=cmd]
 [components.spancat.suggester]
@@ -166,7 +166,7 @@ sizes = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
 \end{lstlisting}
 
 \noindent Ho impostato 20 come lunghezza massima a causa della varietà degli header: il modello risulta molto flessibile, ma anche più pesante, perché all'aumentare degli n-grammi possibili aumentano i controlli da effettuare.
-Vediamo adesso come è composta la rete neurale, partendo dalla sua prima componente: *Tok2Vec*.
+Vediamo adesso come è composta la rete neurale, partendo dalla sua prima componente: \textbf{Tok2Vec}.
 \subsubsection{Tok2Vec}
 \noindent È suddiviso in due sottoreti embedder ed encoder. L'\textit{embedder} converte i token in vettori ignorando il contesto.
 
@@ -206,17 +206,41 @@ hidden_size = 128
 \noindent Il componente \texttt{MeanMaxReducer} calcola la media dei token, il massimo dei token e concatena i due vettori in un'unica rappresentazione, sulla quale applica un \textit{hidden layer}; la documentazione indica la presenza del layer ma non ne esplicita la struttura.\footnote{\url{https://spacy.io/api/architectures\#mean\_max\_reducer}}
 \subsection{Scorer}
 
-\noindent Il layer finale mappa il vettore dello span sulla probabilità di classe, utilizzando una funzione di attivazione sigmoide.
+\noindent Il layer finale mappa il vettore dello span sulla probabilità di classe, utilizzando una funzione di attivazione \textbf{sigmoide}.
 
 \begin{lstlisting}[style=cmd]
 [components.spancat.model.scorer]
 @layers = "spacy.LinearLogistic.v1"
-nO = 1
-nI = null
+nO = 1    # dimensione output (ho una sola classe)
+nI = null # dimensione input (in questo caso 128)
+\end{lstlisting}
+Il layer usato qui è uno strato lineare seguito da una \textbf{sigmoide}.
+Poiché SBERT (usato per la classificazione dei paragrafi) predilige documenti composti da poche frasi, e per limitare il numero di paragrafi spuri (cioè che comprendono informazioni di classi diverse), abbiamo scelto 0.2 come probabilità minima per classificare uno span come header, in modo da avere una segmentazione più fine.
+Il contro di questo approccio è che se il documento è troppo corto SBERT non ha il contesto necessario per fare una classificazione robusta, parleremo del problema nella sezione successiva.
+
+\subsubsection{Allenamento}
+
+\noindent Come detto in precedenza il file \textit{config.cfg} definisce anche l'allenamento della rete. Il \textit{corpus} è composto da 149 descrizioni selezionate inizialmente a caso dal dataset completo, poi a causa della comparsa di numerosi annunci dalla stessa azienda abbiamo deciso di sostituire alcuni annunci della suddetta con altri che mai comparivano nei 149 estratti, questo per evitare overfitting e migliorare la capacità del modello di generalizzare. In queste descrizioni abbiamo individuato 1083 intestazioni.
+
+\noindent Abbiamo quindi suddiviso il corpus in \textit{train} usato per l'allenamento e \textit{dev} usato per la valutazione. la grandezza del \textit{dev set} è del 10\% del corpus, siamo consci del fatto che sia una porzione di dati troppo esigua per avere delle valutazioni statistiche robuste, cionondimeno abbiamo deciso volutamente di creare una disparità in favore del training set poiché il modello è composto da più strati, tutti da allenare (embedder, encoder, reducer e scorer), dunque abbiamo evitato di sottrarre informazioni utili all'apprendimento. Vediamo adesso nello specifico come è impostato il training:
+
+\begin{lstlisting}[style=cmd]
+[training]
+dev_corpus = "corpora.dev"
+train_corpus = "corpora.train"
+seed = ${system.seed}
+gpu_allocator = ${system.gpu_allocator}
+dropout = 0.1    # neuroni spenti ad ogni update
+accumulate_gradient = 1 # update dopo ogni batch
+patience = 1600  # numero massimo di valutazioni senza miglioramento prima di early stopping
+max_epochs = 0   # 0 implica che il numero di epoche viene ignorato, usa solo max_step
+max_steps = 20000 # criterio di early stopping
+eval_frequency = 200 # frequenza di valutazione su dev (in step)
 \end{lstlisting}
 
+\noindent Il corpo viene suddiviso in batch di grandezza variabile, i batch non sono composti da documenti, ma da token, per miglioreare le performance qualndo l'allenamento avviene su GPU. A ogni passo di training, la dimensione del batch viene moltiplicata per un fattore 1.001, partendo da 100 token fino a un massimo di 1000; in questo modo batch piccoli vengono usati all'inizio del training, per avere gradienti più rumorosi ma anche più esplorativi, man mano che il training prosegue si prediligono batch sempre più grandi per avere gradienti più stabili e precisi. \textit{Nota: valutare se inserire info riguardo l'ottimizzatore che è Adam.}
 
 \section{Classificazione paragrafi}
 Spiegare il processo di etichettatura o clustering preliminare dei paragrafi, specificando se è supervisionato o meno e come si valida la coerenza delle classi.
 
-\section{ Altre strategie di data cleaning usate}
+\section{Altre strategie di data cleaning usate}

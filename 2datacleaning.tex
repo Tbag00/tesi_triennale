@@ -94,7 +94,7 @@ Un buon punto di partenza, ma non sufficiente. Per capire bene cosa eliminare do
 \noindent Studiando nuovamente il dataset abbiamo notato che molti paragrafi iniziano con un'intestazione: nell'esempio sopra possiamo notare: "Responsabilities:" e "Equal Employment Opportunity Statement". Moltissimi annunci usano questa divisione, probabilmente  per motivi di leggibilità data la lunghezza, ma non tutti; dunque abbiamo scelto la divisione basata su intestazioni come strategia principale e la vecchia strategia basata sulla punteggiatura come \textit{fallback} nel caso di paragrafi troppo lunghi, questo perché se un paragrafo è lungo è probabile che contenga frasi con significati distanti, inoltre il modello che vedremo nella sezione successiva predilige blocchi di testo con poche frasi.
 
 \medskip
-
+\subsubsection{Riconoscere le intestazioni}
 \noindent Come riconoscere un'intestazione è più complicato di come si potrebbe pensare, un primo tentativo che abbiamo svolto utilizzava delle \textit{espressioni regolari}, ad esempio:
 
 \begin{lstlisting}[language=python]
@@ -278,7 +278,7 @@ eval_frequency = 200
     \label{fig:cfg-training}
 \end{figure}
 
-\noindent Il corpo viene suddiviso in batch di grandezza variabile, i batch non sono composti da documenti, ma da token, per miglioreare le performance quando l'allenamento avviene su GPU. A ogni passo di training, la dimensione del batch viene moltiplicata per un fattore 1.001, partendo da 100 token fino a un massimo di 1000; in questo modo batch piccoli vengono usati all'inizio del training, per avere gradienti più rumorosi ma anche più esplorativi, man mano che il training prosegue si prediligono batch sempre più grandi per avere gradienti più stabili e precisi. \textit{Nota: valutare se inserire info riguardo l'ottimizzatore che è Adam.}
+\noindent Il corpo viene suddiviso in batch di grandezza variabile, i batch non sono composti da documenti, ma da token, per migliorare le performance quando l'allenamento avviene su GPU. A ogni passo di training, la dimensione del batch viene moltiplicata per un fattore 1.001, partendo da 100 token fino a un massimo di 1000; in questo modo batch piccoli vengono usati all'inizio del training, per avere gradienti più rumorosi ma anche più esplorativi, man mano che il training prosegue si prediligono batch sempre più grandi per avere gradienti più stabili e precisi. \textit{Nota: valutare se inserire info riguardo l'ottimizzatore che è Adam.}
 
 \subsection{Valutazione del modello}
 
@@ -495,7 +495,7 @@ Il modello bilanciato è quello con un \textit{f-score} più alto, però il nost
 Il modello più sbilanciato non offre un miglioramento della \textit{recall}, ma solo un peggioramento della performance generale del modello.
 Dunque la scelta è ricaduta sul modello \textbf{Slightly unbalanced}.
 \subsubsection{Strategia di rimozione}
-Adesso abbiamo la probabilità di appartenere ad una per ciascun paragrafo, dobbiamo scegliere come eliminare i paragrafi non informativi in base a queste informazioni:
+Adesso abbiamo la probabilità di appartenenza ad una classe per ciascun paragrafo, dobbiamo scegliere come eliminare i paragrafi non informativi in base a queste informazioni:
 \noindent Per mitigare i casi borderline abbiamo definito un filtro euristico che riassegna la classe finale sulla base delle probabilità restituite dal classificatore.
 
 \begin{figure}[H]
@@ -527,7 +527,7 @@ prediction = np.select(
 \noindent Cosa fa questo codice:
 \begin{enumerate}
     \item un paragrafo viene etichettato come \textbf{blurb legal} solo quando la probabilità relativa supera la soglia e quella di \textbf{JOB} rimane sotto il limite stabilito; questo perché i paragrafi che più inquinano sono quelli delle descrizioni aziendali.
-    \item i paragrafi con alta confidenza su \textbf{JOB}, con probabilità simile a \textbf{JOB} o complessivamente ambigui (\textit{low conf}) vengono classificati come \textbf{job};
+    \item i paragrafi con alta confidenza su \textbf{JOB}, con probabilità simile a \textbf{JOB} o complessivamente ambigui (\textit{low conf}) vengono classificati come \textbf{JOB};
     \item in tutti gli altri casi si ricorre alla classe dominante (\textit{default}) proposta dal modello.
 \end{enumerate}
 \section{Altre strategie di data cleaning usate}
@@ -573,7 +573,7 @@ def remove_entities(texts, removable_entities={"ORG", "PERSON", "GPE"}):
 
 \subsubsection{Risultato finale}
 
-\noindent Applicando anche questa pulizia intra-frasi otteniamo il dendrogramma della Figura~\ref{fig:cleaned-dendrogram} ottenuto con BERTopic.
+\noindent Applicando anche questa pulizia intra-frasi otteniamo il dendrogramma della Figura~\ref{fig:cleaned-dendrogram} tramite BERTopic.
 
 \begin{figure}[H]
     \centering

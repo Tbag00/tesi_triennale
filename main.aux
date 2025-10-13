@@ -38,63 +38,64 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Esempio annotato di annuncio di lavoro e sezioni considerate nella fase di data cleaning.}}{14}{figure.caption.3}\protected@file@percent }
 \newlabel{fig:job-offer-example}{{3.2}{14}{Esempio annotato di annuncio di lavoro e sezioni considerate nella fase di data cleaning}{figure.caption.3}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {3.2}Divisione in paragrafi}{15}{section.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Riconoscere le intestazioni}{16}{section*.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Spacy}{16}{subsection.3.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Suggester}{18}{section*.4}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Configurazione del \textit  {suggester}: usa il componente \texttt  {spacy.ngram\_suggester.v1} e valuta tutti gli span fino a 20 token per coprire la varietà degli header.}}{18}{figure.caption.5}\protected@file@percent }
-\newlabel{fig:cfg-suggester}{{3.3}{18}{Configurazione del \textit {suggester}: usa il componente \texttt {spacy.ngram\_suggester.v1} e valuta tutti gli span fino a 20 token per coprire la varietà degli header}{figure.caption.5}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Tok2Vec}{18}{section*.6}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Configurazione dell'\textit  {embedder}: vettori da 96 dimensioni con attributi morfologici distinti (\texttt  {NORM}, \texttt  {PREFIX}, \texttt  {SUFFIX}, \texttt  {SHAPE}) e hash table calibrate su 5000/1000/2500/2500 voci; gli embedding esterni non vengono usati.}}{18}{figure.caption.7}\protected@file@percent }
-\newlabel{fig:cfg-embed}{{3.4}{18}{Configurazione dell'\textit {embedder}: vettori da 96 dimensioni con attributi morfologici distinti (\texttt {NORM}, \texttt {PREFIX}, \texttt {SUFFIX}, \texttt {SHAPE}) e hash table calibrate su 5000/1000/2500/2500 voci; gli embedding esterni non vengono usati}{figure.caption.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Encoder \texttt  {MaxoutWindowEncoder}: stesso spazio vettoriale a 96 dimensioni, quattro strati con finestra contestuale di un token per lato e tre proiezioni Maxout per modellare non linearità.}}{19}{figure.caption.8}\protected@file@percent }
-\newlabel{fig:cfg-encode}{{3.5}{19}{Encoder \texttt {MaxoutWindowEncoder}: stesso spazio vettoriale a 96 dimensioni, quattro strati con finestra contestuale di un token per lato e tre proiezioni Maxout per modellare non linearità}{figure.caption.8}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Reducer}{19}{section*.9}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces Reducer \texttt  {mean\_max}: combina media e massimo dei token in un vettore di dimensione 128 prima dello strato di scoring.}}{20}{figure.caption.10}\protected@file@percent }
-\newlabel{fig:cfg-reducer}{{3.6}{20}{Reducer \texttt {mean\_max}: combina media e massimo dei token in un vettore di dimensione 128 prima dello strato di scoring}{figure.caption.10}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Scorer}{20}{section*.11}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces Scorer logistico lineare: un'unica uscita sigmoide (\texttt  {nO = 1}) alimentata dal vettore di dimensione 128 prodotto dal reducer.}}{20}{figure.caption.12}\protected@file@percent }
-\newlabel{fig:cfg-scorer}{{3.7}{20}{Scorer logistico lineare: un'unica uscita sigmoide (\texttt {nO = 1}) alimentata dal vettore di dimensione 128 prodotto dal reducer}{figure.caption.12}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Allenamento}{21}{section*.13}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces Parametri di training: dropout fissato a 0.1, aggiornamento dopo ogni batch (\texttt  {accumulate\_gradient = 1}), early stopping con \texttt  {patience} 1600 valutazioni e \texttt  {max\_steps} 20000; valutazione sul dev ogni 200 step.}}{21}{figure.caption.14}\protected@file@percent }
-\newlabel{fig:cfg-training}{{3.8}{21}{Parametri di training: dropout fissato a 0.1, aggiornamento dopo ogni batch (\texttt {accumulate\_gradient = 1}), early stopping con \texttt {patience} 1600 valutazioni e \texttt {max\_steps} 20000; valutazione sul dev ogni 200 step}{figure.caption.14}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Valutazione del modello}{22}{subsection.3.2.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.9}{\ignorespaces Confronto delle metriche \textit  {precision}, \textit  {recall} e \textit  {F-score} tra la valutazione fatta nel dev set e quella nel test set.}}{22}{figure.caption.15}\protected@file@percent }
-\newlabel{fig:header-metrics}{{3.9}{22}{Confronto delle metriche \textit {precision}, \textit {recall} e \textit {F-score} tra la valutazione fatta nel dev set e quella nel test set}{figure.caption.15}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Suggester}{18}{section*.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Configurazione del \textit  {suggester}: usa il componente \texttt  {spacy.ngram\_suggester.v1} e valuta tutti gli span fino a 20 token per coprire la varietà degli header.}}{18}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:cfg-suggester}{{3.3}{18}{Configurazione del \textit {suggester}: usa il componente \texttt {spacy.ngram\_suggester.v1} e valuta tutti gli span fino a 20 token per coprire la varietà degli header}{figure.caption.6}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Tok2Vec}{18}{section*.7}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Configurazione dell'\textit  {embedder}: vettori da 96 dimensioni con attributi morfologici distinti (\texttt  {NORM}, \texttt  {PREFIX}, \texttt  {SUFFIX}, \texttt  {SHAPE}) e hash table calibrate su 5000/1000/2500/2500 voci; gli embedding esterni non vengono usati.}}{19}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:cfg-embed}{{3.4}{19}{Configurazione dell'\textit {embedder}: vettori da 96 dimensioni con attributi morfologici distinti (\texttt {NORM}, \texttt {PREFIX}, \texttt {SUFFIX}, \texttt {SHAPE}) e hash table calibrate su 5000/1000/2500/2500 voci; gli embedding esterni non vengono usati}{figure.caption.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Encoder \texttt  {MaxoutWindowEncoder}: stesso spazio vettoriale a 96 dimensioni, quattro strati con finestra contestuale di un token per lato e tre proiezioni Maxout per modellare non linearità.}}{20}{figure.caption.9}\protected@file@percent }
+\newlabel{fig:cfg-encode}{{3.5}{20}{Encoder \texttt {MaxoutWindowEncoder}: stesso spazio vettoriale a 96 dimensioni, quattro strati con finestra contestuale di un token per lato e tre proiezioni Maxout per modellare non linearità}{figure.caption.9}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Reducer}{20}{section*.10}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces Reducer \texttt  {mean\_max}: combina media e massimo dei token in un vettore di dimensione 128 prima dello strato di scoring.}}{20}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:cfg-reducer}{{3.6}{20}{Reducer \texttt {mean\_max}: combina media e massimo dei token in un vettore di dimensione 128 prima dello strato di scoring}{figure.caption.11}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Scorer}{21}{section*.12}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces Scorer logistico lineare: un'unica uscita sigmoide (\texttt  {nO = 1}) alimentata dal vettore di dimensione 128 prodotto dal reducer.}}{21}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:cfg-scorer}{{3.7}{21}{Scorer logistico lineare: un'unica uscita sigmoide (\texttt {nO = 1}) alimentata dal vettore di dimensione 128 prodotto dal reducer}{figure.caption.13}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Allenamento}{21}{section*.14}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces Parametri di training: dropout fissato a 0.1, aggiornamento dopo ogni batch (\texttt  {accumulate\_gradient = 1}), early stopping con \texttt  {patience} 1600 valutazioni e \texttt  {max\_steps} 20000; valutazione sul dev ogni 200 step.}}{22}{figure.caption.15}\protected@file@percent }
+\newlabel{fig:cfg-training}{{3.8}{22}{Parametri di training: dropout fissato a 0.1, aggiornamento dopo ogni batch (\texttt {accumulate\_gradient = 1}), early stopping con \texttt {patience} 1600 valutazioni e \texttt {max\_steps} 20000; valutazione sul dev ogni 200 step}{figure.caption.15}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Valutazione del modello}{23}{subsection.3.2.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.9}{\ignorespaces Confronto delle metriche \textit  {precision}, \textit  {recall} e \textit  {F-score} tra la valutazione fatta nel dev set e quella nel test set.}}{23}{figure.caption.16}\protected@file@percent }
+\newlabel{fig:header-metrics}{{3.9}{23}{Confronto delle metriche \textit {precision}, \textit {recall} e \textit {F-score} tra la valutazione fatta nel dev set e quella nel test set}{figure.caption.16}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}Fallback}{23}{subsection.3.2.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.10}{\ignorespaces Funzione di fallback: sfrutta i token e il modulo \texttt  {sentencizer} di spaCy (all'interno di \texttt  {count\_sentences}) per riconoscere le frasi in un blocco di testo.}}{24}{figure.caption.16}\protected@file@percent }
-\newlabel{fig:fallback-split}{{3.10}{24}{Funzione di fallback: sfrutta i token e il modulo \texttt {sentencizer} di spaCy (all'interno di \texttt {count\_sentences}) per riconoscere le frasi in un blocco di testo}{figure.caption.16}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Classificazione paragrafi}{25}{section.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Etichettatura}{25}{subsection.3.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Allenamento}{27}{section*.17}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.11}{\ignorespaces Il 20\% del dataset è usato come test set per la valutazione. L'opzione \texttt  {stratify=df["label"]} preserva la distribuzione delle classi tra train e test, indispensabile in presenza di classi sbilanciate.}}{27}{figure.caption.18}\protected@file@percent }
-\newlabel{fig:clf-split}{{3.11}{27}{Il 20\% del dataset è usato come test set per la valutazione. L'opzione \texttt {stratify=df["label"]} preserva la distribuzione delle classi tra train e test, indispensabile in presenza di classi sbilanciate}{figure.caption.18}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.12}{\ignorespaces Configurazione del classificatore LR: massimo 2000 iterazioni, pesi maggiorati per la classe \texttt  {JOB} (1.5) e bilanciamento minore per \texttt  {BLURB} e \texttt  {DETAIL}.}}{28}{figure.caption.19}\protected@file@percent }
-\newlabel{fig:clf-lr}{{3.12}{28}{Configurazione del classificatore LR: massimo 2000 iterazioni, pesi maggiorati per la classe \texttt {JOB} (1.5) e bilanciamento minore per \texttt {BLURB} e \texttt {DETAIL}}{figure.caption.19}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.13}{\ignorespaces Metriche di valutazione e matrici di confusione al variare del peso assegnato alla classe \textbf  {JOB} nella \textit  {Logistic Regression}.}}{29}{figure.caption.20}\protected@file@percent }
-\newlabel{fig:lr-reports}{{3.13}{29}{Metriche di valutazione e matrici di confusione al variare del peso assegnato alla classe \textbf {JOB} nella \textit {Logistic Regression}}{figure.caption.20}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Strategia di rimozione}{29}{section*.21}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.14}{\ignorespaces Logica di post-processing per l'assegnazione finale della classe del paragrafo.}}{30}{figure.caption.22}\protected@file@percent }
-\newlabel{fig:lr-postprocess}{{3.14}{30}{Logica di post-processing per l'assegnazione finale della classe del paragrafo}{figure.caption.22}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.4}Altre strategie di data cleaning usate}{31}{section.3.4}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.15}{\ignorespaces Dendrogramma di BERTopic su dataset parzialmente pulito.}}{31}{figure.caption.23}\protected@file@percent }
-\newlabel{fig:half-cleaning}{{3.15}{31}{Dendrogramma di BERTopic su dataset parzialmente pulito}{figure.caption.23}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Pulizia tramite NER}{32}{section*.24}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.16}{\ignorespaces Euristica di rimozione delle entità: \texttt  {ORG} identifica le organizzazioni (incluse le aziende), \texttt  {GPE} le entità geopolitiche (stati, città).}}{32}{figure.caption.25}\protected@file@percent }
-\newlabel{fig:ner-cleaning}{{3.16}{32}{Euristica di rimozione delle entità: \texttt {ORG} identifica le organizzazioni (incluse le aziende), \texttt {GPE} le entità geopolitiche (stati, città)}{figure.caption.25}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Risultato finale}{32}{section*.26}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.17}{\ignorespaces Dendrogramma di BERTopic su dataset completamente pulito.}}{33}{figure.caption.27}\protected@file@percent }
-\newlabel{fig:cleaned-dendrogram}{{3.17}{33}{Dendrogramma di BERTopic su dataset completamente pulito}{figure.caption.27}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.5}Possibili miglioramenti}{33}{section.3.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Risultati finali}{34}{chapter.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.10}{\ignorespaces Funzione di fallback: sfrutta i token e il modulo \texttt  {sentencizer} di spaCy (all'interno di \texttt  {count\_sentences}) per riconoscere le frasi in un blocco di testo.}}{25}{figure.caption.17}\protected@file@percent }
+\newlabel{fig:fallback-split}{{3.10}{25}{Funzione di fallback: sfrutta i token e il modulo \texttt {sentencizer} di spaCy (all'interno di \texttt {count\_sentences}) per riconoscere le frasi in un blocco di testo}{figure.caption.17}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Classificazione paragrafi}{26}{section.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Etichettatura}{26}{subsection.3.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Allenamento}{28}{section*.18}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.11}{\ignorespaces Il 20\% del dataset è usato come test set per la valutazione. L'opzione \texttt  {stratify=df["label"]} preserva la distribuzione delle classi tra train e test, indispensabile in presenza di classi sbilanciate.}}{28}{figure.caption.19}\protected@file@percent }
+\newlabel{fig:clf-split}{{3.11}{28}{Il 20\% del dataset è usato come test set per la valutazione. L'opzione \texttt {stratify=df["label"]} preserva la distribuzione delle classi tra train e test, indispensabile in presenza di classi sbilanciate}{figure.caption.19}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.12}{\ignorespaces Configurazione del classificatore LR: massimo 2000 iterazioni, pesi maggiorati per la classe \texttt  {JOB} (1.5) e bilanciamento minore per \texttt  {BLURB} e \texttt  {DETAIL}.}}{29}{figure.caption.20}\protected@file@percent }
+\newlabel{fig:clf-lr}{{3.12}{29}{Configurazione del classificatore LR: massimo 2000 iterazioni, pesi maggiorati per la classe \texttt {JOB} (1.5) e bilanciamento minore per \texttt {BLURB} e \texttt {DETAIL}}{figure.caption.20}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.13}{\ignorespaces Metriche di valutazione e matrici di confusione al variare del peso assegnato alla classe \textbf  {JOB} nella \textit  {Logistic Regression}.}}{30}{figure.caption.21}\protected@file@percent }
+\newlabel{fig:lr-reports}{{3.13}{30}{Metriche di valutazione e matrici di confusione al variare del peso assegnato alla classe \textbf {JOB} nella \textit {Logistic Regression}}{figure.caption.21}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Strategia di rimozione}{30}{section*.22}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.14}{\ignorespaces Logica di post-processing per l'assegnazione finale della classe del paragrafo.}}{31}{figure.caption.23}\protected@file@percent }
+\newlabel{fig:lr-postprocess}{{3.14}{31}{Logica di post-processing per l'assegnazione finale della classe del paragrafo}{figure.caption.23}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Altre strategie di data cleaning usate}{32}{section.3.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.15}{\ignorespaces Dendrogramma di BERTopic su dataset parzialmente pulito.}}{32}{figure.caption.24}\protected@file@percent }
+\newlabel{fig:half-cleaning}{{3.15}{32}{Dendrogramma di BERTopic su dataset parzialmente pulito}{figure.caption.24}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Pulizia tramite NER}{33}{section*.25}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.16}{\ignorespaces Euristica di rimozione delle entità: \texttt  {ORG} identifica le organizzazioni (incluse le aziende), \texttt  {GPE} le entità geopolitiche (stati, città).}}{33}{figure.caption.26}\protected@file@percent }
+\newlabel{fig:ner-cleaning}{{3.16}{33}{Euristica di rimozione delle entità: \texttt {ORG} identifica le organizzazioni (incluse le aziende), \texttt {GPE} le entità geopolitiche (stati, città)}{figure.caption.26}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Risultato finale}{33}{section*.27}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.17}{\ignorespaces Dendrogramma di BERTopic su dataset completamente pulito.}}{34}{figure.caption.28}\protected@file@percent }
+\newlabel{fig:cleaned-dendrogram}{{3.17}{34}{Dendrogramma di BERTopic su dataset completamente pulito}{figure.caption.28}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.5}Possibili miglioramenti}{34}{section.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Risultati finali}{35}{chapter.4}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \citation{*}
 \bibstyle{unsrt}
 \bibdata{bibliografia}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Conclusioni}{35}{chapter.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Conclusioni}{36}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \bibcite{almgerbi2025dynamics}{1}
 \bibcite{grootendorst2022bertopic}{2}
 \bibcite{devlin2019bert}{3}
-\@writefile{toc}{\contentsline {chapter}{Ringraziamenti}{37}{chapter*.29}\protected@file@percent }
-\gdef \@abspage@last{37}
+\@writefile{toc}{\contentsline {chapter}{Ringraziamenti}{38}{chapter*.30}\protected@file@percent }
+\gdef \@abspage@last{38}

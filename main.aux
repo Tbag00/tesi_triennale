@@ -61,18 +61,36 @@
 \newlabel{fig:header-metrics}{{3.9}{22}{Confronto delle metriche \textit {precision}, \textit {recall} e \textit {F-score} tra la valutazione fatta nel dev set e quella nel test set}{figure.caption.14}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {3.3}Classificazione paragrafi}{23}{section.3.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Etichettatura}{23}{subsection.3.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.4}Altre strategie di data cleaning usate}{25}{section.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Risultati finali}{26}{chapter.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Allenamento}{25}{section*.15}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.10}{\ignorespaces Il 20\% del dataset è usato come test set per la valutazione. L'opzione \texttt  {stratify=df["label"]} preserva la distribuzione delle classi tra train e test, indispensabile in presenza di classi sbilanciate.}}{25}{figure.caption.16}\protected@file@percent }
+\newlabel{fig:clf-split}{{3.10}{25}{Il 20\% del dataset è usato come test set per la valutazione. L'opzione \texttt {stratify=df["label"]} preserva la distribuzione delle classi tra train e test, indispensabile in presenza di classi sbilanciate}{figure.caption.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.11}{\ignorespaces Configurazione del classificatore LR: massimo 2000 iterazioni, pesi maggiorati per la classe \texttt  {JOB} (1.5) e bilanciamento minore per \texttt  {BLURB} e \texttt  {DETAIL}.}}{27}{figure.caption.17}\protected@file@percent }
+\newlabel{fig:clf-lr}{{3.11}{27}{Configurazione del classificatore LR: massimo 2000 iterazioni, pesi maggiorati per la classe \texttt {JOB} (1.5) e bilanciamento minore per \texttt {BLURB} e \texttt {DETAIL}}{figure.caption.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.12}{\ignorespaces Metriche di valutazione e matrici di confusione al variare del peso assegnato alla classe \textbf  {JOB} nella \textit  {Logistic Regression}.}}{27}{figure.caption.18}\protected@file@percent }
+\newlabel{fig:lr-reports}{{3.12}{27}{Metriche di valutazione e matrici di confusione al variare del peso assegnato alla classe \textbf {JOB} nella \textit {Logistic Regression}}{figure.caption.18}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Strategia di rimozione}{28}{section*.19}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.13}{\ignorespaces Logica di post-processing per l'assegnazione finale della classe del paragrafo.}}{28}{figure.caption.20}\protected@file@percent }
+\newlabel{fig:lr-postprocess}{{3.13}{28}{Logica di post-processing per l'assegnazione finale della classe del paragrafo}{figure.caption.20}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Altre strategie di data cleaning usate}{29}{section.3.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.14}{\ignorespaces Dendrogramma di BERTopic su dataset parzialmente pulito.}}{29}{figure.caption.21}\protected@file@percent }
+\newlabel{fig:half-cleaning}{{3.14}{29}{Dendrogramma di BERTopic su dataset parzialmente pulito}{figure.caption.21}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Pulizia tramite NER}{30}{section*.22}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.15}{\ignorespaces Euristica di rimozione delle entità: \texttt  {ORG} identifica le organizzazioni (incluse le aziende), \texttt  {GPE} le entità geopolitiche (stati, città).}}{30}{figure.caption.23}\protected@file@percent }
+\newlabel{fig:ner-cleaning}{{3.15}{30}{Euristica di rimozione delle entità: \texttt {ORG} identifica le organizzazioni (incluse le aziende), \texttt {GPE} le entità geopolitiche (stati, città)}{figure.caption.23}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Risultato finale}{30}{section*.24}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.16}{\ignorespaces Dendrogramma di BERTopic su dataset completamente pulito.}}{31}{figure.caption.25}\protected@file@percent }
+\newlabel{fig:cleaned-dendrogram}{{3.16}{31}{Dendrogramma di BERTopic su dataset completamente pulito}{figure.caption.25}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Risultati finali}{32}{chapter.4}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \citation{*}
 \bibstyle{unsrt}
 \bibdata{bibliografia}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Conclusioni}{27}{chapter.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Conclusioni}{33}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \bibcite{almgerbi2025dynamics}{1}
 \bibcite{grootendorst2022bertopic}{2}
 \bibcite{devlin2019bert}{3}
-\@writefile{toc}{\contentsline {chapter}{Ringraziamenti}{29}{chapter*.16}\protected@file@percent }
-\gdef \@abspage@last{29}
+\@writefile{toc}{\contentsline {chapter}{Ringraziamenti}{35}{chapter*.27}\protected@file@percent }
+\gdef \@abspage@last{35}

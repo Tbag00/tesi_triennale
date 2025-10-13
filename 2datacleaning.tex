@@ -333,7 +333,7 @@ eval_frequency = 200
     \item \textbf{OFFER-DETAIL}: unione di benefit, location, schedule, contract.
 \end{itemize}
 
-\noindent Useremo dunque più classi in fase di addestramento, ma il modello verrà impiegato come classificatore binario scartando le classi diverse da \textbf{JOB}. Il \textit{training set} finale è composto da 1315 paragrafi così etichettati:
+\noindent Useremo dunque più classi in fase di addestramento, ma il modello verrà impiegato come classificatore binario scartando le classi diverse da \textbf{JOB}. Il \textit{dataset} finale è composto da 1315 paragrafi così etichettati:
 
 \begin{center}
 \begin{tabular}{ll}
@@ -344,5 +344,193 @@ eval_frequency = 200
 \end{center}
 
 \noindent Lo sbilanciamento a favore di \textbf{JOB} potrebbe apparire problematico: quando le classi sono sbilanciate un classificatore tende a privilegiare la classe maggioritaria, con il rischio di introdurre un \textit{bias} verso \textbf{JOB}. Tuttavia il nostro obiettivo è pulire il dataset \textit{evitando di tagliare informazioni potenzialmente rilevanti} per lo studio; di conseguenza, nel caso in cui il modello fosse incerto, è preferibile preservare il paragrafo per non eliminare contenuti importanti. In quest'ottica avere un'unica classe \textbf{JOB} (anziché distinguere Ruolo, Abilità e Responsabilità) può rivelarsi un vantaggio. Questa politica di ``favoritismo'' verso la classe \textbf{JOB} verrà riutilizzata sia nel training dell'embedder sia nelle politiche di cancellazione dei paragrafi post-classificazione, come illustrato nelle sezioni successive.
+\subsubsection{Allenamento}
 
+\begin{figure}[H]
+    \centering
+    \scriptsize
+\begin{lstlisting}[language=python]
+X_train, X_test, y_train, y_test = train_test_split(
+    df["text"],
+    df["label"],
+    test_size=0.2,
+    stratify=df["label"],
+    random_state=10,
+)
+\end{lstlisting}
+    \caption{Il 20\% del dataset è usato come test set per la valutazione. L'opzione \texttt{stratify=df["label"]} preserva la distribuzione delle classi tra train e test, indispensabile in presenza di classi sbilanciate.}
+    \label{fig:clf-split}
+\end{figure}
+
+\noindent Dopo la suddivisione del dataset e la creazione e normalizzazione degli embedding resta la classificazione effettiva, le opzioni che abbiamo preso in considerazione sono:
+
+\begin{enumerate}
+    \item \textbf{Rete neurale}
+    \item \textbf{Fine-tuning del transformer}
+    \item \textbf{Logistic Regression}
+\end{enumerate}
+
+\noindent Una rete neurale può apprendere relazioni non lineari tra gli embedding per catturare interazioni più complesse. Questo approccio può ottenere buone prestazioni in presenza di dataset di dimensioni maggiori, comporta inoltre una maggiore complessità di addestramento e un rischio più elevato di overfitting rispetto a modelli lineari.
+
+\noindent Con \textit{fine tuning del transformer} intendiamo il riaddestramento parziale (cioè solo degli ultimi layer) del modello Transformer stesso, aggiungendo in coda al modello una piccola testa di classificazione. Questa strategia offre un grande vantaggio in più rispetto alla precedente: l'adattamento al dominio. Infatti SBERT non sarebbe più un generatore di embedding statici, ma coglierebbe sfumature linguistiche specifiche degli annunci di lavoro, riducendo l’ambiguità tra frasi che nei dati generali erano simili, ma nel dominio degli annunci hanno significati distinti; questo potrebbe aumentare sensibilmente la capacità del modello di discriminare più accuratamente paragrafi simili. Chiaramente un approccio del genere richiederebbe un dataset di dimensioni ben maggiori, con almeno alcune migliaia di esempi. Abbiamo comunque ritenuto importante menzionarlo per eventuali sviluppi futuri.
+
+\noindent L'opzione scelta è quindi la \textbf{Logistic Regression}, che è adatta alla dimensione del nostro dataset, con basso rischio di overfitting rispetto alle scelte precedenti; inoltre gli embedding di \textit{all-mpnet-base-v2} sono già molto informativi, anche senza \textit{fine tuning}, quindi LR deve solo apprendere frontiere di decisione lineari, non estrarre feature dal testo grezzo.
+
+\begin{figure}[H]
+    \centering
+    \scriptsize
+\begin{lstlisting}[language=python]
+clf = LogisticRegression(
+    max_iter=2000,
+    class_weight={"JOB": 1.5, "BLURB": 1.0, "DETAIL": 1.0},
+    random_state=10,
+)
+\end{lstlisting}
+    \caption{Configurazione del classificatore LR: massimo 2000 iterazioni, pesi maggiorati per la classe \texttt{JOB} (1.5) e bilanciamento minore per \texttt{BLURB} e \texttt{DETAIL}.}
+    \label{fig:clf-lr}
+\end{figure}
+
+La \textit{class weight} rappresenta il peso che ha una classe nella funzione di \textit{loss}. Aumentando il peso di una classe il modello riceve gradienti più forti durante la \textit{backpropagation} e impara quindi a classificarla meglio. Abbiamo prediletto pesi maggiori per \textbf{JOB} per le ragioni espresse nella sezione precedente. I valori testati per la \textit{class weight} di \textbf{JOB} sono 1.0, 1.5 e 2.0; i risultati principali sono riassunti in Figura~\ref{fig:lr-reports}.
+
+\begin{figure}[H]
+    \centering
+    \scriptsize
+    \begin{tabular}{@{}p{0.45\textwidth}@{\hspace{1em}}p{0.45\textwidth}@{}}
+        \multicolumn{2}{c}{\textbf{Balanced (1.0)}}\\[0.4em]
+        \begin{tabular}{lccc}
+        & \textbf{Prec.} & \textbf{Rec.} & \textbf{F1} \\
+        DETAIL & 0.87 & 0.93 & 0.90 \\
+        BLURB & 0.85 & 0.90 & 0.88 \\
+        JOB & 0.97 & 0.92 & 0.94 \\
+        \end{tabular} &
+        $\begin{array}{c|ccc}
+            & \textbf{DET.} & \textbf{BLURB} & \textbf{JOB} \\
+            \hline
+            \textbf{DET.} & 253 & 13 & 7 \\
+            \textbf{BLURB} & 20 & 306 & 13 \\
+            \textbf{JOB} & 18 & 41 & 637 \\
+        \end{array}$\\[1em]
+        \multicolumn{2}{c}{\textbf{Slightly unbalanced (1.5)}}\\[0.4em]
+        \begin{tabular}{lccc}
+        & \textbf{Prec.} & \textbf{Rec.} & \textbf{F1} \\
+        DETAIL & 0.91 & 0.85 & 0.88 \\
+        BLURB & 0.89 & 0.81 & 0.85 \\
+        JOB & 0.91 & 0.97 & 0.94 \\
+        \end{tabular} &
+        $\begin{array}{c|ccc}
+            & \textbf{DET.} & \textbf{BLURB} & \textbf{JOB} \\
+            \hline
+            \textbf{DET.} & 231 & 22 & 20 \\
+            \textbf{BLURB} & 16 & 275 & 48 \\
+            \textbf{JOB} & 8 & 13 & 675 \\
+        \end{array}$\\[1em]
+        \multicolumn{2}{c}{\textbf{Unbalanced (2.0)}}\\[0.4em]
+        \begin{tabular}{lccc}
+        & \textbf{Prec.} & \textbf{Rec.} & \textbf{F1} \\
+        DETAIL & 0.91 & 0.84 & 0.88 \\
+        BLURB & 0.89 & 0.80 & 0.85 \\
+        JOB & 0.90 & 0.97 & 0.94 \\
+        \end{tabular} &
+        $\begin{array}{c|ccc}
+            & \textbf{DET.} & \textbf{BLURB} & \textbf{JOB} \\
+            \hline
+            \textbf{DET.} & 230 & 20 & 23 \\
+            \textbf{BLURB} & 15 & 272 & 52 \\
+            \textbf{JOB} & 7 & 12 & 677 \\
+        \end{array}$\\
+    \end{tabular}
+    \caption{Metriche di valutazione e matrici di confusione al variare del peso assegnato alla classe \textbf{JOB} nella \textit{Logistic Regression}.}
+    \label{fig:lr-reports}
+\end{figure}
+Il modello bilanciato è quello con un \textit{f-score} più alto, però il nostro obiettivo rimane massimizzare la \textit{recall} di JOB, in cui il modello leggermente sbilanciato è più forte al netto di un leggero peggioramento nelle altre classi (atteso) e nella precisione.
+Il modello più sbilanciato non offre un miglioramento della \textit{recall}, ma solo un peggioramento della performance generale del modello.
+Dunque la scelta è ricaduta sul modello \textbf{Slightly unbalanced}.
+\subsubsection{Strategia di rimozione}
+Adesso abbiamo la probabilità di appartenere ad una per ciascun paragrafo, dobbiamo scegliere come eliminare i paragrafi non informativi in base a queste informazioni:
+\noindent Per mitigare i casi borderline abbiamo definito un filtro euristico che riassegna la classe finale sulla base delle probabilità restituite dal classificatore.
+
+\begin{figure}[H]
+    \centering
+    \scriptsize
+\begin{lstlisting}[language=python]
+dominant = df[["prob_job", "prob_blurb_legal", "prob_offer_detail"]] \
+    .idxmax(axis=1).str.replace("prob_", "", regex=False)
+top_probs = df[["prob_job", "prob_blurb_legal", "prob_offer_detail"]].max(axis=1)
+
+cond_blurb = df["prob_blurb_legal"] > blurb_threshold
+cond_job = df["prob_job"] > job_threshold
+cond_diff = (top_probs - df["prob_job"] < diff_threshold)
+cond_low = top_probs < low_conf_threshold
+
+prediction = np.select(
+    [
+        cond_blurb & ~cond_job,               # blurb forte e non job
+        cond_job | cond_diff | cond_low       # se job, simile a job, o incerto
+    ],
+    ["blurb_legal", "job"],
+    default=dominant                          # altrimenti usa la classe dominante
+)
+\end{lstlisting}
+    \caption{Logica di post-processing per l'assegnazione finale della classe del paragrafo.}
+    \label{fig:lr-postprocess}
+\end{figure}
+
+\noindent Cosa fa questo codice:
+\begin{enumerate}
+    \item un paragrafo viene etichettato come \textbf{blurb legal} solo quando la probabilità relativa supera la soglia e quella di \textbf{JOB} rimane sotto il limite stabilito; questo perché i paragrafi che più inquinano sono quelli delle descrizioni aziendali.
+    \item i paragrafi con alta confidenza su \textbf{JOB}, con probabilità simile a \textbf{JOB} o complessivamente ambigui (\textit{low conf}) vengono classificati come \textbf{job};
+    \item in tutti gli altri casi si ricorre alla classe dominante (\textit{default}) proposta dal modello.
+\end{enumerate}
 \section{Altre strategie di data cleaning usate}
+
+\noindent Dopo la pulizia a livello di paragrafo analizziamo l'effetto su BERTopic. La Figura~\ref{fig:half-cleaning} mostra il dendrogramma ottenuto con il dataset parzialmente pulito.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{cleaning/gerarchia_half_cleaning.png}
+    \caption{Dendrogramma di BERTopic su dataset parzialmente pulito.}
+    \label{fig:half-cleaning}
+\end{figure}
+
+\noindent Il miglioramento rispetto al dataset grezzo è evidente, ma persistono ancora numerosi \textbf{nomi aziendali} e \textbf{luoghi}. Ciò dipende sia dalla strategia conservativa adottata in classificazione (preferire \textbf{JOB} anziché rischiare falsi negativi), sia da paragrafi misti: frasi come ``At Apple we are looking for a Data Analyst'' contengono informazioni cruciali sul ruolo, ma introducono anche riferimenti non utili.
+
+\noindent Diventa quindi necessario affiancare alla pulizia per paragrafi una pulizia \textbf{interna alle singole frasi}, così da eliminare riferimenti ad aziende e località e permettere a BERTopic di pesare maggiormente mansioni e competenze.
+
+\subsubsection{Pulizia tramite NER}
+
+\noindent Per raggiungere questo obiettivo integriamo nella pipeline spaCy un componente \textit{NER} (Name Entity Recognizer) già addestrato che identifica \textit{entità} testuali (aziende, persone, stati, ecc.). I token corrispondenti a entità non informative vengono rimossi dalle frasi dei paragrafi \textbf{JOB}.
+
+\begin{figure}[H]
+    \centering
+    \scriptsize
+\begin{lstlisting}[language=python]
+def remove_entities(texts, removable_entities={"ORG", "PERSON", "GPE"}):
+    cleaned = []
+    for doc in ner_model.pipe(texts):
+        tokens = []
+        for token in doc:
+            if token.ent_type_ in removable_entities \
+                    and token.text.lower() not in TECH_WHITELIST:
+                continue
+            tokens.append(token.text_with_ws)
+        cleaned.append("".join(tokens).strip())
+    return cleaned
+\end{lstlisting}
+    \caption{Euristica di rimozione delle entità: \texttt{ORG} identifica le organizzazioni (incluse le aziende), \texttt{GPE} le entità geopolitiche (stati, città).}
+    \label{fig:ner-cleaning}
+\end{figure}
+
+\noindent In parallelo manteniamo una \textbf{whitelist} di termini tecnici (ad esempio \textit{Oracle}, \textit{GitHub}) per evitare di rimuovere entità che rappresentano competenze o strumenti rilevanti.
+
+\subsubsection{Risultato finale}
+
+\noindent Applicando anche questa pulizia intra-frasi otteniamo il dendrogramma della Figura~\ref{fig:cleaned-dendrogram} ottenuto con BERTopic.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{cleaning/dendrogramma_pulito.png}
+    \caption{Dendrogramma di BERTopic su dataset completamente pulito.}
+    \label{fig:cleaned-dendrogram}
+\end{figure}
+
+\noindent I riferimenti a \textbf{brand} e \textbf{luoghi statunitensi} scompaiono quasi del tutto e l'attenzione si concentra su mansioni, competenze e requisiti realmente utili per l'analisi del mercato del lavoro.

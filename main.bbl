@@ -8,11 +8,13 @@ Mariam Almgerbi, Andrea De~Mauro, Hanan Kahlawi, and Valentina Poggioni.
 \bibitem{grootendorst2022bertopic}
 Maarten Grootendorst.
 \newblock Bertopic: Neural topic modeling with a class-based tf-idf procedure.
-\newblock In {\em Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics}, pages 1--9, 2022.
+\newblock In {\em Proceedings of the 60th Annual Meeting of the Association for
+  Computational Linguistics}, pages 1--9, 2022.
 
 \bibitem{devlin2019bert}
 Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova.
-\newblock {\em BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding}.
+\newblock {\em BERT: Pre-training of Deep Bidirectional Transformers for
+  Language Understanding}.
 \newblock Association for Computational Linguistics, Florence, 2019.
 
 \end{thebibliography}

@@ -269,11 +269,11 @@ INPUT ./img/cleaning/header_metrics_comparison.png
 INPUT ./img/cleaning/header_metrics_comparison.png
 INPUT ./img/cleaning/header_metrics_comparison.png
 INPUT ./img/cleaning/header_metrics_comparison.png
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm0800.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm0600.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbx0600.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm0500.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbx0500.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm0800.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecti0800.tfm
 INPUT ./img/cleaning/gerarchia_half_cleaning.png
 INPUT ./img/cleaning/gerarchia_half_cleaning.png

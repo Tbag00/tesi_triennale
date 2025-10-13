@@ -231,7 +231,7 @@ hidden_size = 128
 \end{figure}
 
 \noindent Il componente \texttt{MeanMaxReducer} calcola la media dei token, il massimo dei token e concatena i due vettori in un'unica rappresentazione, sulla quale applica un \textit{hidden layer}; la documentazione indica la presenza del layer ma non ne esplicita la struttura.\footnote{\url{https://spacy.io/api/architectures\#mean\_max\_reducer}}
-\subsection{Scorer}
+\subsubsection{Scorer}
 
 \noindent Il layer finale mappa il vettore dello span sulla probabilità di classe, utilizzando una funzione di attivazione \textbf{sigmoide}.
 
@@ -249,7 +249,7 @@ nI = null
 \end{figure}
 Il layer usato qui è uno strato lineare seguito da una \textbf{sigmoide}.
 Poiché SBERT (usato per la classificazione dei paragrafi) predilige documenti composti da poche frasi, e per limitare il numero di paragrafi spuri (cioè che comprendono informazioni di classi diverse), abbiamo scelto 0.2 come probabilità minima per classificare uno span come header, in modo da avere una segmentazione più fine.
-Il contro di questo approccio è che se il documento è troppo corto SBERT non ha il contesto necessario per fare una classificazione robusta, parleremo del problema nella sezione successiva.
+Il contro di questo approccio è che se il documento è troppo corto SBERT non ha il contesto necessario per fare una classificazione robusta, parleremo del problema nella sezione relativa al \textit{fallback}.
 
 \subsubsection{Allenamento}
 
@@ -278,7 +278,7 @@ eval_frequency = 200
     \label{fig:cfg-training}
 \end{figure}
 
-\noindent Il corpo viene suddiviso in batch di grandezza variabile, i batch non sono composti da documenti, ma da token, per miglioreare le performance qualndo l'allenamento avviene su GPU. A ogni passo di training, la dimensione del batch viene moltiplicata per un fattore 1.001, partendo da 100 token fino a un massimo di 1000; in questo modo batch piccoli vengono usati all'inizio del training, per avere gradienti più rumorosi ma anche più esplorativi, man mano che il training prosegue si prediligono batch sempre più grandi per avere gradienti più stabili e precisi. \textit{Nota: valutare se inserire info riguardo l'ottimizzatore che è Adam.}
+\noindent Il corpo viene suddiviso in batch di grandezza variabile, i batch non sono composti da documenti, ma da token, per miglioreare le performance quando l'allenamento avviene su GPU. A ogni passo di training, la dimensione del batch viene moltiplicata per un fattore 1.001, partendo da 100 token fino a un massimo di 1000; in questo modo batch piccoli vengono usati all'inizio del training, per avere gradienti più rumorosi ma anche più esplorativi, man mano che il training prosegue si prediligono batch sempre più grandi per avere gradienti più stabili e precisi. \textit{Nota: valutare se inserire info riguardo l'ottimizzatore che è Adam.}
 
 \subsection{Valutazione del modello}
 
@@ -291,6 +291,55 @@ eval_frequency = 200
 
 \noindent Il \textit{test set} è composto da altre 20 descrizioni per un totale di 150 intestazioni.
 \noindent Il modello mostra una \textit{precisione} elevata e una \textit{sensibilità} complessivamente soddisfacente. La \textit{recall}, come evidenziato in Figura~\ref{fig:header-metrics}, diminuisce in modo sensibile, ma rimane entro un intervallo accettabile per l'obiettivo di segmentazione. L'\textit{F-score} resta stabile e su valori buoni, a indicare che la rete generalizza bene: qualche intestazione marginale viene persa, ma il bilanciamento tra falsi positivi e falsi negativi rimane favorevole.
+\subsection{Fallback}
+
+\noindent Come affermato in precedenza, abbiamo implementato una strategia di \textit{fallback} per suddividere i paragrafi troppo lunghi. Il primo approccio testato è stato quello di utilizzare la \textit{cosine similarity} fra frasi:
+\begin{enumerate}
+    \item si divide il paragrafo in frasi;
+    \item si calcola l'embedding di ogni frase con SBERT;
+    \item a partire dalla seconda frase si misura la \textit{cosine similarity} con quella precedente e, quando scende sotto soglia, si spezza il paragrafo.
+\end{enumerate}
+\noindent In teoria il metodo avrebbe dovuto raggruppare frasi semanticamente affini e separare cambi di argomento. In pratica, molti paragrafi omogenei presentavano similarità basse e, in generale, la \textit{similarità tra frasi} non risultava abbastanza correlata al cambio di argomento. Siamo quindi tornati a una suddivisione più ortografica basata su soglie di lunghezza (in termini di \textit{token} spaCy), numero minimo di frasi e doppi \texttt{\textbackslash n\textbackslash n}.
+
+\begin{figure}[H]
+    \centering
+    \scriptsize
+\begin{lstlisting}[language=python]
+nlp_sent = spacy.blank("en")
+nlp_sent.add_pipe("sentencizer")
+
+def count_sentences(part: str) -> int:
+    doc = nlp_sent(part)
+    return len(list(doc.sents))
+
+def _split_long_paragraph(span, max_tokens=120, min_sents=2):
+    text = span.text
+    if len(span) < max_tokens:
+        return [text]
+
+    parts = [p.strip() for p in text.split("\n\n") if p.strip()]
+    buffer = ""
+    paragraphs = []
+
+    for i, part in enumerate(parts):
+        n_sents = count_sentences(part)
+        if n_sents <= min_sents and i < len(parts) - 1:
+            buffer += "\n" + part
+        else:
+            paragraphs.append((buffer + "\n" + part).strip())
+            buffer = ""
+
+    if buffer:
+        paragraphs.append(buffer.strip())
+
+    return paragraphs
+\end{lstlisting}
+    \caption{Funzione di fallback: sfrutta i token e il modulo \texttt{sentencizer} di spaCy (all'interno di \texttt{count\_sentences}) per riconoscere le frasi in un blocco di testo.}
+    \label{fig:fallback-split}
+\end{figure}
+
+\noindent L'euristica divide il testo sugli \texttt{\textbackslash n\textbackslash n}, accumula i blocchi troppo corti in un buffer e restituisce sotto-paragrafi con almeno due frasi e meno di 120 token, così SBERT riceve segmenti informativi senza perdere il contesto.
+L'uso di una doppia strategia garantisce una buona granularità nella suddivisione del testo, infatti annunci in cui non sono presenti né intestazioni, né doppi new line sono pochi e hanno quindi un peso basso in BERTopic.
 \section{Classificazione paragrafi}
 
 \noindent Una volta completata la divisione in paragrafi, analizziamo come abbiamo affrontato la classificazione. Dobbiamo gestire testi di lunghezza variabile ma comunque limitati a poche frasi. Abbiamo deciso di utilizzare un modello della libreria \textit{Sentence Transformers} per creare gli embedding dei paragrafi, a cui abbiamo poi applicato un layer di \textit{Logistic Regression} che classifica gli embedding. Anche in questo caso abbiamo adottato \textit{all-mpnet-base-v2}, poiché fornisce embedding semantici di alta qualità, come visto nel capitolo precedente.
@@ -534,3 +583,6 @@ def remove_entities(texts, removable_entities={"ORG", "PERSON", "GPE"}):
 \end{figure}
 
 \noindent I riferimenti a \textbf{brand} e \textbf{luoghi statunitensi} scompaiono quasi del tutto e l'attenzione si concentra su mansioni, competenze e requisiti realmente utili per l'analisi del mercato del lavoro.
+\section{Possibili miglioramenti}
+Analizziamo quì i punti critici che potrebbero essere migliorati e speculiamo su quali altre strategie potrebbero essere attuate in uno sviluppo successivo dello studio:
+

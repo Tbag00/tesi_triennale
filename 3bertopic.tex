@@ -1,13 +1,12 @@
 \chapter{BERTopic}
-L'avvento dei moderni \emph{LLM} ha portato ad un'evoluzione del \textbf{nlp} (natural lenguage processing) con la conseguente nascita di nuovi framework e tecniche per le analisi più disparate.
-Il \emph{topic modeling} non è esente da questo fenomeno, in particolare i modelli basati su \textbf{transformers} (cioè modelli che convertono testo in embeddings dipendenti dal contesto) si sono rilevati particolarmente efficaci nell'\emph{nlp}.
-\textbf{Modelli preaddestrati} sono molto utilizzati perché permettono di creare rappresentazioni \textbf{accurate} e \textbf{rappresentative} di testi.
-In questo contesto BERTopic è un algoritmo al passo con il corrente stato dell'arte, che offre alcuni vantaggi rispetto a tecniche antecedenti:
-In primis permette di catturare il \textbf{significato semantico} dei documenti (riconosce ad esempio i sinonimi), Per dataset eterogenei e rumorosi come gli annunci di lavoro, questa capacità di individuare strutture semantiche latenti rende BERTopic una scelta particolarmente vantaggiosa rispetto ai modelli tradizionali. Inoltre BERTopic non richiede che il numero di classi venga specificato in anticipo, checomunque \textbf{può} essere specificato, o influenzato tramite metaparametri.
+L'avvento dei moderni \emph{LLM} ha portato ad un'evoluzione del \textbf{NLP} (Natural Language Processing) con la conseguente nascita di nuovi framework e tecniche per le analisi più disparate.
+Il \emph{topic modeling} non è esente da questo fenomeno, in particolare i modelli basati su \textbf{transformers} (cioè modelli che convertono testo in embeddings dipendenti dal contesto) si sono rilevati particolarmente efficaci.% nell'\emph{nlp}.
+\textbf{Modelli preaddestrati} sono molto utilizzati perché permettono di creare rappresentazioni \textbf{accurate} e \textbf{rappresentative} di testi, potendo fare affidamento su dataset di training molto grandi e molto diversificati.
+In questo contesto BERTopic è un algoritmo al passo con il corrente stato dell'arte, che offre alcuni vantaggi rispetto a tecniche antecedenti, fra cui permette di catturare il \textbf{significato semantico} dei documenti (riconosce ad esempio i sinonimi). Per dataset eterogenei e rumorosi come gli annunci di lavoro, questa capacità di individuare strutture semantiche latenti rende BERTopic una scelta particolarmente vantaggiosa rispetto ai modelli tradizionali. Inoltre BERTopic non richiede che il numero di classi venga specificato in anticipo, checomunque \textbf{può} essere specificato, o influenzato tramite metaparametri.
 Inoltre BERTopic è una \emph{pipeline} composta da più moduli con funzioni diverse, il che permette una alta personalizzazione.
 
-\section{Pipeline}
-I moduli che abbiamo scelto nella implementazione usata nello studio sono:
+\section{Funzionalità}
+All'interno di Bert Topic è possibile distinguere alcune funzionalità particolarmente utili per questo progetto:
 \begin{enumerate}
 \item Embedding
 \item Dimensionality Reduction
@@ -16,8 +15,8 @@ I moduli che abbiamo scelto nella implementazione usata nello studio sono:
 \item c-TF-IDF
 \end{enumerate}
 
-BERTopic permette l'utilizzo di algoritmi diversi in ogni punto, per personalizzare il proprio \emph{topic model}, ad esempio il clustering può essere effettuato da \emph{HDBSCAN} o da \emph{k-Means}.
-Illustreremo ora tutti i moduli della pipeline, vedremo nello specifico la loro funzione e come la loro alterazione modifica il risultato finale.
+BERTopic permette l'utilizzo di algoritmi diversi per ogni funzionalità, per personalizzare il proprio \emph{topic model}, ad esempio il clustering può essere effettuato da \emph{HDBSCAN} o da \emph{k-Means}.
+Illustreremo ora tutti i moduli, vedremo nello specifico la loro funzione e come la loro alterazione modifica il risultato finale.
 \subsection{Embedding}
 Il primo modulo è l'\textbf{embedder}, il cui compito è quello di trasformare i documenti in rappresentazioni numeriche.
 i modelli principali consigliati nella documentazione\footnote{\url{https://maartengr.github.io/BERTopic/getting_started/embeddings/embeddings.html}} sono i \textbf{sentence transformers} (SBERT).

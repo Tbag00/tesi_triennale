@@ -6,7 +6,7 @@ Descrivere in termini generali l'obiettivo del topic modeling, le tecniche class
 
 \section{Analisi del paper \emph{The Dynamics of Data Analytics Job Skills: a Longitudinal Analysis}}
 
-\textit{Almgerbi, De Mauro, Kahlawi, Poggioni (2025)} presentano uno studio longitudinale sull'evoluzione delle competenze richieste negli \textbf{annunci di lavoro in ambito Data Analytics} tra il 2019 e il 2023. 
+\textit{Almgerbi, De Mauro, Kahlawi, Poggioni} presentano uno studio longitudinale sull'evoluzione delle competenze richieste negli \textbf{annunci di lavoro in ambito Data Analytics} tra il 2019 e il 2023. 
 La loro ricerca mira a catturare le dinamiche temporali nella domanda di competenze applicando il topic modeling basato su \textbf{Latent Dirichlet Allocation (LDA)} a grandi corpora di annunci di lavoro online (Online Job Advertisements, OJA).
 
 \subsection{Obiettivi e motivazioni}
@@ -41,12 +41,9 @@ Sono stati individuati dodici topic distinti:
     \item \textbf{Maggiore bisogno di software e governance:} l'incremento di \textit{Software Engineering} (+13\%) e \textit{Senior Management} (+8\%) segnala l'importanza crescente di capacità di leadership, governo dei processi e integrazione software.
 \end{itemize}
 
-\subsection{Evoluzione del vocabolario}
-L'analisi delle frequenze (termini con più di 500 occorrenze) mostra un chiaro cambio tecnologico:
-\begin{itemize}
-    \item \textbf{Termini in crescita:} \textit{Databricks} (+551\%), \textit{PyTorch} (+226\%), \textit{NLP} (+130\%), \textit{Modelling} (+129\%), \textit{GCP} (+114\%), a testimonianza del ruolo crescente di framework cloud e machine learning.
-    \item \textbf{Termini in diminuzione:} \textit{Hadoop} (--50\%), \textit{Java} (--51\%), \textit{SSRS} (--61\%), \textit{CSS} (--51\%), che rappresentano il declino di tecnologie legacy orientate all'infrastruttura.
-\end{itemize}
+Inoltre l'analisi delle frequenze (termini con più di 500 occorrenze) mostra un chiaro cambio tecnologico:
+\noindent \textbf{Termini in crescita:} \textit{Databricks} (+551\%), \textit{PyTorch} (+226\%), \textit{NLP} (+130\%), \textit{Modelling} (+129\%), \textit{GCP} (+114\%), a testimonianza del ruolo crescente di framework cloud e machine learning.
+\noindent \textbf{Termini in diminuzione:} \textit{Hadoop} (--50\%), \textit{Java} (--51\%), \textit{SSRS} (--61\%), \textit{CSS} (--51\%), che rappresentano il declino di tecnologie legacy orientate all'infrastruttura.
 
 \subsection{Conclusioni}
 Il paper mostra come il mercato del lavoro in ambito Data Analytics stia evolvendo verso ruoli \textbf{specializzati, guidati dall'AI e orientati al software}.
@@ -57,11 +54,5 @@ Per il futuro si suggerisce l'integrazione di ulteriori fonti (sondaggi, curricu
 
 \subsection{Rilevanza per questo progetto}
 Questo studio fornisce le basi concettuali e metodologiche per il nostro lavoro:
-\begin{itemize}
-    \item stabilisce il topic modeling longitudinale basato su LDA come benchmark per il confronto con i metodi moderni basati su embedding come \textbf{BERTopic};
-    \item conferma l'importanza di analizzare le \textbf{dinamiche temporali} nei corpora di annunci di lavoro;
-    \item enfatizza la combinazione tra metriche quantitative di coerenza e interpretabilità umana, principio mantenuto nel nostro approccio tramite UMAP, HDBSCAN e probabilità di topic.
-\end{itemize}
-
-\section{Approccio con BERT}
-Introdurre il modello BERT, motivare la sua scelta per il topic modeling e spiegare a livello concettuale la pipeline prevista.
+In primis stabilisce il topic modeling longitudinale basato su LDA come benchmark per il confronto con i metodi moderni basati su embedding come \textbf{BERTopic};
+conferma l'importanza di analizzare le \textbf{dinamiche temporali} nei corpora di annunci di lavoro e enfatizza la combinazione tra metriche quantitative di coerenza e interpretabilità umana, principio mantenuto nel nostro approccio tramite UMAP, HDBSCAN e probabilità di topic.

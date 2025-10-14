@@ -1,14 +1,95 @@
 \chapter{BERTopic}
-Descrivere l'architettura di BERTopic e le motivazioni per cui è stata scelta per l'analisi degli annunci.
+L'avvento dei moderni \emph{LLM} ha portato ad un'evoluzione del \textbf{nlp} (natural lenguage processing) con la conseguente nascita di nuovi framework e tecniche per le analisi più disparate.
+Il \emph{topic modeling} non è esente da questo fenomeno, in particolare i modelli basati su \textbf{transformers} (cioè modelli che convertono testo in embeddings dipendenti dal contesto) si sono rilevati particolarmente efficaci nell'\emph{nlp}.
+\textbf{Modelli preaddestrati} sono molto utilizzati perché permettono di creare rappresentazioni \textbf{accurate} e \textbf{rappresentative} di testi.
+In questo contesto BERTopic è un algoritmo al passo con il corrente stato dell'arte, che offre alcuni vantaggi rispetto a tecniche antecedenti:
+In primis permette di catturare il \textbf{significato semantico} dei documenti (riconosce ad esempio i sinonimi), Per dataset eterogenei e rumorosi come gli annunci di lavoro, questa capacità di individuare strutture semantiche latenti rende BERTopic una scelta particolarmente vantaggiosa rispetto ai modelli tradizionali. Inoltre BERTopic non richiede che il numero di classi venga specificato in anticipo, checomunque \textbf{può} essere specificato, o influenzato tramite metaparametri.
+Inoltre BERTopic è una \emph{pipeline} composta da più moduli con funzioni diverse, il che permette una alta personalizzazione.
 
 \section{Pipeline}
-Presentare la pipeline end-to-end, evidenziando gli input, le trasformazioni intermedie e l'output finale del modello.
+I moduli che abbiamo scelto nella implementazione usata nello studio sono:
+\begin{enumerate}
+\item Embedding
+\item Dimensionality Reduction
+\item Clustering
+\item Tokenizer
+\item c-TF-IDF
+\end{enumerate}
 
+BERTopic permette l'utilizzo di algoritmi diversi in ogni punto, per personalizzare il proprio \emph{topic model}, ad esempio il clustering può essere effettuato da \emph{HDBSCAN} o da \emph{k-Means}.
+Illustreremo ora tutti i moduli della pipeline, vedremo nello specifico la loro funzione e come la loro alterazione modifica il risultato finale.
 \subsection{Embedding}
-Indicare come vengono generati gli embedding con BERT (o varianti), eventuali fine-tuning e impostazioni rilevanti.
-
+Il primo modulo è l'\textbf{embedder}, il cui compito è quello di trasformare i documenti in rappresentazioni numeriche.
+i modelli principali consigliati nella documentazione\footnote{\url{https://maartengr.github.io/BERTopic/getting_started/embeddings/embeddings.html}} sono i \textbf{sentence transformers} (SBERT).
+Ci sono molti modelli SBERT pre-addestrati tra cui scegliere, la documentazione ufficiale nei suoi esempi usa spesso all-MiniLM-L6-v2 un modello estremamente leggero e veloce, però non sufficientemente preciso nel catturare sfumature semantiche complesse o relazioni a lungo raggio.
+paraphrase-MiniLM-L12-v2 e paraphrase-mpnet-base-v2, sono più accurati, ma più specializzati nel catturare relazioni di parafrasi, fra testi molto simili, sono inoltre inadatti a testi particolarmente lunghi come gli annunci di lavoro.
+\textbf{all-mpnet-base-v2}, invece, ha una alta \textbf{precisione semantica}, e si comporta bene con documenti di lunghezza \textbf{medio-lunga}.
+Ha però un limite di lunghezza di \textbf{512 token}, con token in questo contesto ci riferiamo all' unità base che usano i modelli sentence transformers, i token sono composti da una parola o da una frazione di essa.
+Ecco alcune informazioni sulla lunghezza del nostro dataset (dopo la pulizia):
+\begin{figure}[H]
+\centering
+\scriptsize
+\begin{tabular}{lccc}
+\hline
+ & n chars & n words & n tokens mpnet \\
+\hline
+count & 5349.00 & 5349.00 & 5349.00 \\
+mean & 3262.81 & 449.54 & 583.11 \\
+std & 1650.89 & 227.65 & 294.96 \\
+min & 7.00 & 1.00 & 3.00 \\
+50\% & 3000.00 & 415.00 & 536.00 \\
+75\% & 4034.00 & 557.00 & 718.00 \\
+90\% & 5204.60 & 717.40 & 929.20 \\
+95\% & 6209.80 & 852.60 & 1110.60 \\
+99\% & 8891.00 & 1218.32 & 1586.56 \\
+max & 19763.00 & 2778.00 & 3811.00 \\
+\hline
+\multicolumn{4}{l}{Testi che superano i 512 token: 2910 (54.40\%)} \\
+\multicolumn{4}{l}{Totale annunci: 5249} \\
+\hline
+\end{tabular}
+\caption{Statistiche globali del dataset (totale annunci: 5249).}
+\label{fig:dataset-stats}
+\end{figure}
+Quando SBERT riceve un input troppo lungo lo \textbf{tronca} questo significa che applicando l'embedder così come è taglierebbe una porzione molto grande del dataset.
+Abbiamo due opzioni: la prima è affidarsi ad un modello con un limite di dimensione input più alto (ad esempio \textbf{all-roberta-long-v1}), la seconda è frammentare le descrizioni e fare il topic modeling in segmenti di quest ultime.
+Il problema della prima opzione è di \emph{design} infatti il topic modeling in generale funziona meglio su documenti di dimensione ridotta, poiché se la lunghezza del testo è grande è probabile che contenga più temi, un unico embedding rischia di mescolare \textbf{sezioni semanticamente diverse}, ottenendo topic più grossolani.
+La seconda opzione invece oltre che generare topic più \textbf{puliti} e \textbf{interpretabili}, consente di aumentare molto il numero di documenti in input, questo è un vantaggio per dataset esegui come il nostro.
+Il contro è che gli annunci vanno poi aggregati a posteriori per ottenere una \textbf{distribuzione di topic per documento}, inoltre serve una strategia di segmentazione degli annunci che soddisfi al contempo \textbf{coerenza semantica} e criteri di lunghezza: il segmento non può essere troppo corto altrimenti SBERT non ha il contesto per estrarre topic e non può ovviamente superare la lunghezza massima consentita.
+Per fare un'analisi più accurata abbiamo scelto la seconda opzione.
+Vedremo il \textbf{post-ptocessing} in seguito in questo capitolo, la suddivisione delle descrizioni in paragrafi viene affrontata nel capitolo \textbf{Pre-processing}
 \subsection{Dimensionality Reduction}
-Illustrare l'algoritmo di riduzione dimensionale adottato (es. UMAP), i parametri principali e l'impatto sulla qualità dei topic.
+I vettori generati dall'embedder hanno dimensione 768, ciò potrebbe rendere difficile il \emph{clustering} per questo è importante introdurre nella pipeline un algoritmo di riduzione della dimensione.
+L'idea di questi algoritmi è quella di ridurre la dimensione di un insieme di vettori preservandone la \textbf{struttura topologica locale}.
+Di default BERTopic usa \textbf{UMAP}\footnote{\url{https://maartengr.github.io/BERTopic/getting_started/dim_reduction/dim_reduction.html}} per questo compito poiché \emph{preserva sia la struttura locale, che quella globale degli spazi ad alte dimensioni}.
+UMAP lavora in tre passi:
+\begin{enumerate}
+\item Costruzione del grafo fuzzy locale. Ogni punto viene connesso ai suoi n\_neighbors più vicini, e la connessione è pesata in base alla distanza. Questo grafo rappresenta la topologia locale dello spazio originale.
+\item Proiezione nello spazio ridotto.
+\item UMAP cerca poi una rappresentazione a bassa dimensione che minimizzi la differenza tra il grafo originale e il grafo proiettato, ottimizzando una funzione di costo simile alla cross-entropy fuzzy tra i due insiemi di connessioni.
+\end{enumerate}
+
+L'obiettivo è mantenere la densità e la vicinanza dei punti simili, consentendo allo stesso tempo di contrarre regioni sparse.
+Questo bilanciamento consente di preservare la struttura locale pur comprimendo lo spazio globale.
+Vediamo più nel dettaglio questi punti:
+\subsubsection{fuzzy simplicial complex}
+Per costruire il grafo iniziale ad alta dimensionalità, \textbf{UMAP} crea una struttura chiamata \textit{fuzzy simplicial complex}. In pratica, si tratta di una rappresentazione di un grafo pesato, in cui i pesi degli archi rappresentano la \textbf{probabilità che due punti siano connessi}.
+
+Per determinare la connessione tra due punti, UMAP\footnote{\url{https://pair-code.github.io/understanding-umap/}} estende un \textbf{raggio locale} a partire da ciascun punto e collega i punti quando i rispettivi raggi si sovrappongono. La scelta di questo raggio è cruciale:
+Se è troppo piccolo, il risultato sarà un insieme di \textbf{piccoli cluster isolati};
+se è troppo grande, tutti i punti finiranno per essere \textbf{collegati tra loro}, perdendo così la struttura locale.
+
+UMAP risolve questo problema scegliendo un raggio locale \textbf{adattivo}, basato sulla distanza rispetto al $k$-esimo vicino più prossimo di ciascun punto. Successivamente, il grafo viene reso ``sfumato'' (\textit{fuzzy}) diminuendo la probabilità di connessione man mano che la distanza aumenta.
+
+Infine, imponendo che ogni punto sia connesso almeno al proprio vicino più prossimo, UMAP garantisce un equilibrio tra la \textbf{preservazione della struttura locale} e la \textbf{coerenza della struttura globale}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{img/BERTopic/UMAP\_projection.png}
+\caption{Proiezione UMAP nel piano bidimensionale. Dopo l'intersezione con il primo \emph{neighbour}, il cerchio diventa \emph{sfumato}, riducendo il peso della connessione.\protect\footnotemark}
+\label{fig:umap-projection}
+\end{figure}
+\footnotetext{\url{https://pair-code.github.io/understanding-umap/}}
 
 \subsection{Clustering}
 Spiegare il metodo di clustering (es. HDBSCAN), i criteri di scelta dei parametri e come viene determinato il numero di topic.

@@ -87,11 +87,11 @@ Un buon punto di partenza, ma non sufficiente. Per capire bene cosa eliminare do
 
 \section{Divisione in paragrafi}
 
-\noindent La suddivisione di un testo in paragrafi semanticamente coerenti è un problema aperto nella disciplina dell'\textit{nlp}, ed è stato uno dei problemi più complessi affrontati in questo studio. Un primo approccio che abbiamo tentato è stato suddividere le descrizioni degli annunci in base a segni di punteggiatura, caratteri speciali (e.g. \texttt{\textbackslash n}) e numero di parole. Il problema di questo approccio è che introduce dei metaparametri, come ad esempio numero di divisioni massime, lunghezza minima, ecc., che poco hanno a che fare con il significato del testo. Come risultato abbiamo ottenuto una divisione abbastanza omogenea nella lunghezza, ma grossolana nella coerenza semantica. Inoltre gli annunci di lavoro hanno una struttura ortografica poco coerente: qualche annuncio suddivide le informazioni con un elenco, altri separano tramite newline, altri ancora non separano affatto i paragrafi. Si è reso quindi necessario una ricerca di un' altro tipo di struttura comune, o se non altro fortemente ricorrente, nella segmentazione degli annunci.
+\noindent La suddivisione di un testo in paragrafi semanticamente coerenti è un problema aperto nella disciplina del \textit{NLP}, ed è stato uno dei problemi più complessi affrontati in questo studio. Un primo approccio che abbiamo tentato è stato suddividere le descrizioni degli annunci in base a segni di punteggiatura, caratteri speciali (e.g. \texttt{\textbackslash n}) e numero di parole. Il problema di questo approccio è che introduce dei metaparametri, come ad esempio numero di divisioni massime, lunghezza minima, ecc., che poco hanno a che fare con il significato del testo. Come risultato abbiamo ottenuto una divisione abbastanza omogenea nella lunghezza, ma grossolana nella coerenza semantica. Inoltre gli annunci di lavoro hanno una struttura ortografica poco coerente: qualche annuncio suddivide le informazioni con un elenco, altri separano tramite newline, altri ancora non separano affatto i paragrafi. Si è reso quindi necessario una ricerca di un' altro tipo di struttura comune, o se non altro fortemente ricorrente, nella segmentazione degli annunci.
 
 \medskip
 
-\noindent Studiando nuovamente il dataset abbiamo notato che molti paragrafi iniziano con un'intestazione: nell'esempio sopra possiamo notare: "Responsabilities:" e "Equal Employment Opportunity Statement". Moltissimi annunci usano questa divisione, probabilmente  per motivi di leggibilità data la lunghezza, ma non tutti; dunque abbiamo scelto la divisione basata su intestazioni come strategia principale e la vecchia strategia basata sulla punteggiatura come \textit{fallback} nel caso di paragrafi troppo lunghi, questo perché se un paragrafo è lungo è probabile che contenga frasi con significati distanti, inoltre il modello che vedremo nella sezione successiva predilige blocchi di testo con poche frasi.
+\noindent Studiando nuovamente il dataset abbiamo notato che molti paragrafi iniziano con un'intestazione: nell'esempio sopra possiamo notare: "Responsabilities:" e "Equal Employment Opportunity Statement". Moltissimi annunci usano questa divisione, probabilmente  per motivi di leggibilità data la lunghezza, ma non tutti; dunque abbiamo scelto la divisione basata su intestazioni come strategia principale e la vecchia strategia basata sulla punteggiatura come \textit{fallback} nel caso di paragrafi troppo lunghi, questo perché se un paragrafo è lungo è probabile che contenga frasi con significati distanti. Inoltre il modello che vedremo nella sezione successiva predilige blocchi di testo con poche frasi.
 
 \medskip
 \subsubsection{Riconoscere le intestazioni}
@@ -111,7 +111,7 @@ JOB_CUES_PAT = re.compile(
 
 \medskip
 
-\noindent Un altro tentativo è stato quello di selezionare le righe che fossero composte da massimo n parole o che terminassero con un carattere \textit{":"}, chiaramente anche questo tentativo è risultato fallimentare poiché alcune intestazioni si rivelano ben più lunghe di quanto si potrebbe immaginare, mentre altre frasi brevi potrebbero essere confuse per intestazioni. Dunque ci serve un metodo che sia sufficentemente flessibile, per questo abbiamo scelto di addestrare una rete neurale.
+\noindent Un altro tentativo è stato quello di selezionare le righe che fossero composte da massimo $n$ parole o che terminassero con un carattere \textit{":"}, chiaramente anche questo tentativo è risultato fallimentare poiché alcune intestazioni si rivelano ben più lunghe di quanto si potrebbe immaginare, mentre altre frasi brevi potrebbero essere confuse per intestazioni. Dunque ci serve un metodo che sia sufficentemente flessibile, per questo abbiamo scelto di addestrare una rete neurale.
 
 \medskip
 
@@ -120,7 +120,7 @@ JOB_CUES_PAT = re.compile(
 \medskip
 
 \subsection{Spacy}
-\noindent Spacy è una libreria per \textit{nlp} basata su \textit{pipelines} composte da moduli modificabili e allenabili. Questa componente altamente personalizzabile della libreria la rende ideale per il nostro studio, infatti in momenti diversi utilizzeremo componenti differenti a seconda del bisogno.
+\noindent Spacy è una libreria per \textit{NLP} basata su \textit{pipelines} composte da moduli modificabili e allenabili. Questa componente altamente personalizzabile della libreria la rende ideale per il nostro studio, infatti in momenti diversi utilizzeremo componenti differenti a seconda del bisogno.
 
 \noindent Le \textit{pipelines} elaborano un testo e restituiscono un \textit{Doc}, un oggetto che permette di accedere alle informazioni del testo ottenute dalla pipeline. Un Doc è una sequenza di Python composta da \textit{token}. In spacy i token sono parole o segni di punteggiatura.
 \noindent Gli \textit{span} invece sono sottosequenze del documento, composte da token contigui.
@@ -174,7 +174,7 @@ sizes = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
     \label{fig:cfg-suggester}
 \end{figure}
 
-\noindent Ho impostato 20 come lunghezza massima a causa della varietà degli header: il modello risulta molto flessibile, ma anche più pesante, perché all'aumentare degli n-grammi possibili aumentano i controlli da effettuare.
+\noindent Abbiamo impostato 20 come lunghezza massima a causa della varietà degli header: il modello risulta molto flessibile, ma anche più pesante, perché all'aumentare degli \textit{n-gram} possibili aumentano i controlli da effettuare.
 Vediamo adesso come è composta la rete neurale, partendo dalla sua prima componente: \textbf{Tok2Vec}.
 \subsubsection{Tok2Vec}
 \noindent È suddiviso in due sottoreti embedder ed encoder. L'\textit{embedder} converte i token in vettori ignorando il contesto.

@@ -1,0 +1,5 @@
+min_samples,n_topics,noise_pct,mean_cluster_size,median_cluster_size,max_cluster_size,top_topic_share_pct,total_points,outliers_count
+5,12,42.28,257.67,190.0,882,28.53,5357,2265
+15,61,45.88,224.98,131.0,1581,11.52,25359,11635
+30,10,39.69,323.1,209.0,886,27.42,5357,2126
+60,2,14.8,2282.0,2282.0,3699,81.05,5357,793

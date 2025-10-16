@@ -231,7 +231,143 @@ $n\_neighbors$ & $n\_topics$ & mean cluster size & std cluster size & topics $<1
 \noindent Abbiamo fissato \texttt{min\_dist} a $0.0$ poiché l'algoritmo di \emph{clustering} (HDBSCAN) restituisce risultati migliori con cluster densi e ben separati: eventuali regioni vuote verrebbero classificate come outlier e assegnate al topic ``spazzatura'' (\texttt{-1}). Mantenere gli embedding compatti riduce la formazione di tali zone.
 
 \subsection{Clustering}
+\noindent Dopo aver ridotto la dimensione dell'input, dobbiamo creare dei \textit{cluster} di embedding simili da cui estrarremo i topic.
 
+\noindent Il modello che consiglia BERTopic\footnote{\url{https://maartengr.github.io/BERTopic/getting_started/clustering/clustering.html}} è \textit{HDBSCAN}, un algoritmo di clustering basato su densità, in modo da identificare cluster a densità variabile senza dover fissare un singolo parametro di soglia (a differenza di \textit{DBSCAN}).
+
+\noindent Il \textit{clustering} viene ottenuto passando per 5 fasi\footnote{\url{https://hdbscan.readthedocs.io/en/latest/how_hdbscan_works.html}}:
+\begin{enumerate}
+    \item Trasformazione dello spazio basata sulla densità
+    \item Minimum spanning tree del grafo pesato delle distanze
+    \item Costruzione della gerarchia di aggregazione dei punti
+    \item Condensazione della gerarchia in base a \texttt{min\_cluster\_size}
+    \item Estrazione dei cluster dall'albero condensato
+\end{enumerate}
+\subsubsection*{1. Trasformazione dello spazio in funzione della densità}
+
+Il primo passo dell'algoritmo HDBSCAN consiste nel \textit{trasformare lo spazio dei dati} in modo che rifletta non solo la distanza geometrica tra i punti, ma anche la densità locale delle regioni in cui essi si trovano. 
+Questo passaggio consente di adattare la nozione di distanza alle caratteristiche strutturali del dataset, migliorando la robustezza rispetto a variazioni di scala e rumore.
+
+Per ogni punto \( x_i \) viene calcolata la \textbf{core distance}, definita come la distanza dal suo \( k\)-esimo vicino più prossimo, dove \( k = \text{min\_samples} \). 
+Essa rappresenta una stima della densità locale: valori piccoli indicano aree dense, mentre valori grandi indicano zone più sparse o isolate.
+
+Successivamente, la distanza tra due punti \( a \) e \( b \) viene ridefinita come \textbf{mutual reachability distance}, che tiene conto delle rispettive densità locali:
+
+\[
+d_{\text{mreach}}(a,b) = \max \big( \text{core\_dist}(a),\ \text{core\_dist}(b),\ d(a,b) \big)
+\]
+dove $d(a,b)$ è la distanza originale tra $a$ e $b$. Usando questa distanza, i punti densi rimangono alla loro distanza originale, mentre quelli rarefatti vengono allontanati, ciò rende l'algoritmo \textbf{robusto al rumore}.
+Abbiamo però introdotto un parametro \texttt{min\_samples}: al suo crescere aumenta la \texttt{core\_distance} media e con essa i punti considerati rarefatti.
+Quindi più è alto \texttt{min\_samples}, più embedding verranno considerati come \textit{rumore}.
+Come per \texttt{n\_neighbors}, mostriamo qui dei confronti con diversi valori di \texttt{min\_samples}:
+
+\begin{table}[H]
+\centering
+\footnotesize
+\begin{tabular}{rrrrrrrrr}
+\hline
+min\_samples & n\_topics & noise \% & mean size & median size & max size & top topic \% & outlier \\
+\hline
+5  & 12 & 42.28 & 257.67 & 190.0 & 882  & 28.53  & 2265 \\
+15 & 61 & 45.88 & 224.98 & 131.0 & 1581 & 11.52 & 11635 \\
+30 & 10 & 39.69 & 323.10 & 209.0 & 886  & 27.42  & 2126 \\
+60 & 2  & 14.80 & 2282.00 & 2282.0 & 3699 & 81.05  & 793  \\
+\hline
+\end{tabular}
+\caption{Metriche chiave al variare di \texttt{min\_samples}: numero di topic (n\_topics), percentuale di rumore (noise), statistiche di dimensione dei cluster, quota del topic principale e conteggio degli outlier.}
+\label{tab:min-samples-summary}
+\end{table}
+Per valori molto bassi (\texttt{min\_samples} = 5) l'algoritmo tende a frammentare eccessivamente il corpus, generando numerosi micro-cluster spesso composti da pochi paragrafi. 
+Sebbene questa impostazione aumenti il livello di dettaglio, i topic risultano meno stabili e semanticamente meno coerenti.
+
+Aumentando il parametro a valori intermedi (\texttt{min\_samples} = 15) si ottiene un equilibrio tra granularità e stabilità. 
+I cluster formati risultano sufficientemente omogenei e interpretabili, mantenendo al contempo un numero di topic adeguato per una lettura tematica fine del corpus. 
+Questo valore rappresenta il compromesso ottimale tra dettaglio informativo e robustezza del clustering.
+
+Con valori più elevati (\texttt{min\_samples} = 30) l’algoritmo diventa più selettivo: la quantità di rumore aumenta e alcuni cluster tendono a fondersi, riducendo la capacità di distinguere tematiche affini ma distinte. 
+Spingendosi ulteriormente verso valori molto alti (\texttt{min\_samples} = 60) si osserva un drastico calo del numero di cluster e un incremento marcato dei punti etichettati come rumore, con il rischio di ottenere pochi macro-temi troppo generici.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.24\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{BERTopic/hdbscan/ms5.png}
+    \caption{\texttt{min\_samples} = 5}
+\end{subfigure}\hfill
+\begin{subfigure}{0.24\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{BERTopic/hdbscan/ms15.png}
+    \caption{\texttt{min\_samples} = 15}
+\end{subfigure}\hfill
+\begin{subfigure}{0.24\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{BERTopic/hdbscan/ms30.png}
+    \caption{\texttt{min\_samples} = 30}
+\end{subfigure}\hfill
+\begin{subfigure}{0.24\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{BERTopic/hdbscan/ms_60.png}
+    \caption{\texttt{min\_samples} = 60}
+\end{subfigure}
+\caption{Effetto di \texttt{min\_samples} sulla distribuzione dei topic: visualizzazioni prodotte da \texttt{BERTopic.visualize\_documents()} in configurazioni crescenti del parametro.}
+\label{fig:min-samples-umap}
+\end{figure}
+
+Nel complesso, la configurazione con \texttt{min\_samples} = 15 si è dimostrata la più bilanciata: 
+garantisce la formazione di cluster stabili, coerenti e sufficientemente dettagliati, risultando quindi la scelta più appropriata per il corpus di annunci di lavoro considerato.
+
+\subsubsection*{2. Costruzione del \textit{Minimum Spanning Tree} (MST)}
+
+Dopo la trasformazione dello spazio in funzione della densità locale, HDBSCAN costruisce un grafo completamente connesso in cui ogni punto rappresenta un nodo e ogni arco tra due punti è pesato in base alla \textit{mutual reachability distance} calcolata nel passo precedente. 
+Questo grafo descrive la struttura di connettività del dataset, tenendo conto sia della distanza geometrica sia della densità locale delle regioni considerate.
+
+A partire da tale grafo, viene poi calcolato il \textbf{Minimum Spanning Tree} (MST), ossia l'albero di connessioni che collega tutti i punti minimizzando la somma complessiva dei pesi degli archi. 
+Il MST conserva quindi solo le connessioni essenziali per mantenere la connettività globale, eliminando i collegamenti ridondanti e le connessioni tra regioni scarsamente dense.
+
+Questo passaggio ha due obiettivi principali:
+\begin{itemize}
+    \item \textbf{Semplificare la struttura dei dati}, riducendo la complessità del grafo e mantenendo una rappresentazione compatta della topologia di densità;
+    \item \textbf{Preparare la costruzione della gerarchia dei cluster}, poiché nei passi successivi gli archi del MST verranno rimossi in ordine crescente di distanza per individuare i gruppi di punti che restano connessi, ossia i futuri cluster.
+\end{itemize}
+
+il Minimum Spanning Tree dunque connette i punti più vicini secondo la loro densità locale e costituisce la base per la costruzione della gerarchia dei cluster nel passo successivo.
+
+\subsubsection*{3. Costruzione della gerarchia dei cluster}
+
+A partire dal \textit{Minimum Spanning Tree} costruito nel passo precedente, HDBSCAN procede alla \textbf{costruzione di una gerarchia di cluster} basata sulle componenti connesse del grafo. 
+Questo processo consiste nel rimuovere progressivamente gli archi del MST in ordine crescente di peso, ovvero dalla connessione più ``debole'' (distanza maggiore) a quella più ``forte'' (distanza minore).
+
+Man mano che gli archi vengono rimossi, il grafo si frammenta in un numero crescente di componenti connesse. 
+Ogni componente risultante viene interpretata come un potenziale cluster a un determinato livello di densità. 
+In questo modo, HDBSCAN genera una \textit{gerarchia di densità} in cui i cluster ``nascono'' e ``muoiono'' al variare della soglia di distanza, descrivendo come la struttura dei dati cambia al modificarsi del livello di densità considerato.
+
+Il risultato di questa fase è un albero gerarchico che rappresenta la relazione di inclusione tra cluster: 
+le radici corrispondono ai cluster più generali (densità minore), mentre i rami e le foglie rappresentano i cluster più specifici e densi. 
+Questa rappresentazione gerarchica è fondamentale per le fasi successive, poiché consente di identificare in modo naturale i livelli di densità più stabili e significativi all'interno del dataset.
+
+\subsubsection*{4. Condensazione della gerarchia dei cluster}
+
+Una volta costruita la gerarchia completa delle componenti connesse, HDBSCAN applica un processo di \textbf{condensazione} basato sul parametro \texttt{min\_cluster\_size}. 
+L'obiettivo è semplificare la struttura gerarchica, eliminando i rami instabili e i cluster di dimensioni troppo ridotte per essere considerati significativi.
+
+Durante questa fase, la gerarchia dei cluster viene attraversata e vengono mantenuti soltanto quei gruppi che rispettano la dimensione minima richiesta. 
+I cluster che non raggiungono la soglia stabilita vengono rimossi oppure fusi con componenti più grandi a densità simile, producendo una rappresentazione compatta e più interpretabile della struttura dei dati.
+
+Il risultato di questa operazione è una \textit{condensed tree}, ossia un albero di condensazione in cui ogni nodo rappresenta un cluster potenzialmente stabile e ogni arco riflette una relazione di inclusione o fusione tra cluster. 
+Questo passaggio riduce notevolmente la complessità della gerarchia originale, preservando solo le regioni dello spazio che presentano un'evidente coesione interna e scartando i gruppi effimeri o rumorosi.
+
+La condensazione costituisce quindi la base per la successiva selezione dei cluster più stabili, che rappresentano le strutture di densità realmente persistenti all'interno del dataset.
+\subsubsection*{5. Estrazione dei cluster stabili dalla struttura condensata}
+
+Dopo aver ottenuto l'albero di condensazione, HDBSCAN seleziona i \textbf{cluster più stabili} in base alla loro persistenza lungo i diversi livelli di densità. 
+Ogni cluster nella struttura condensata è caratterizzato da un intervallo di esistenza: esso ``nasce'' quando si separa da un cluster padre e ``muore'' quando, aumentando la soglia di densità, si frammenta o scompare.
+
+Per ciascun cluster, HDBSCAN calcola una misura di \textbf{stabilità} che quantifica la sua persistenza all'interno della gerarchia. 
+Tale stabilità corrisponde all'area sotto la curva che descrive l'evoluzione della dimensione del cluster in funzione della densità: 
+cluster che permangono per un ampio intervallo di densità sono considerati più stabili e quindi più rappresentativi della struttura intrinseca dei dati.
+
+Durante questa fase, vengono mantenuti soltanto i cluster con una stabilità elevata, mentre i punti appartenenti a regioni meno dense o a cluster transitori vengono etichettati come \textit{rumore} (label~$-1$). 
+Questo approccio consente di identificare automaticamente le strutture di densità più consistenti, senza richiedere la specifica del numero di cluster a priori.
 
 \subsection{Tokenizer}
 Dettagliare il tokenizer utilizzato, le strategie di pre-processing e qualsiasi personalizzazione per il dominio degli annunci di lavoro.

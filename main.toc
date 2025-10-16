@@ -10,33 +10,37 @@
 \contentsline {subsection}{\numberline {1.2.5}Conclusioni}{8}{subsection.1.2.5}%
 \contentsline {subsection}{\numberline {1.2.6}Rilevanza per questo progetto}{8}{subsection.1.2.6}%
 \contentsline {chapter}{\numberline {2}BERTopic}{10}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Pipeline}{11}{section.2.1}%
+\contentsline {section}{\numberline {2.1}Funzionalità}{11}{section.2.1}%
 \contentsline {subsection}{\numberline {2.1.1}Embedding}{11}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}Dimensionality Reduction}{13}{subsection.2.1.2}%
-\contentsline {subsubsection}{fuzzy simplicial complex}{14}{section*.3}%
-\contentsline {subsection}{\numberline {2.1.3}Clustering}{15}{subsection.2.1.3}%
-\contentsline {subsection}{\numberline {2.1.4}Tokenizer}{15}{subsection.2.1.4}%
-\contentsline {subsection}{\numberline {2.1.5}Cosa si può migliorare}{15}{subsection.2.1.5}%
-\contentsline {chapter}{\numberline {3}Data Cleaning}{16}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Perché il Data Cleaning è necessario}{16}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Divisione in paragrafi}{19}{section.3.2}%
-\contentsline {subsubsection}{Riconoscere le intestazioni}{20}{section*.7}%
-\contentsline {subsection}{\numberline {3.2.1}Spacy}{20}{subsection.3.2.1}%
-\contentsline {subsubsection}{Suggester}{22}{section*.8}%
-\contentsline {subsubsection}{Tok2Vec}{22}{section*.10}%
-\contentsline {subsubsection}{Reducer}{24}{section*.13}%
-\contentsline {subsubsection}{Scorer}{25}{section*.15}%
-\contentsline {subsubsection}{Allenamento}{25}{section*.17}%
-\contentsline {subsection}{\numberline {3.2.2}Valutazione del modello}{27}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Fallback}{27}{subsection.3.2.3}%
-\contentsline {section}{\numberline {3.3}Classificazione paragrafi}{30}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Etichettatura}{30}{subsection.3.3.1}%
-\contentsline {subsubsection}{Allenamento}{32}{section*.21}%
-\contentsline {subsubsection}{Strategia di rimozione}{34}{section*.25}%
-\contentsline {section}{\numberline {3.4}Altre strategie di data cleaning usate}{36}{section.3.4}%
-\contentsline {subsubsection}{Pulizia tramite NER}{37}{section*.28}%
-\contentsline {subsubsection}{Risultato finale}{37}{section*.30}%
-\contentsline {section}{\numberline {3.5}Possibili miglioramenti}{38}{section.3.5}%
-\contentsline {chapter}{\numberline {4}Risultati finali}{39}{chapter.4}%
-\contentsline {chapter}{\numberline {5}Conclusioni}{40}{chapter.5}%
-\contentsline {chapter}{Ringraziamenti}{42}{chapter*.33}%
+\contentsline {subsubsection}{Mean-max pooling}{13}{section*.3}%
+\contentsline {subsection}{\numberline {2.1.2}Dimensionality Reduction}{14}{subsection.2.1.2}%
+\contentsline {subsubsection}{fuzzy simplicial complex}{15}{section*.4}%
+\contentsline {subsubsection}{Parametri}{16}{section*.6}%
+\contentsline {paragraph}{\texttt {n\_neighbors}.}{16}{section*.7}%
+\contentsline {paragraph}{\texttt {min\_dist}}{20}{section*.12}%
+\contentsline {subsection}{\numberline {2.1.3}Clustering}{21}{subsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.1.4}Tokenizer}{21}{subsection.2.1.4}%
+\contentsline {subsection}{\numberline {2.1.5}Cosa si può migliorare}{21}{subsection.2.1.5}%
+\contentsline {chapter}{\numberline {3}Data Cleaning}{22}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Perché il Data Cleaning è necessario}{22}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Divisione in paragrafi}{25}{section.3.2}%
+\contentsline {subsubsection}{Riconoscere le intestazioni}{26}{section*.16}%
+\contentsline {subsection}{\numberline {3.2.1}Spacy}{26}{subsection.3.2.1}%
+\contentsline {subsubsection}{Suggester}{28}{section*.17}%
+\contentsline {subsubsection}{Tok2Vec}{28}{section*.19}%
+\contentsline {subsubsection}{Reducer}{30}{section*.22}%
+\contentsline {subsubsection}{Scorer}{31}{section*.24}%
+\contentsline {subsubsection}{Allenamento}{31}{section*.26}%
+\contentsline {subsection}{\numberline {3.2.2}Valutazione del modello}{33}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Fallback}{33}{subsection.3.2.3}%
+\contentsline {section}{\numberline {3.3}Classificazione paragrafi}{36}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Etichettatura}{36}{subsection.3.3.1}%
+\contentsline {subsubsection}{Allenamento}{38}{section*.30}%
+\contentsline {subsubsection}{Strategia di rimozione}{40}{section*.34}%
+\contentsline {section}{\numberline {3.4}Altre strategie di data cleaning usate}{42}{section.3.4}%
+\contentsline {subsubsection}{Pulizia tramite NER}{43}{section*.37}%
+\contentsline {subsubsection}{Risultato finale}{43}{section*.39}%
+\contentsline {section}{\numberline {3.5}Possibili miglioramenti}{44}{section.3.5}%
+\contentsline {chapter}{\numberline {4}Risultati finali}{45}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Conclusioni}{46}{chapter.5}%
+\contentsline {chapter}{Ringraziamenti}{48}{chapter*.42}%

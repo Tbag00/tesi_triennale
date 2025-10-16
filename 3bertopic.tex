@@ -50,7 +50,7 @@ max & 19470.00 & 2739.00 & 3753.00 \\
 \caption{Statistiche globali del dataset (totale annunci: 5357).}
 \label{fig:dataset-stats}
 \end{figure}
-\noindent Quando SBERT riceve un input troppo lungo lo \textbf{tronca} questo significa che applicando l'embedder così come è taglierebbe una porzione molto grande del dataset.
+\noindent Quando SBERT riceve un input troppo lungo, lo \textbf{tronca} questo significa che applicando l'embedder così come è verrebbe tagliata una porzione molto grande del dataset.
 
 \noindent Le prime opzioni che abbiamo considerato sono:
 \begin{enumerate}
@@ -58,15 +58,14 @@ max & 19470.00 & 2739.00 & 3753.00 \\
     \item Frammentare le descrizioni e fare il topic modeling in segmenti di quest ultime.
 \end{enumerate}
 Il vantaggio della prima opzione è che i modelli \textit{long-context}, mantengono attenzione tra termini distanti, permettendo di cogliere relazioni semantiche a lungo raggio, cosa impossibile se si divide il testo in \textit{chunk}.
-Non è però una caratteristica che abbiamo ritenuto significativa data la natura del nostro \textit{dataset}, infatti i nostri paragrafi hanno natura scollegata, uno potrebbe parlare di competenze e un altro di mansioni, la coerenza globale è più importante in testi di natura \textbf{discorsiva}.
+Non è però una caratteristica che abbiamo ritenuto significativa, data la natura del nostro \textit{dataset}, infatti i nostri paragrafi hanno natura scollegata, uno potrebbe parlare di competenze e un altro di mansioni, la coerenza globale è più importante in testi di natura \textbf{discorsiva}.
 Inoltre se la lunghezza del testo è grande è probabile che contenga più temi, un unico embedding rischia di mescolare \textbf{sezioni semanticamente diverse}, ottenendo topic più grossolani.
 La seconda opzione invece oltre che generare topic più \textbf{puliti} e \textbf{interpretabili}, consente di aumentare molto il numero di documenti in input, questo è un vantaggio per dataset esegui come il nostro.
-Però anche questo caso presenta delle criticità: non avremmo i topic relativi agli annunci, questi ultimi andrebbero aggregati a posteriori per ottenere una \textbf{distribuzione di topic per documento}, inoltre in questo modo, gli annunci più lunghi hanno \textbf{più peso}, semplicemente perché hanno più paragrafi, la situazione si complica ulteriormente se gli annunci contengono paragrafi simili, questo creerebbe dei \textbf{cluster} artefatti e quindi topic che non rispecchiano la natura del dataset, inoltre questo metodo il modello è completamente ignaro della struttura globale dell'annuncio.
+Però anche questo caso presenta delle criticità: non avremmo i topic relativi agli annunci, questi ultimi andrebbero aggregati a posteriori per ottenere una \textbf{distribuzione di topic per documento}. In più in questo modo, gli annunci più lunghi hanno \textbf{più peso}, semplicemente perché hanno più paragrafi, la situazione si complica ulteriormente se i documenti contengono paragrafi simili, questo creerebbe dei \textbf{cluster} artefatti e quindi topic che non rispecchiano la natura del dataset. Un altro problema è che con questo metodo il modello è completamente ignaro della struttura globale dell'annuncio.
 Questo approccio è più attuabile per risolvere un problema di \textbf{classificazione}, non per il \textit{topic modeling}.\medskip
 
-La soluzione che abbiamo scelto è dunque quella di \textit{mean-max-pooling}.
+\noindent La soluzione che abbiamo scelto è dunque quella di \textit{mean-max-pooling}.
 \subsubsection{Mean-max pooling}
-\noindent\textbf{Nota.} Non esiste un nome canonico in letteratura per questa tecnica.
 
 \noindent Con questa tecnica si ottiene un embedding per ogni annuncio partendo dagli embedding dei paragrafi, seguendo i passaggi seguenti:
 \begin{enumerate}
@@ -77,19 +76,15 @@ La soluzione che abbiamo scelto è dunque quella di \textit{mean-max-pooling}.
     \item normalizzare nuovamente il vettore concatenato.
 \end{enumerate}
 
-In questo modo si ottiene un embedding unico di dimensione doppia rispetto l'output dell'embedder che cattura sia il \textit{significato generale} dell'annuncio, sia le \textit{feature salienti} dei singoli paragrafi: queste due componenti producono vettori più \textit{discriminativi} e quindi più facilmente separabili nello spazio semantico.
+In questo modo si ottiene un embedding unico di dimensione doppia rispetto l'output dell'embedder che cattura sia il \textbf{significato generale} dell'annuncio, sia le \textbf{feature salienti} dei singoli paragrafi: queste due componenti producono vettori più \textbf{discriminativi} e quindi più facilmente separabili nello spazio semantico.
 
 Per attuare questo approccio serve inoltre una strategia di segmentazione degli annunci che soddisfi al contempo \textbf{coerenza semantica} e criteri di lunghezza: il segmento non può essere troppo corto, altrimenti SBERT non ha il contesto per estrarre topic, e non può ovviamente superare la lunghezza massima consentita. Approfondiamo questo aspetto nel capitolo \textbf{Pre-processing}.
 \subsection{Dimensionality Reduction}
 I vettori generati dall'embedder hanno dimensione 768, ciò potrebbe rendere difficile il \emph{clustering} per questo è importante introdurre nella pipeline un algoritmo di riduzione della dimensione.
 L'idea di questi algoritmi è quella di ridurre la dimensione di un insieme di vettori preservandone la \textbf{struttura topologica locale}.
 Di default BERTopic usa \textbf{UMAP}\footnote{\url{https://maartengr.github.io/BERTopic/getting_started/dim_reduction/dim_reduction.html}} per questo compito poiché \emph{preserva sia la struttura locale, che quella globale degli spazi ad alte dimensioni}.
-UMAP lavora in tre passi:
-\begin{enumerate}
-\item Costruzione del grafo fuzzy locale. Ogni punto viene connesso ai suoi n\_neighbors più vicini, e la connessione è pesata in base alla distanza. Questo grafo rappresenta la topologia locale dello spazio originale.
-\item Proiezione nello spazio ridotto.
-\item UMAP cerca poi una rappresentazione a bassa dimensione che minimizzi la differenza tra il grafo originale e il grafo proiettato, ottimizzando una funzione di costo simile alla cross-entropy fuzzy tra i due insiemi di connessioni.
-\end{enumerate}
+UMAP lavora costruendo un \textit{grafo fuzzy locale}: ogni punto viene connesso ai suoi n\_neighbors più vicini e la connessione è pesata in base alla distanza. Questo grafo rappresenta la topologia locale dello spazio originale.
+UMAP cerca poi una rappresentazione a bassa dimensione che minimizzi la differenza tra il grafo originale e il grafo proiettato.
 
 L'obiettivo è mantenere la densità e la vicinanza dei punti simili, consentendo allo stesso tempo di contrarre regioni sparse.
 Questo bilanciamento consente di preservare la struttura locale pur comprimendo lo spazio globale.
@@ -122,68 +117,118 @@ Per visualizzare l'effetto di \texttt{n\_neighbors} consideriamo la proiezione b
 \centering
 \includegraphics[width=0.5\textwidth]{BERTopic/umap/mammoth_render.png}
 
-\begin{subfigure}{0.45\textwidth}
+\begin{subfigure}{0.32\textwidth}
     \centering
     \includegraphics[width=\textwidth]{BERTopic/umap/n_neighbours5.png}
     \caption{$n\_neighbors = 5$}
-\end{subfigure}
-\hfill
-\begin{subfigure}{0.45\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{BERTopic/umap/n_neighbours15.png}
-    \caption{$n\_neighbors = 15$}
-\end{subfigure}
-
-\vspace{0.5em}
-\begin{subfigure}{0.45\textwidth}
+\end{subfigure}\hfill
+\begin{subfigure}{0.32\textwidth}
     \centering
     \includegraphics[width=\textwidth]{BERTopic/umap/n_neighbours20.png}
     \caption{$n\_neighbors = 20$}
-\end{subfigure}
-\hfill
-\begin{subfigure}{0.45\textwidth}
+\end{subfigure}\hfill
+\begin{subfigure}{0.32\textwidth}
     \centering
     \includegraphics[width=\textwidth]{BERTopic/umap/n_neighbours115.png}
     \caption{$n\_neighbors = 115$}
 \end{subfigure}
-\caption{Proiezione UMAP di un modello 3D con 50\,000 punti in un piano 2D. Fonti: Smithsonian 3D Digitization Program (\url{https://3d.si.edu/object/3d/mammuthus-primigenius-blumbach:341c96cd-f967-4540-8ed1-d3fc56d31f12}) e Max Noichl (\url{https://www.maxnoichl.eu/projects/mammoth/}).}
+\caption{Proiezione UMAP di un modello 3D con 50\,000 punti in un piano 2D. Fonti: \href{https://3d.si.edu/object/3d/mammuthus-primigenius-blumbach:341c96cd-f967-4540-8ed1-d3fc56d31f12}{Smithsonian 3D Digitization Program} e \href{https://www.maxnoichl.eu/projects/mammoth/}{Max Noichl}.}
 \label{fig:umap-mammoth}
 \end{figure}
-Si osserva come per valori ridotti di \texttt{n\_neighbors} la proiezione mantenga dettagli locali (curve delle zanne o delle zampe) ma perda la forma complessiva del mammut; all'aumentare del parametro la sagoma globale diventa riconoscibile, a scapito delle piccole variazioni geometriche. In modo analogo, sperimentare con valori come 15, 50 o 100 nel nostro dataset permette di calibrare il livello di granularità dei topic: valori molto bassi frammentano in gruppi minuti, mentre impostazioni alte tendono a fondere i cluster semantici più affini; una scelta intermedia (ad esempio \texttt{n\_neighbors} = 50) offre un equilibrio adeguato tra dettaglio locale e coerenza globale.
+Si osservi come per valori ridotti di \texttt{n\_neighbors} la proiezione mantenga dettagli locali (curve delle zanne o delle zampe), ma perda la forma complessiva del mammut; all'aumentare del parametro la sagoma globale diventa riconoscibile, a scapito delle piccole variazioni geometriche. In modo analogo, sperimentare con valori come 15, 50 o 100 nel nostro dataset permette di calibrare il livello di granularità dei topic: valori molto bassi frammentano in gruppi minuti, mentre impostazioni alte tendono a fondere i cluster semantici più affini; una scelta intermedia (ad esempio \texttt{n\_neighbors} = 50) offre un equilibrio adeguato tra dettaglio locale e coerenza globale.
+Per giungere a questa scelta sono stati provati diversi set di iperparametri; riportiamo di seguito quelli usati per la configurazione finale, così da facilitarne la riproducibilità:
 
-\paragraph{\texttt{min\_dist}.} Controlla la densità minima consentita nella proiezione a bassa dimensione. Un valore vicino a zero permette ai punti di collassare in regioni molto dense, mettendo in risalto cluster ben separati; aumentando il parametro, UMAP distribuisce i punti con maggiore uniformità, sacrificando la compattezza dei gruppi a favore di una rappresentazione più omogenea. La Figura~\ref{fig:umap-min-dist} mostra come diverse configurazioni di \texttt{min\_dist} modifichino la distribuzione dei punti: valori estremamente bassi generano isole molto concentrate, mentre impostazioni più elevate distendono l'intero spazio proiettato riducendo l'effetto ``grumo''.
+\begin{lstlisting}[language=Python]
+umap_model = UMAP(
+    n_neighbors=n,
+    n_components=10,
+    min_dist=0.0,
+    metric="cosine",
+    random_state=1,
+)
+hdbscan_model = HDBSCAN(
+    min_cluster_size=50,
+    min_samples=15,
+    metric="euclidean",
+    cluster_selection_method="eom",
+    prediction_data=True,
+    cluster_selection_epsilon=0.1,
+)
+\end{lstlisting}
+
+\begin{table}[H]
+\centering
+\footnotesize
+\begin{tabular}{rrrrrr}
+\hline
+$n\_neighbors$ & $n\_topics$ & mean cluster size & std cluster size & topics $<100$ & topics $>500$ \\
+\hline
+15  & 15 & 208.87 & 267.01 & 8  & 2 \\
+50  & 61 & 224.98 & 294.64 & 25 & 8 \\
+60  & 62 & 197.81 & 254.00 & 26 & 6 \\
+70  & 58 & 208.09 & 242.64 & 22 & 4 \\
+100 & 2  & 2396.50 & 2090.91 & 0  & 2 \\
+\hline
+\end{tabular}
+\caption{Sintesi degli esperimenti al variare di $n\_neighbors$: numero di topic trovati, dimensione media e deviazione standard dei cluster, oltre al conteggio dei topic piccoli ($<100$ documenti) e molto grandi ($>500$ documenti).}
+\label{tab:n-neighbors-summary}
+\end{table}
+
+\noindent Nel corso dei test abbiamo variato \texttt{n\_neighbors} tra i valori 15, 50, 60 e 70 (con un confronto a 100 come baseline), scegliendo infine \texttt{n\_neighbors} = 50 come compromesso ottimale; la Tabella~\ref{tab:n-neighbors-summary} riassume il numero di topic e la distribuzione delle dimensioni dei cluster ottenuti in ciascun caso.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.5\textwidth]{BERTopic/umap/mammoth_render.png}
+\includegraphics[width=0.6\textwidth]{BERTopic/umap/num_topics_per_neighbors.png}
+\caption{Numero di topic generati da HDBSCAN al variare di $n\_neighbors$: la scelta intermedia ($n\_neighbors=50$) massimizza la granularità senza collassare in pochi cluster.}
+\label{fig:num-topics-per-neighbors}
+\end{figure}
+\noindent I plot in Figura~\ref{fig:umap-neighbors-comparison} mostrano la proiezione bidimensionale generata da \texttt{BERTopic.\allowbreak visualize\_documents()} per tre configurazioni distinte. Con \texttt{n\_neighbors} = 15 UMAP costruisce un grafo molto \textbf{frammentato}: le connessioni tra i documenti sono deboli, molti punti rimangono isolati e HDBSCAN li etichetta come \textit{outlier}, generando quindi un topic \texttt{-1} (il topic dove vengono inseriti i documenti di cui si è incerti) estremamente popoloso (2224 documenti). All'estremo opposto (\texttt{n\_neighbors} = 100) il grafo è troppo \textbf{compatto}: le relazioni globali dominano e i topic tendono a fondersi. Con \texttt{n\_neighbors} = 50, invece, i cluster si addensano in regioni coerenti, evidenziando macro-categorie professionali distinte (marketing, cybersecurity, biomedical engineering, \emph{etc.}). L'incrocio tra indicatori numerici e analisi visiva conferma quindi \texttt{n\_neighbors} = 50 come valore finale.
 
-\begin{subfigure}{0.45\textwidth}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{BERTopic/umap/umap_15.png}
+    \caption{$n\_neighbors = 15$}
+\end{subfigure}\hfill
+\begin{subfigure}{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{BERTopic/umap/umap_50.png}
+    \caption{$n\_neighbors = 50$}
+\end{subfigure}\hfill
+\begin{subfigure}{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{BERTopic/umap/umap_100.png}
+    \caption{$n\_neighbors = 100$}
+\end{subfigure}
+\caption{Proiezioni generate da \texttt{BERTopic.\allowbreak visualize\_documents()}: i punti (embedding ridotti a 2 dimensioni) sono colorati in base al topic. Confronto tra \texttt{n\_neighbors} pari a 15, 50 e 100.}
+\label{fig:umap-neighbors-comparison}
+\end{figure}
+
+
+\paragraph{\texttt{min\_dist}} controlla la densità minima consentita nella proiezione a bassa dimensione. Un valore vicino a zero permette ai punti di collassare in regioni molto dense, mettendo in risalto cluster ben separati; aumentando il parametro, UMAP distribuisce i punti con maggiore uniformità, sacrificando la compattezza dei gruppi a favore di una rappresentazione più omogenea. La Figura~\ref{fig:umap-min-dist} mostra come diverse configurazioni di \texttt{min\_dist} modifichino la distribuzione dei punti: valori estremamente bassi generano isole molto concentrate, mentre impostazioni più elevate distendono l'intero spazio proiettato.
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}{0.32\textwidth}
     \centering
     \includegraphics[width=\textwidth]{BERTopic/umap/min_dist_001.png}
     \caption{$min\_dist = 0.01$}
-\end{subfigure}
-\hfill
-\begin{subfigure}{0.45\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{BERTopic/umap/m_dist_1.png}
-    \caption{$min\_dist = 0.1$}
-\end{subfigure}
-
-\vspace{0.5em}
-\begin{subfigure}{0.45\textwidth}
+\end{subfigure}\hfill
+\begin{subfigure}{0.32\textwidth}
     \centering
     \includegraphics[width=\textwidth]{BERTopic/umap/m_dist_5.png}
     \caption{$min\_dist = 0.5$}
-\end{subfigure}
-\hfill
-\begin{subfigure}{0.45\textwidth}
+\end{subfigure}\hfill
+\begin{subfigure}{0.32\textwidth}
     \centering
     \includegraphics[width=\textwidth]{BERTopic/umap/m_dist_8.png}
     \caption{$min\_dist = 0.8$}
 \end{subfigure}
-\caption{Effetto di \texttt{min\_dist} sulla proiezione UMAP del modello 3D da 50\,000 punti. Fonti: Smithsonian 3D Digitization Program (\url{https://3d.si.edu/object/3d/mammuthus-primigenius-blumbach:341c96cd-f967-4540-8ed1-d3fc56d31f12}) e Max Noichl (\url{https://www.maxnoichl.eu/projects/mammoth/}).}
+\caption{Effetto di \texttt{min\_dist} sulla proiezione UMAP del modello 3D da 50\,000 punti. Fonti: \href{https://3d.si.edu/object/3d/mammuthus-primigenius-blumbach:341c96cd-f967-4540-8ed1-d3fc56d31f12}{Smithsonian 3D Digitization Program} e \href{https://www.maxnoichl.eu/projects/mammoth/}{Max Noichl}.}
 \label{fig:umap-min-dist}
 \end{figure}
+\noindent Abbiamo fissato \texttt{min\_dist} a $0.0$ poiché l'algoritmo di \emph{clustering} (HDBSCAN) restituisce risultati migliori con cluster densi e ben separati: eventuali regioni vuote verrebbero classificate come outlier e assegnate al topic ``spazzatura'' (\texttt{-1}). Mantenere gli embedding compatti riduce la formazione di tali zone.
 
 \subsection{Clustering}
 

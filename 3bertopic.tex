@@ -2,8 +2,8 @@
 L'avvento dei moderni \emph{LLM} ha portato ad un'evoluzione del \textbf{NLP} (Natural Language Processing) con la conseguente nascita di nuovi framework e tecniche per le analisi più disparate.
 Il \emph{topic modeling} non è esente da questo fenomeno, in particolare i modelli basati su \textbf{transformers} (cioè modelli che convertono testo in embeddings dipendenti dal contesto) si sono rilevati particolarmente efficaci.% nell'\emph{nlp}.
 \textbf{Modelli preaddestrati} sono molto utilizzati perché permettono di creare rappresentazioni \textbf{accurate} e \textbf{rappresentative} di testi, potendo fare affidamento su dataset di training molto grandi e molto diversificati.
-In questo contesto BERTopic è un algoritmo al passo con il corrente stato dell'arte, che offre alcuni vantaggi rispetto a tecniche antecedenti, fra cui permette di catturare il \textbf{significato semantico} dei documenti (riconosce ad esempio i sinonimi). Per dataset eterogenei e rumorosi come gli annunci di lavoro, questa capacità di individuare strutture semantiche latenti rende BERTopic una scelta particolarmente vantaggiosa rispetto ai modelli tradizionali. Inoltre BERTopic non richiede che il numero di classi venga specificato in anticipo, checomunque \textbf{può} essere specificato, o influenzato tramite metaparametri.
-Inoltre BERTopic è una \emph{pipeline} composta da più moduli con funzioni diverse, il che permette una alta personalizzazione.
+In questo contesto BERTopic è un \textit{framework} al passo con il corrente stato dell'arte, che offre alcuni vantaggi rispetto a tecniche antecedenti, fra cui permette di catturare il \textbf{significato semantico} dei documenti (riconosce ad esempio i sinonimi). Per dataset eterogenei e rumorosi come gli annunci di lavoro, questa capacità di individuare strutture semantiche latenti rende BERTopic una scelta particolarmente vantaggiosa rispetto ai modelli tradizionali. Inoltre in BERTopic specificare il il numero di classi è \textbf{opzionale}.
+Inoltre BERTopic è composto da più \textit{submodules} con funzioni diverse, il che permette un'alta personalizzazione.
 
 \section{Funzionalità}
 All'interno di Bert Topic è possibile distinguere alcune funzionalità particolarmente utili per questo progetto:
@@ -16,7 +16,7 @@ All'interno di Bert Topic è possibile distinguere alcune funzionalità particol
 \end{enumerate}
 
 BERTopic permette l'utilizzo di algoritmi diversi per ogni funzionalità, per personalizzare il proprio \emph{topic model}, ad esempio il clustering può essere effettuato da \emph{HDBSCAN} o da \emph{k-Means}.
-Illustreremo ora tutti i moduli, vedremo nello specifico la loro funzione e come la loro alterazione modifica il risultato finale.
+Illustreremo ora tutti i moduli da noi usati, vedremo nello specifico la loro funzione e come la loro alterazione modifica il risultato finale.
 \subsection{Embedding}
 Il primo modulo è l'\textbf{embedder}, il cui compito è quello di trasformare i documenti in rappresentazioni numeriche.
 i modelli principali consigliati nella documentazione\footnote{\url{https://maartengr.github.io/BERTopic/getting_started/embeddings/embeddings.html}} sono i \textbf{sentence transformers} (SBERT).
@@ -32,31 +32,54 @@ Ecco alcune informazioni sulla lunghezza del nostro dataset (dopo la pulizia):
 \hline
  & n chars & n words & n tokens mpnet \\
 \hline
-count & 5349.00 & 5349.00 & 5349.00 \\
-mean & 3262.81 & 449.54 & 583.11 \\
-std & 1650.89 & 227.65 & 294.96 \\
-min & 7.00 & 1.00 & 3.00 \\
-50\% & 3000.00 & 415.00 & 536.00 \\
-75\% & 4034.00 & 557.00 & 718.00 \\
-90\% & 5204.60 & 717.40 & 929.20 \\
-95\% & 6209.80 & 852.60 & 1110.60 \\
-99\% & 8891.00 & 1218.32 & 1586.56 \\
-max & 19763.00 & 2778.00 & 3811.00 \\
+count & 5357.00 & 5357.00 & 5357.00 \\
+mean & 3315.48 & 457.92 & 594.54 \\
+std & 1591.28 & 219.01 & 283.37 \\
+min & 91.00 & 14.00 & 23.00 \\
+50\% & 3087.00 & 427.00 & 554.00 \\
+75\% & 4060.00 & 562.00 & 729.00 \\
+90\% & 5213.40 & 717.00 & 934.00 \\
+95\% & 6188.20 & 846.20 & 1103.40 \\
+99\% & 8797.52 & 1203.44 & 1562.72 \\
+max & 19470.00 & 2739.00 & 3753.00 \\
 \hline
-\multicolumn{4}{l}{Testi che superano i 512 token: 2910 (54.40\%)} \\
-\multicolumn{4}{l}{Totale annunci: 5249} \\
+\multicolumn{4}{l}{Testi che superano i 512 token: 3075 (57.40\%)} \\
+\multicolumn{4}{l}{Totale annunci: 5357} \\
 \hline
 \end{tabular}
-\caption{Statistiche globali del dataset (totale annunci: 5249).}
+\caption{Statistiche globali del dataset (totale annunci: 5357).}
 \label{fig:dataset-stats}
 \end{figure}
-Quando SBERT riceve un input troppo lungo lo \textbf{tronca} questo significa che applicando l'embedder così come è taglierebbe una porzione molto grande del dataset.
-Abbiamo due opzioni: la prima è affidarsi ad un modello con un limite di dimensione input più alto (ad esempio \textbf{all-roberta-long-v1}), la seconda è frammentare le descrizioni e fare il topic modeling in segmenti di quest ultime.
-Il problema della prima opzione è di \emph{design} infatti il topic modeling in generale funziona meglio su documenti di dimensione ridotta, poiché se la lunghezza del testo è grande è probabile che contenga più temi, un unico embedding rischia di mescolare \textbf{sezioni semanticamente diverse}, ottenendo topic più grossolani.
+\noindent Quando SBERT riceve un input troppo lungo lo \textbf{tronca} questo significa che applicando l'embedder così come è taglierebbe una porzione molto grande del dataset.
+
+\noindent Le prime opzioni che abbiamo considerato sono:
+\begin{enumerate}
+    \item Affidarsi ad un modello con un limite di dimensione input più alto (ad esempio \textbf{all-roberta-long-v1})
+    \item Frammentare le descrizioni e fare il topic modeling in segmenti di quest ultime.
+\end{enumerate}
+Il vantaggio della prima opzione è che i modelli \textit{long-context}, mantengono attenzione tra termini distanti, permettendo di cogliere relazioni semantiche a lungo raggio, cosa impossibile se si divide il testo in \textit{chunk}.
+Non è però una caratteristica che abbiamo ritenuto significativa data la natura del nostro \textit{dataset}, infatti i nostri paragrafi hanno natura scollegata, uno potrebbe parlare di competenze e un altro di mansioni, la coerenza globale è più importante in testi di natura \textbf{discorsiva}.
+Inoltre se la lunghezza del testo è grande è probabile che contenga più temi, un unico embedding rischia di mescolare \textbf{sezioni semanticamente diverse}, ottenendo topic più grossolani.
 La seconda opzione invece oltre che generare topic più \textbf{puliti} e \textbf{interpretabili}, consente di aumentare molto il numero di documenti in input, questo è un vantaggio per dataset esegui come il nostro.
-Il contro è che gli annunci vanno poi aggregati a posteriori per ottenere una \textbf{distribuzione di topic per documento}, inoltre serve una strategia di segmentazione degli annunci che soddisfi al contempo \textbf{coerenza semantica} e criteri di lunghezza: il segmento non può essere troppo corto altrimenti SBERT non ha il contesto per estrarre topic e non può ovviamente superare la lunghezza massima consentita.
-Per fare un'analisi più accurata abbiamo scelto la seconda opzione.
-Vedremo il \textbf{post-ptocessing} in seguito in questo capitolo, la suddivisione delle descrizioni in paragrafi viene affrontata nel capitolo \textbf{Pre-processing}
+Però anche questo caso presenta delle criticità: non avremmo i topic relativi agli annunci, questi ultimi andrebbero aggregati a posteriori per ottenere una \textbf{distribuzione di topic per documento}, inoltre in questo modo, gli annunci più lunghi hanno \textbf{più peso}, semplicemente perché hanno più paragrafi, la situazione si complica ulteriormente se gli annunci contengono paragrafi simili, questo creerebbe dei \textbf{cluster} artefatti e quindi topic che non rispecchiano la natura del dataset, inoltre questo metodo il modello è completamente ignaro della struttura globale dell'annuncio.
+Questo approccio è più attuabile per risolvere un problema di \textbf{classificazione}, non per il \textit{topic modeling}.\medskip
+
+La soluzione che abbiamo scelto è dunque quella di \textit{mean-max-pooling}.
+\subsubsection{Mean-max pooling}
+\noindent\textbf{Nota.} Non esiste un nome canonico in letteratura per questa tecnica.
+
+\noindent Con questa tecnica si ottiene un embedding per ogni annuncio partendo dagli embedding dei paragrafi, seguendo i passaggi seguenti:
+\begin{enumerate}
+    \item calcolare gli embedding di ciascun paragrafo;
+    \item normalizzare ogni embedding;
+    \item calcolare media aritmetica e massimo elemento per elemento;
+    \item concatenare i due vettori risultanti;
+    \item normalizzare nuovamente il vettore concatenato.
+\end{enumerate}
+
+In questo modo si ottiene un embedding unico di dimensione doppia rispetto l'output dell'embedder che cattura sia il \textit{significato generale} dell'annuncio, sia le \textit{feature salienti} dei singoli paragrafi: queste due componenti producono vettori più \textit{discriminativi} e quindi più facilmente separabili nello spazio semantico.
+
+Per attuare questo approccio serve inoltre una strategia di segmentazione degli annunci che soddisfi al contempo \textbf{coerenza semantica} e criteri di lunghezza: il segmento non può essere troppo corto, altrimenti SBERT non ha il contesto per estrarre topic, e non può ovviamente superare la lunghezza massima consentita. Approfondiamo questo aspetto nel capitolo \textbf{Pre-processing}.
 \subsection{Dimensionality Reduction}
 I vettori generati dall'embedder hanno dimensione 768, ciò potrebbe rendere difficile il \emph{clustering} per questo è importante introdurre nella pipeline un algoritmo di riduzione della dimensione.
 L'idea di questi algoritmi è quella di ridurre la dimensione di un insieme di vettori preservandone la \textbf{struttura topologica locale}.
@@ -81,17 +104,89 @@ se è troppo grande, tutti i punti finiranno per essere \textbf{collegati tra lo
 UMAP risolve questo problema scegliendo un raggio locale \textbf{adattivo}, basato sulla distanza rispetto al $k$-esimo vicino più prossimo di ciascun punto. Successivamente, il grafo viene reso ``sfumato'' (\textit{fuzzy}) diminuendo la probabilità di connessione man mano che la distanza aumenta.
 
 Infine, imponendo che ogni punto sia connesso almeno al proprio vicino più prossimo, UMAP garantisce un equilibrio tra la \textbf{preservazione della struttura locale} e la \textbf{coerenza della struttura globale}.
-
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.75\textwidth]{img/BERTopic/UMAP\_projection.png}
+\includegraphics[width=0.75\textwidth]{img/BERTopic/umap/UMAP\_projection.png}
 \caption{Proiezione UMAP nel piano bidimensionale. Dopo l'intersezione con il primo \emph{neighbour}, il cerchio diventa \emph{sfumato}, riducendo il peso della connessione.\protect\footnotemark}
 \label{fig:umap-projection}
 \end{figure}
 \footnotetext{\url{https://pair-code.github.io/understanding-umap/}}
+\subsubsection{Parametri}
+I due parametri più importanti di UMAP sono \texttt{n\_neighbors} e \texttt{min\_dist}, poiché regolano l'equilibrio tra struttura \textit{locale} e \textit{globale} nella proiezione finale.\footnote{\url{https://pair-code.github.io/understanding-umap/}}
+
+\paragraph{\texttt{n\_neighbors}.} Determina il numero di vicini utilizzato per costruire il grafo fuzzy iniziale. Valori bassi enfatizzano le relazioni locali, isolando micro-strutture anche molto sottili; valori alti favoriscono invece la coerenza complessiva, preservando maggiormente la geometria globale dell'insieme di punti.
+
+Per visualizzare l'effetto di \texttt{n\_neighbors} consideriamo la proiezione bidimensionale di un modello 3D campionato con 50\,000 punti. Le immagini mostrano come la struttura globale emerga gradualmente all'aumentare del numero di vicini, mentre i dettagli fini sono preservati soltanto per valori più bassi.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{BERTopic/umap/mammoth_render.png}
+
+\begin{subfigure}{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{BERTopic/umap/n_neighbours5.png}
+    \caption{$n\_neighbors = 5$}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{BERTopic/umap/n_neighbours15.png}
+    \caption{$n\_neighbors = 15$}
+\end{subfigure}
+
+\vspace{0.5em}
+\begin{subfigure}{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{BERTopic/umap/n_neighbours20.png}
+    \caption{$n\_neighbors = 20$}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{BERTopic/umap/n_neighbours115.png}
+    \caption{$n\_neighbors = 115$}
+\end{subfigure}
+\caption{Proiezione UMAP di un modello 3D con 50\,000 punti in un piano 2D. Fonti: Smithsonian 3D Digitization Program (\url{https://3d.si.edu/object/3d/mammuthus-primigenius-blumbach:341c96cd-f967-4540-8ed1-d3fc56d31f12}) e Max Noichl (\url{https://www.maxnoichl.eu/projects/mammoth/}).}
+\label{fig:umap-mammoth}
+\end{figure}
+Si osserva come per valori ridotti di \texttt{n\_neighbors} la proiezione mantenga dettagli locali (curve delle zanne o delle zampe) ma perda la forma complessiva del mammut; all'aumentare del parametro la sagoma globale diventa riconoscibile, a scapito delle piccole variazioni geometriche. In modo analogo, sperimentare con valori come 15, 50 o 100 nel nostro dataset permette di calibrare il livello di granularità dei topic: valori molto bassi frammentano in gruppi minuti, mentre impostazioni alte tendono a fondere i cluster semantici più affini; una scelta intermedia (ad esempio \texttt{n\_neighbors} = 50) offre un equilibrio adeguato tra dettaglio locale e coerenza globale.
+
+\paragraph{\texttt{min\_dist}.} Controlla la densità minima consentita nella proiezione a bassa dimensione. Un valore vicino a zero permette ai punti di collassare in regioni molto dense, mettendo in risalto cluster ben separati; aumentando il parametro, UMAP distribuisce i punti con maggiore uniformità, sacrificando la compattezza dei gruppi a favore di una rappresentazione più omogenea. La Figura~\ref{fig:umap-min-dist} mostra come diverse configurazioni di \texttt{min\_dist} modifichino la distribuzione dei punti: valori estremamente bassi generano isole molto concentrate, mentre impostazioni più elevate distendono l'intero spazio proiettato riducendo l'effetto ``grumo''.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{BERTopic/umap/mammoth_render.png}
+
+\begin{subfigure}{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{BERTopic/umap/min_dist_001.png}
+    \caption{$min\_dist = 0.01$}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{BERTopic/umap/m_dist_1.png}
+    \caption{$min\_dist = 0.1$}
+\end{subfigure}
+
+\vspace{0.5em}
+\begin{subfigure}{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{BERTopic/umap/m_dist_5.png}
+    \caption{$min\_dist = 0.5$}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{BERTopic/umap/m_dist_8.png}
+    \caption{$min\_dist = 0.8$}
+\end{subfigure}
+\caption{Effetto di \texttt{min\_dist} sulla proiezione UMAP del modello 3D da 50\,000 punti. Fonti: Smithsonian 3D Digitization Program (\url{https://3d.si.edu/object/3d/mammuthus-primigenius-blumbach:341c96cd-f967-4540-8ed1-d3fc56d31f12}) e Max Noichl (\url{https://www.maxnoichl.eu/projects/mammoth/}).}
+\label{fig:umap-min-dist}
+\end{figure}
 
 \subsection{Clustering}
-Spiegare il metodo di clustering (es. HDBSCAN), i criteri di scelta dei parametri e come viene determinato il numero di topic.
+
 
 \subsection{Tokenizer}
 Dettagliare il tokenizer utilizzato, le strategie di pre-processing e qualsiasi personalizzazione per il dominio degli annunci di lavoro.

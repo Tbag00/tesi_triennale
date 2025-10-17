@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.6)  17 OCT 2025 01:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.6)  18 OCT 2025 00:46
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -372,12 +372,12 @@ Package hyperref Info: Link coloring ON on input line 9.
 \openout3 = `main.out'.
 
  (./settings/frontmatter.tex
-<img/logoUniPg.jpg, id=120, 401.5pt x 401.5pt>
+<img/logoUniPg.jpg, id=148, 401.5pt x 401.5pt>
 File: img/logoUniPg.jpg Graphic file (type jpg)
 <use img/logoUniPg.jpg>
 Package pdftex.def Info: img/logoUniPg.jpg  used on input line 5.
 (pdftex.def)             Requested size: 58.49762pt x 58.49475pt.
-<img/logoDMI.jpg, id=121, 401.5pt x 401.5pt>
+<img/logoDMI.jpg, id=149, 401.5pt x 401.5pt>
 File: img/logoDMI.jpg Graphic file (type jpg)
 <use img/logoDMI.jpg>
 Package pdftex.def Info: img/logoDMI.jpg  used on input line 11.
@@ -412,149 +412,222 @@ Capitolo 2.
 [10
 
 ]
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 22.
+Overfull \hbox (11.2075pt too wide) in paragraph at lines 25--26
+\T1/cmr/m/n/12 Ciascun to-ken è suc-ces-si-va-men-te con-ver-ti-to in un vet-to-re nu-me-ri-co, l'\T1/cmr/m/it/12 embedding\T1/cmr/m/n/12 .
+ []
+
+<./img/BERTopic/embeddings/blog-king-queen-embeddings.jpg, id=248, 1116.17pt x 624.3325pt>
+File: ./img/BERTopic/embeddings/blog-king-queen-embeddings.jpg Graphic file (type jpg)
+<use ./img/BERTopic/embeddings/blog-king-queen-embeddings.jpg>
+Package pdftex.def Info: ./img/BERTopic/embeddings/blog-king-queen-embeddings.jpg  used on input line 29.
+(pdftex.def)             Requested size: 234.00238pt x 130.88506pt.
+[11]
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 38.
  (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
-Underfull \hbox (badness 10000) in paragraph at lines 22--22
-[][][][][]$\T1/cmtt/m/n/10 https : / / maartengr . github . io / BERTopic / getting _ started / embeddings /
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+[][][][][]$\T1/cmtt/m/n/10 https : / / sbert . net / docs / package _ reference / sentence _ transformer / models .
  []
 
-[11] [12] [13]
-Underfull \hbox (badness 10000) in paragraph at lines 85--85
+[12 <./img/BERTopic/embeddings/blog-king-queen-embeddings.jpg (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 44--44
 [][][][][]$\T1/cmtt/m/n/10 https : / / maartengr . github . io / BERTopic / getting _ started / dim _ reduction /
  []
 
-[14]
-<img/BERTopic/umap/UMAP_projection.png, id=259, 2055.68pt x 1027.84pt>
+[13]
+<img/BERTopic/umap/UMAP_projection.png, id=286, 2055.68pt x 1027.84pt>
 File: img/BERTopic/umap/UMAP_projection.png Graphic file (type png)
 <use img/BERTopic/umap/UMAP_projection.png>
-Package pdftex.def Info: img/BERTopic/umap/UMAP_projection.png  used on input line 104.
+Package pdftex.def Info: img/BERTopic/umap/UMAP_projection.png  used on input line 63.
 (pdftex.def)             Requested size: 292.5pt x 146.24915pt.
- [15]
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 112.
-<./img/BERTopic/umap/mammoth_render.png, id=271, 4015.0pt x 4015.0pt>
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 71.
+ [14 <./img/BERTopic/umap/UMAP_projection.png>]
+<./img/BERTopic/umap/mammoth_render.png, id=301, 4015.0pt x 4015.0pt>
 File: ./img/BERTopic/umap/mammoth_render.png Graphic file (type png)
 <use ./img/BERTopic/umap/mammoth_render.png>
-Package pdftex.def Info: ./img/BERTopic/umap/mammoth_render.png  used on input line 118.
+Package pdftex.def Info: ./img/BERTopic/umap/mammoth_render.png  used on input line 76.
 (pdftex.def)             Requested size: 195.0pt x 194.9417pt.
-<./img/BERTopic/umap/n_neighbours5.png, id=272, 1003.75pt x 1003.75pt>
+<./img/BERTopic/umap/n_neighbours5.png, id=302, 1003.75pt x 1003.75pt>
 File: ./img/BERTopic/umap/n_neighbours5.png Graphic file (type png)
 <use ./img/BERTopic/umap/n_neighbours5.png>
-Package pdftex.def Info: ./img/BERTopic/umap/n_neighbours5.png  used on input line 122.
+Package pdftex.def Info: ./img/BERTopic/umap/n_neighbours5.png  used on input line 80.
 (pdftex.def)             Requested size: 124.80286pt x 124.79454pt.
-<./img/BERTopic/umap/n_neighbours20.png, id=273, 1003.75pt x 1003.75pt>
+<./img/BERTopic/umap/n_neighbours20.png, id=303, 1003.75pt x 1003.75pt>
 File: ./img/BERTopic/umap/n_neighbours20.png Graphic file (type png)
 <use ./img/BERTopic/umap/n_neighbours20.png>
-Package pdftex.def Info: ./img/BERTopic/umap/n_neighbours20.png  used on input line 127.
+Package pdftex.def Info: ./img/BERTopic/umap/n_neighbours20.png  used on input line 85.
 (pdftex.def)             Requested size: 124.80286pt x 124.79454pt.
-<./img/BERTopic/umap/n_neighbours115.png, id=274, 1003.75pt x 1003.75pt>
+<./img/BERTopic/umap/n_neighbours115.png, id=304, 1003.75pt x 1003.75pt>
 File: ./img/BERTopic/umap/n_neighbours115.png Graphic file (type png)
 <use ./img/BERTopic/umap/n_neighbours115.png>
-Package pdftex.def Info: ./img/BERTopic/umap/n_neighbours115.png  used on input line 132.
+Package pdftex.def Info: ./img/BERTopic/umap/n_neighbours115.png  used on input line 90.
 (pdftex.def)             Requested size: 124.80286pt x 124.79454pt.
- [16 <./img/BERTopic/umap/UMAP_projection.png>] [17 <./img/BERTopic/umap/mammoth_render.png> <./img/BERTopic/umap/n_neighbours5.png> <./img/BERTopic/umap/n_neighbours20.png> <./img/BERTopic/umap/n_neighbours115.png>] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2023/02/27 1.9 listings language file
-)
-Overfull \hbox (27.28998pt too wide) in paragraph at lines 162--173
- [][] 
- []
-
-[18]
-<./img/BERTopic/umap/num_topics_per_neighbors.png, id=326, 505.89pt x 361.35pt>
-File: ./img/BERTopic/umap/num_topics_per_neighbors.png Graphic file (type png)
-<use ./img/BERTopic/umap/num_topics_per_neighbors.png>
-Package pdftex.def Info: ./img/BERTopic/umap/num_topics_per_neighbors.png  used on input line 181.
-(pdftex.def)             Requested size: 234.00238pt x 167.14381pt.
-
-Underfull \hbox (badness 1694) in paragraph at lines 182--182
-[]\T1/cmr/m/n/12 Figura 2.4: |Nu-me-ro di to-pic ge-ne-ra-ti da HDB-SCAN al va-ria-re di
- []
-
-
-Overfull \hbox (17.6089pt too wide) in paragraph at lines 185--186
-\T1/cmr/m/n/12 I plot in Fi-gu-ra [][]2.5[][] mo-stra-no la pro-ie-zio-ne bi-di-men-sio-na-le ge-ne-ra-ta da \T1/cmtt/m/n/12 BERTopic.
- []
-
-<./img/BERTopic/umap/umap_15.png, id=328, 643.40375pt x 644.4075pt>
-File: ./img/BERTopic/umap/umap_15.png Graphic file (type png)
-<use ./img/BERTopic/umap/umap_15.png>
-Package pdftex.def Info: ./img/BERTopic/umap/umap_15.png  used on input line 191.
-(pdftex.def)             Requested size: 124.80286pt x 124.99524pt.
-<./img/BERTopic/umap/umap_50.png, id=329, 595.22375pt x 594.22pt>
-File: ./img/BERTopic/umap/umap_50.png Graphic file (type png)
-<use ./img/BERTopic/umap/umap_50.png>
-Package pdftex.def Info: ./img/BERTopic/umap/umap_50.png  used on input line 196.
-(pdftex.def)             Requested size: 124.80286pt x 124.59041pt.
-<./img/BERTopic/umap/umap_100.png, id=330, 647.41875pt x 646.415pt>
-File: ./img/BERTopic/umap/umap_100.png Graphic file (type png)
-<use ./img/BERTopic/umap/umap_100.png>
-Package pdftex.def Info: ./img/BERTopic/umap/umap_100.png  used on input line 201.
-(pdftex.def)             Requested size: 124.80286pt x 124.60541pt.
-[19 <./img/BERTopic/umap/num_topics_per_neighbors.png>]
-<./img/BERTopic/umap/min_dist_001.png, id=340, 1003.75pt x 1003.75pt>
+ [15 <./img/BERTopic/umap/mammoth_render.png> <./img/BERTopic/umap/n_neighbours5.png> <./img/BERTopic/umap/n_neighbours20.png> <./img/BERTopic/umap/n_neighbours115.png>]
+<./img/BERTopic/umap/min_dist_001.png, id=324, 1003.75pt x 1003.75pt>
 File: ./img/BERTopic/umap/min_dist_001.png Graphic file (type png)
 <use ./img/BERTopic/umap/min_dist_001.png>
-Package pdftex.def Info: ./img/BERTopic/umap/min_dist_001.png  used on input line 215.
+Package pdftex.def Info: ./img/BERTopic/umap/min_dist_001.png  used on input line 102.
 (pdftex.def)             Requested size: 124.80286pt x 124.79454pt.
-<./img/BERTopic/umap/m_dist_5.png, id=341, 1003.75pt x 1003.75pt>
+<./img/BERTopic/umap/m_dist_5.png, id=325, 1003.75pt x 1003.75pt>
 File: ./img/BERTopic/umap/m_dist_5.png Graphic file (type png)
 <use ./img/BERTopic/umap/m_dist_5.png>
-Package pdftex.def Info: ./img/BERTopic/umap/m_dist_5.png  used on input line 220.
+Package pdftex.def Info: ./img/BERTopic/umap/m_dist_5.png  used on input line 107.
 (pdftex.def)             Requested size: 124.80286pt x 124.79454pt.
-<./img/BERTopic/umap/m_dist_8.png, id=342, 1003.75pt x 1003.75pt>
+<./img/BERTopic/umap/m_dist_8.png, id=326, 1003.75pt x 1003.75pt>
 File: ./img/BERTopic/umap/m_dist_8.png Graphic file (type png)
 <use ./img/BERTopic/umap/m_dist_8.png>
-Package pdftex.def Info: ./img/BERTopic/umap/m_dist_8.png  used on input line 225.
+Package pdftex.def Info: ./img/BERTopic/umap/m_dist_8.png  used on input line 112.
 (pdftex.def)             Requested size: 124.80286pt x 124.79454pt.
- [20 <./img/BERTopic/umap/umap_15.png> <./img/BERTopic/umap/umap_50.png> <./img/BERTopic/umap/umap_100.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 236--236
+
+Underfull \hbox (badness 10000) in paragraph at lines 121--121
 [][][][][]$\T1/cmtt/m/n/10 https : / / maartengr . github . io / BERTopic / getting _ started / clustering /
  []
 
-[21 <./img/BERTopic/umap/min_dist_001.png> <./img/BERTopic/umap/m_dist_5.png> <./img/BERTopic/umap/m_dist_8.png>]
-Overfull \hbox (46.61139pt too wide) in paragraph at lines 267--277
- [][] 
- []
-
-[22]
-<./img/BERTopic/hdbscan/ms5.png, id=382, 1204.5pt x 752.8125pt>
-File: ./img/BERTopic/hdbscan/ms5.png Graphic file (type png)
-<use ./img/BERTopic/hdbscan/ms5.png>
-Package pdftex.def Info: ./img/BERTopic/hdbscan/ms5.png  used on input line 294.
-(pdftex.def)             Requested size: 93.60214pt x 58.49168pt.
-<./img/BERTopic/hdbscan/ms15.png, id=383, 1204.5pt x 752.8125pt>
-File: ./img/BERTopic/hdbscan/ms15.png Graphic file (type png)
-<use ./img/BERTopic/hdbscan/ms15.png>
-Package pdftex.def Info: ./img/BERTopic/hdbscan/ms15.png  used on input line 299.
-(pdftex.def)             Requested size: 93.60214pt x 58.49168pt.
-<./img/BERTopic/hdbscan/ms30.png, id=384, 1204.5pt x 752.8125pt>
-File: ./img/BERTopic/hdbscan/ms30.png Graphic file (type png)
-<use ./img/BERTopic/hdbscan/ms30.png>
-Package pdftex.def Info: ./img/BERTopic/hdbscan/ms30.png  used on input line 304.
-(pdftex.def)             Requested size: 93.60214pt x 58.49168pt.
-<./img/BERTopic/hdbscan/ms_60.png, id=385, 1204.5pt x 752.8125pt>
-File: ./img/BERTopic/hdbscan/ms_60.png Graphic file (type png)
-<use ./img/BERTopic/hdbscan/ms_60.png>
-Package pdftex.def Info: ./img/BERTopic/hdbscan/ms_60.png  used on input line 309.
-(pdftex.def)             Requested size: 93.60214pt x 58.49168pt.
- [23] [24 <./img/BERTopic/hdbscan/ms5.png> <./img/BERTopic/hdbscan/ms15.png> <./img/BERTopic/hdbscan/ms30.png> <./img/BERTopic/hdbscan/ms_60.png>]
-Overfull \hbox (54.49011pt too wide) in paragraph at lines 350--352
+[16 <./img/BERTopic/umap/min_dist_001.png> <./img/BERTopic/umap/m_dist_5.png> <./img/BERTopic/umap/m_dist_8.png>]
+<./img/BERTopic/hdbscan/hdbscan_points.png, id=345, 784.9325pt x 541.02126pt>
+File: ./img/BERTopic/hdbscan/hdbscan_points.png Graphic file (type png)
+<use ./img/BERTopic/hdbscan/hdbscan_points.png>
+Package pdftex.def Info: ./img/BERTopic/hdbscan/hdbscan_points.png  used on input line 135.
+(pdftex.def)             Requested size: 253.49762pt x 174.7236pt.
+ [17 <./img/BERTopic/hdbscan/hdbscan_points.png>] [18]
+<./img/BERTopic/hdbscan/hdbscan_MST.png, id=369, 713.66624pt x 506.89375pt>
+File: ./img/BERTopic/hdbscan/hdbscan_MST.png Graphic file (type png)
+<use ./img/BERTopic/hdbscan/hdbscan_MST.png>
+Package pdftex.def Info: ./img/BERTopic/hdbscan/hdbscan_MST.png  used on input line 171.
+(pdftex.def)             Requested size: 253.49762pt x 180.05295pt.
+ [19 <./img/BERTopic/hdbscan/hdbscan_MST.png (PNG copy)>]
+<./img/BERTopic/hdbscan/hdbscan_cluster_hierarchy.png, id=376, 760.8425pt x 521.95pt>
+File: ./img/BERTopic/hdbscan/hdbscan_cluster_hierarchy.png Graphic file (type png)
+<use ./img/BERTopic/hdbscan/hdbscan_cluster_hierarchy.png>
+Package pdftex.def Info: ./img/BERTopic/hdbscan/hdbscan_cluster_hierarchy.png  used on input line 191.
+(pdftex.def)             Requested size: 253.49762pt x 173.9006pt.
+ [20]
+Overfull \hbox (54.49011pt too wide) in paragraph at lines 198--200
 \T1/cmr/m/n/12 SCAN ap-pli-ca un pro-ces-so di \T1/cmr/bx/n/12 con-den-sa-zio-ne \T1/cmr/m/n/12 ba-sa-to sul pa-ra-me-tro \T1/cmtt/m/n/12 min_cluster_size\T1/cmr/m/n/12 .
  []
 
-[25] [26]) (./2datacleaning.tex [27]
+[21 <./img/BERTopic/hdbscan/hdbscan_cluster_hierarchy.png (PNG copy)>]
+<./img/BERTopic/hdbscan/hdbscan_condensed.png, id=388, 751.80875pt x 521.95pt>
+File: ./img/BERTopic/hdbscan/hdbscan_condensed.png Graphic file (type png)
+<use ./img/BERTopic/hdbscan/hdbscan_condensed.png>
+Package pdftex.def Info: ./img/BERTopic/hdbscan/hdbscan_condensed.png  used on input line 211.
+(pdftex.def)             Requested size: 253.49762pt x 175.99521pt.
+<./img/BERTopic/hdbscan/hdbsca_clusters.png, id=389, 751.80875pt x 521.95pt>
+File: ./img/BERTopic/hdbscan/hdbsca_clusters.png Graphic file (type png)
+<use ./img/BERTopic/hdbscan/hdbsca_clusters.png>
+Package pdftex.def Info: ./img/BERTopic/hdbscan/hdbsca_clusters.png  used on input line 227.
+(pdftex.def)             Requested size: 253.49762pt x 175.99521pt.
+ [22 <./img/BERTopic/hdbscan/hdbscan_condensed.png>] [23 <./img/BERTopic/hdbscan/hdbsca_clusters.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 262--262
+[][][][][]$\T1/cmtt/m/n/10 https : / / maartengr . github . io / BERTopic / api / bertopic . html # bertopic .
+ []
+
+[24] [25]) (./3bertopic_implementation.tex [26]
 Capitolo 3.
-[28
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--4
+[][][][][]$\T1/cmtt/m/n/10 https : / / maartengr . github . io / BERTopic / getting _ started / embeddings /
+ []
+
+[27
+
+] [28] [29] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2023/02/27 1.9 listings language file
+) [30]
+<./img/BERTopic/umap/num_topics_per_neighbors.png, id=466, 505.89pt x 361.35pt>
+File: ./img/BERTopic/umap/num_topics_per_neighbors.png Graphic file (type png)
+<use ./img/BERTopic/umap/num_topics_per_neighbors.png>
+Package pdftex.def Info: ./img/BERTopic/umap/num_topics_per_neighbors.png  used on input line 113.
+(pdftex.def)             Requested size: 234.00238pt x 167.14381pt.
+
+Underfull \hbox (badness 1694) in paragraph at lines 114--114
+[]\T1/cmr/m/n/12 Figura 3.2: |Nu-me-ro di to-pic ge-ne-ra-ti da HDB-SCAN al va-ria-re di
+ []
+
+[31]
+Overfull \hbox (17.6089pt too wide) in paragraph at lines 117--118
+\T1/cmr/m/n/12 I plot in Fi-gu-ra [][]3.3[][] mo-stra-no la pro-ie-zio-ne bi-di-men-sio-na-le ge-ne-ra-ta da \T1/cmtt/m/n/12 BERTopic.
+ []
+
+<./img/BERTopic/umap/umap_15.png, id=480, 643.40375pt x 644.4075pt>
+File: ./img/BERTopic/umap/umap_15.png Graphic file (type png)
+<use ./img/BERTopic/umap/umap_15.png>
+Package pdftex.def Info: ./img/BERTopic/umap/umap_15.png  used on input line 123.
+(pdftex.def)             Requested size: 124.80286pt x 124.99524pt.
+<./img/BERTopic/umap/umap_50.png, id=481, 595.22375pt x 594.22pt>
+File: ./img/BERTopic/umap/umap_50.png Graphic file (type png)
+<use ./img/BERTopic/umap/umap_50.png>
+Package pdftex.def Info: ./img/BERTopic/umap/umap_50.png  used on input line 128.
+(pdftex.def)             Requested size: 124.80286pt x 124.59041pt.
+<./img/BERTopic/umap/umap_100.png, id=482, 647.41875pt x 646.415pt>
+File: ./img/BERTopic/umap/umap_100.png Graphic file (type png)
+<use ./img/BERTopic/umap/umap_100.png>
+Package pdftex.def Info: ./img/BERTopic/umap/umap_100.png  used on input line 133.
+(pdftex.def)             Requested size: 124.80286pt x 124.60541pt.
+[32 <./img/BERTopic/umap/num_topics_per_neighbors.png>]
+Overfull \hbox (50.55487pt too wide) in paragraph at lines 150--160
+ [][] 
+ []
+
+[33 <./img/BERTopic/umap/umap_15.png> <./img/BERTopic/umap/umap_50.png> <./img/BERTopic/umap/umap_100.png>]
+<./img/BERTopic/hdbscan/ms5.png, id=497, 1204.5pt x 752.8125pt>
+File: ./img/BERTopic/hdbscan/ms5.png Graphic file (type png)
+<use ./img/BERTopic/hdbscan/ms5.png>
+Package pdftex.def Info: ./img/BERTopic/hdbscan/ms5.png  used on input line 177.
+(pdftex.def)             Requested size: 93.60214pt x 58.49168pt.
+<./img/BERTopic/hdbscan/ms15.png, id=498, 1204.5pt x 752.8125pt>
+File: ./img/BERTopic/hdbscan/ms15.png Graphic file (type png)
+<use ./img/BERTopic/hdbscan/ms15.png>
+Package pdftex.def Info: ./img/BERTopic/hdbscan/ms15.png  used on input line 182.
+(pdftex.def)             Requested size: 93.60214pt x 58.49168pt.
+<./img/BERTopic/hdbscan/ms30.png, id=499, 1204.5pt x 752.8125pt>
+File: ./img/BERTopic/hdbscan/ms30.png Graphic file (type png)
+<use ./img/BERTopic/hdbscan/ms30.png>
+Package pdftex.def Info: ./img/BERTopic/hdbscan/ms30.png  used on input line 187.
+(pdftex.def)             Requested size: 93.60214pt x 58.49168pt.
+<./img/BERTopic/hdbscan/ms_60.png, id=500, 1204.5pt x 752.8125pt>
+File: ./img/BERTopic/hdbscan/ms_60.png Graphic file (type png)
+<use ./img/BERTopic/hdbscan/ms_60.png>
+Package pdftex.def Info: ./img/BERTopic/hdbscan/ms_60.png  used on input line 192.
+(pdftex.def)             Requested size: 93.60214pt x 58.49168pt.
+ [34] [35 <./img/BERTopic/hdbscan/ms5.png> <./img/BERTopic/hdbscan/ms15.png> <./img/BERTopic/hdbscan/ms30.png> <./img/BERTopic/hdbscan/ms_60.png>]
+Overfull \hbox (18.80371pt too wide) in paragraph at lines 229--230
+[][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (18.80371pt too wide) in paragraph at lines 231--232
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (173.86719pt too wide) in paragraph at lines 234--235
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[36]
+Overfull \hbox (11.75537pt too wide) in paragraph at lines 235--236
+[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (4.70703pt too wide) in paragraph at lines 237--238
+[][][][][][][][][][][][][][][][][][][][] 
+ []
+
+) (./2datacleaning.tex [37]
+Capitolo 4.
+[38
 
 ]
-<./img/cleaning/garbage_barplot.png, id=427, 1003.75pt x 501.875pt>
+<./img/cleaning/garbage_barplot.png, id=552, 1003.75pt x 501.875pt>
 File: ./img/cleaning/garbage_barplot.png Graphic file (type png)
 <use ./img/cleaning/garbage_barplot.png>
 Package pdftex.def Info: ./img/cleaning/garbage_barplot.png  used on input line 30.
 (pdftex.def)             Requested size: 390.0pt x 195.00294pt.
- [29 <./img/cleaning/garbage_barplot.png>] [30] [31]
+ [39 <./img/cleaning/garbage_barplot.png>] [40] [41]
 Overfull \hbox (75.19043pt too wide) in paragraph at lines 103--104
 [][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
@@ -564,19 +637,19 @@ Overfull \hbox (96.33545pt too wide) in paragraph at lines 104--105
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[32]
+[42]
 Overfull \hbox (4.70703pt too wide) in paragraph at lines 129--130
 [][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[33]
+[43]
 Overfull \hbox (7.34187pt too wide) in paragraph at lines 161--162
 \T1/cmr/m/n/12 Per con-fi-gu-ra-re il mo-del-lo (e l'al-le-na-men-to), spa-Cy ri-chie-de un fi-le \T1/cmtt/m/n/12 config.cfg\T1/cmr/m/n/12 ,
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 173--173
-[]\T1/cmr/m/n/12 Figura 3.3: |Con-fi-gu-ra-zio-ne del \T1/cmr/m/it/12 sug-ge-ster\T1/cmr/m/n/12 : usa il com-po-nen-te
+[]\T1/cmr/m/n/12 Figura 4.3: |Con-fi-gu-ra-zio-ne del \T1/cmr/m/it/12 sug-ge-ster\T1/cmr/m/n/12 : usa il com-po-nen-te
  []
 
 
@@ -584,13 +657,13 @@ Underfull \hbox (badness 1735) in paragraph at lines 173--173
 \T1/cmtt/m/n/12 spacy.ngram_suggester.v1 \T1/cmr/m/n/12 e va-lu-ta tut-ti gli span fi-no a 20 to-ken
  []
 
-[34] [35] [36] [37]
-<./img/cleaning/header_metrics_comparison.png, id=545, 433.62pt x 289.08pt>
+[44] [45] [46] [47]
+<./img/cleaning/header_metrics_comparison.png, id=669, 433.62pt x 289.08pt>
 File: ./img/cleaning/header_metrics_comparison.png Graphic file (type png)
 <use ./img/cleaning/header_metrics_comparison.png>
 Package pdftex.def Info: ./img/cleaning/header_metrics_comparison.png  used on input line 287.
 (pdftex.def)             Requested size: 292.5pt x 195.0103pt.
- [38] [39 <./img/cleaning/header_metrics_comparison.png>] [40] [41] [42] [43] [44] [45] [46]
+ [48] [49 <./img/cleaning/header_metrics_comparison.png>] [50] [51] [52] [53] [54] [55]
 Overfull \hbox (23.00285pt too wide) in paragraph at lines 507--509
 [][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
@@ -605,29 +678,29 @@ Overfull \hbox (28.10165pt too wide) in paragraph at lines 520--521
 [][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[47]
-<./img/cleaning/gerarchia_half_cleaning.png, id=690, 1054.94125pt x 498.86375pt>
+[56]
+<./img/cleaning/gerarchia_half_cleaning.png, id=787, 1054.94125pt x 498.86375pt>
 File: ./img/cleaning/gerarchia_half_cleaning.png Graphic file (type png)
 <use ./img/cleaning/gerarchia_half_cleaning.png>
 Package pdftex.def Info: ./img/cleaning/gerarchia_half_cleaning.png  used on input line 539.
 (pdftex.def)             Requested size: 390.0pt x 184.42445pt.
- [48 <./img/cleaning/gerarchia_half_cleaning.png>]
-<./img/cleaning/dendrogramma_pulito.png, id=698, 1262.7175pt x 587.19376pt>
+ [57] [58 <./img/cleaning/gerarchia_half_cleaning.png>]
+<./img/cleaning/dendrogramma_pulito.png, id=824, 1262.7175pt x 587.19376pt>
 File: ./img/cleaning/dendrogramma_pulito.png Graphic file (type png)
 <use ./img/cleaning/dendrogramma_pulito.png>
 Package pdftex.def Info: ./img/cleaning/dendrogramma_pulito.png  used on input line 580.
 (pdftex.def)             Requested size: 390.0pt x 181.35619pt.
- [49]) (./4risultatifinali.tex [50 <./img/cleaning/dendrogramma_pulito.png>]
-Capitolo 4.
-) (./5conclusioni.tex [51
+ [59 <./img/cleaning/dendrogramma_pulito.png>]) (./4risultatifinali.tex [60]
+Capitolo 5.
+) (./5conclusioni.tex [61
 
 ]
-Capitolo 5.
-) (./main.bbl [52
+Capitolo 6.
+) (./main.bbl [62
 
-]) (./ringraziamenti.tex [53
+]) (./ringraziamenti.tex [63
 
-]) [54
+]) [64
 
 ] (./main.aux)
  ***********
@@ -635,21 +708,21 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: DC1FD896B36C0A3585BC775E3404AE73;4612.
+(rerunfilecheck)             Checksum: 134C1BEF8AAD84B79DC193BAD0AF72FC;5269.
  ) 
 Here is how much of TeX's memory you used:
- 15180 strings out of 474222
- 240224 string characters out of 5748733
+ 15299 strings out of 474222
+ 244056 string characters out of 5748733
  1959975 words of memory out of 5000000
- 36875 multiletter control sequences out of 15000+600000
- 585885 words of font info for 98 fonts, out of 8000000 for 9000
+ 36947 multiletter control sequences out of 15000+600000
+ 585185 words of font info for 97 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 80i,19n,82p,1246b,1282s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbi1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbi1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0700.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm2074.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on main.pdf (54 pages, 4481529 bytes).
+ 80i,19n,82p,1246b,2100s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbi1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0700.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm2074.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb>
+Output written on main.pdf (64 pages, 4751153 bytes).
 PDF statistics:
- 953 PDF objects out of 1000 (max. 8388607)
- 779 compressed objects within 8 object streams
- 333 named destinations out of 1000 (max. 500000)
- 343 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1090 PDF objects out of 1200 (max. 8388607)
+ 894 compressed objects within 9 object streams
+ 378 named destinations out of 1000 (max. 500000)
+ 429 words of extra memory for PDF output out of 10000 (max. 10000000)
 

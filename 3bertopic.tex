@@ -92,7 +92,7 @@ Per visualizzare l'effetto di \texttt{n\_neighbors} consideriamo la proiezione b
 \end{subfigure}
 \caption{Proiezione UMAP di un modello 3D con 50\,000 punti in un piano 2D. Fonti: \href{https://3d.si.edu/object/3d/mammuthus-primigenius-blumbach:341c96cd-f967-4540-8ed1-d3fc56d31f12}{Smithsonian 3D Digitization Program} e \href{https://www.maxnoichl.eu/projects/mammoth/}{Max Noichl}.}
 \label{fig:umap-mammoth}
-\end{figure}
+\end{figure}Si osservi come per valori ridotti di \texttt{n\_neighbors} la proiezione UMAP mantenga dettagli locali (curve delle zanne o delle zampe), ma perda la forma complessiva del mammut; all'aumentare del parametro la sagoma globale diventa riconoscibile, a scapito delle piccole variazioni geometriche.
 \paragraph{\texttt{min\_dist}} controlla la densità minima consentita nella proiezione a bassa dimensione. Un valore vicino a zero permette ai punti di collassare in regioni molto dense, mettendo in risalto cluster ben separati; aumentando il parametro, UMAP distribuisce i punti con maggiore uniformità, sacrificando la compattezza dei gruppi a favore di una rappresentazione più omogenea. La Figura~\ref{fig:umap-min-dist} mostra come diverse configurazioni di \texttt{min\_dist} modifichino la distribuzione dei punti: valori estremamente bassi generano isole molto concentrate, mentre impostazioni più elevate distendono l'intero spazio proiettato.
 \begin{figure}[H]
 \centering
@@ -129,10 +129,11 @@ Per visualizzare l'effetto di \texttt{n\_neighbors} consideriamo la proiezione b
     \item Estrazione dei cluster dall'albero condensato
 \end{enumerate}
 
+Vediamo i passaggi più nel dettaglio con l'ausilio di un esempio grafico. In Figura~\ref{fig:hdbscan-points} è mostrato l'insieme di punti su cui applicheremo HDBSCAN.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.65\textwidth]{BERTopic/hdbscan/hdbscan_points.png}
-\caption{Dataset iniziale proiettato nello spazio UMAP: ogni punto rappresenta un documento e la densità locale guida i passaggi successivi di HDBSCAN.}
+\caption{Dataset iniziale \textit{ad hoc} generato per testare HDBSCAN}
 \label{fig:hdbscan-points}
 \end{figure}
 \subsubsection*{1. Trasformazione dello spazio in funzione della densità}
@@ -232,24 +233,60 @@ Questo approccio consente di identificare automaticamente le strutture di densit
 Nel topic modeling, dopo la creazione dei topic, si cerca una \textbf{rappresentazione} che descriva i topic in termini lessicali.
 
 Il \texttt{CountVectorizer} rappresenta il primo passo per collegare la rappresentazione semantica dei documenti, ottenuta tramite gli \textit{embeddings}, a una rappresentazione lessicale interpretabile. 
-Il suo compito è quello di trasformare un insieme di testi in una matrice numerica, detta \textit{document-term matrix}, in cui ogni riga rappresenta un documento (o, nel contesto di BERTopic, un insieme di documenti appartenenti a un topic), ogni colonna un termine del vocabolario, e ciascun elemento \( M_{ij} \) indica quante volte il termine \( j \) compare nel documento \( i \).
+Il suo compito è quello di trasformare un insieme di testi in una matrice numerica in cui ogni riga rappresenta un documento e ogni colonna un termine del vocabolario; ciascun elemento \( M_{ij} \) indica quante volte il termine \( j \) compare nel documento \( i \).
 
 In questo modo, il \texttt{CountVectorizer} costituisce il ponte tra la rappresentazione numerica continua degli \textit{embeddings} e la rappresentazione simbolica necessaria per calcolare le statistiche di c-TF-IDF, che servono a identificare le parole più rappresentative di ciascun topic.
+\subsection{c-TF-IDF}
+\noindent Come descritto nella documentazione ufficiale\footnote{\url{https://maartengr.github.io/BERTopic/api/ctfidf.html}}, il c-TF-IDF può essere visto come l’adattamento della formula TF-IDF a un contesto multi-classe: tutti i documenti di una stessa classe vengono concatenati in un unico documento, da cui si calcola la frequenza dei termini \(x\). Questa frequenza viene normalizzata con norma L1 e costituisce la \textbf{term frequency}.
 
-La configurazione del vettorizzatore influenza fortemente la qualità dei topic risultanti. 
-Tra i principali parametri utilizzabili si distinguono:
+Per un termine \( x \) appartenente alla classe \( c \), il peso c-TF-IDF è definito come:
 
-\begin{table}[H]
-\centering
-\begin{tabular}{p{3cm} p{9cm}}
-\textbf{Parametro} & \textbf{Descrizione} \\
-\texttt{stop\_words} & Elenco di parole da escludere (articoli, preposizioni, ecc.). Può assumere valori come \texttt{'english'} o una lista personalizzata di termini. \\
-\texttt{ngram\_range} & Tuple che definisce la lunghezza minima e massima delle n-gram; ad esempio \texttt{(1, 2)} include sia unigrammi che bigrammi, consentendo di catturare espressioni come \textit{data analysis}. \\
-\texttt{min\_df} & Numero minimo di documenti (o frazione) in cui un termine deve apparire per essere incluso nel vocabolario; filtra i termini troppo rari. \\
-\texttt{max\_df} & Numero massimo di documenti (o frazione) in cui un termine può apparire prima di essere escluso; filtra i termini troppo frequenti o generici. \\
-\end{tabular}
-\caption{Principali parametri del \texttt{CountVectorizer}.}
-\end{table}
+\[
+W_{x,c} = \left\| \mathrm{tf}_{x,c} \right\| \times 
+\log \!\left( 1 + \frac{A}{f_x} \right)
+\]
 
-\subsection{Cosa si può migliorare}
-Discutere criticità note, possibili ottimizzazioni della pipeline e idee per estensioni future di BERTopic nel progetto.
+dove:
+\begin{itemize}
+    \item \( W_{x, c} \) è il peso del termine \( x\) nella classe \( c \);
+    \item \( \mathrm{tf}_{x,c} \) è la frequenza del termine \( x \) nella classe \( c \);
+    \item \( f_x \) è la frequenza totale del termine \( x \) considerando tutte le classi;
+    \item \( A \) rappresenta il numero medio di parole per classe. 
+\end{itemize}
+Il termine \( \left\| \mathrm{tf}_{x,c} \right\| \) indica la normalizzazione della frequenza all'interno del topic, mentre il fattore 
+\(\log \!\left( 1 + \tfrac{A}{f_x} \right)\) riduce il peso dei termini comuni tra le classi, privilegiando invece quelli che si presentano frequentemente in una sola classe.  
+Questo consente di ottenere una rappresentazione più discriminante e stabile dei topic rispetto alla versione standard del TF-IDF, 
+in quanto la rarità viene calcolata rispetto ai topic anziché rispetto ai singoli documenti.
+
+\subsubsection{Come viene usato il peso}
+Per ciascun topic \(c\), BERTopic ordina i termini in base al peso c-TF-IDF in ordine decrescente e produce una lista di coppie \textit{termine}-\textit{peso}. Tale lista è accessibile tramite il metodo \texttt{topic\_model.get\_topic(topic\_id)}.\footnote{\url{https://maartengr.github.io/BERTopic/api/bertopic.html\#bertopic._bertopic.BERTopic.get_topic}}
+
+\noindent Il framework utilizza inoltre le prime parole più pesanti per generare un nome sintetico del topic, consultabile con \texttt{topic\_model.get\_topic\_info()}.
+\subsection{Maximal Marginal Relevance (MMR)}
+c-TF-IDF è una tecnica basata esclusivamente sulla rilevanza statistica e quindi tende spesso a selezionare termini ridondanti o molto simili tra loro. Ciò accade perché le parole semanticamente affini come “scientist”, “scientists”, “science” condividono contesti lessicali simili e presentano valori di peso elevati, riducendo la capacità discriminativa dell’etichetta del topic.
+
+Per ovviare a questo problema, BERTopic può impiegare un meccanismo chiamato \textbf{Maximal Marginal Relevance (MMR)}. L’obiettivo di MMR è bilanciare la \textit{rilevanza} di un termine rispetto al topic con la sua \textit{novità} rispetto ai termini già selezionati, ottenendo così una rappresentazione più informativa e diversificata.
+
+MMR seleziona iterativamente i termini $D_i$ che massimizzano la seguente funzione:
+
+\[
+\text{MMR}(D_i) = \arg\max_{D_i \in R \setminus S}
+\Big[
+\lambda \cdot \text{Rel}(D_i, Q)
+- (1 - \lambda) \cdot \max_{D_j \in S} \text{Sim}(D_i, D_j)
+\Big]
+\]
+
+dove:
+\begin{itemize}
+    \item $R$ è l’insieme dei candidati termini,
+    \item $S$ è l’insieme dei termini già selezionati,
+    \item $\text{Rel}(D_i, Q)$ misura la rilevanza del termine $D_i$ rispetto al topic $Q$ (spesso basata sulla similarità coseno con il vettore medio del topic),
+    \item $\text{Sim}(D_i, D_j)$ rappresenta la similarità semantica tra due termini,
+    \item $\lambda \in [0,1]$ è un parametro di bilanciamento tra rilevanza e diversità.
+\end{itemize}
+
+Un valore di $\lambda$ elevato privilegia la rilevanza (selezionando termini molto centrali ma potenzialmente ridondanti), mentre un valore più basso favorisce la diversità semantica, producendo etichette più varie e descrittive. In pratica, valori compresi tra $0.5$ e $0.7$ risultano un buon compromesso nella maggior parte dei casi, specialmente in domini con linguaggio ripetitivo come gli annunci di lavoro.
+
+In BERTopic, l’algoritmo MMR viene applicato alla rappresentazione finale dei topic per scegliere le parole chiave che ne definiscono il nome. Ciò consente di ottenere etichette più leggibili e significative, riducendo la presenza di lemmi sinonimici o morfologicamente simili e migliorando la capacità interpretativa del modello.
+\noindent Vediamo adesso come abbiamo deciso di impostare il framework per fare \textit{topic modeling} su annunci di lavoro.

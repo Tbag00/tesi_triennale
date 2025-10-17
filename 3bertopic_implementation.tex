@@ -63,7 +63,7 @@ In questo modo si ottiene un embedding unico di dimensione doppia rispetto l'out
 Per attuare questo approccio serve inoltre una strategia di segmentazione degli annunci che soddisfi al contempo \textbf{coerenza semantica} e criteri di lunghezza: il segmento non può essere troppo corto, altrimenti SBERT non ha il contesto per estrarre topic singnificativi, e non può ovviamente superare la lunghezza massima consentita. Approfondiamo questo aspetto nel capitolo \textbf{Pre-processing}.
 
 \section{Dimensionality Reduction}
-Si osservi come per valori ridotti di \texttt{n\_neighbors} la proiezione UMAP mantenga dettagli locali (curve delle zanne o delle zampe), ma perda la forma complessiva del mammut; all'aumentare del parametro la sagoma globale diventa riconoscibile, a scapito delle piccole variazioni geometriche. In modo analogo, sperimentare con valori come 15, 50 o 100 nel nostro dataset permette di calibrare il livello di granularità dei topic: valori molto bassi frammentano in gruppi minuti, mentre impostazioni alte tendono a fondere i cluster semantici più affini; una scelta intermedia (ad esempio \texttt{n\_neighbors} = 50) offre un equilibrio adeguato tra dettaglio locale e coerenza globale.
+\noindent Il parametro piùimportante di UMAP è \emph{n neighbors}. I valori con cui abbiamo sperimentato sono: 5, 15, 25, 35, 50 e 100 per calibrare il livello di granularità dei topic: valori molto bassi frammentano in gruppi minuti, mentre impostazioni alte tendono a fondere i cluster semantici più affini; una scelta intermedia (ad esempio \texttt{n\_neighbors} = 50) offre un equilibrio adeguato tra dettaglio locale e coerenza globale.
 
 Per giungere a questa scelta sono stati provati diversi set di iperparametri; riportiamo di seguito quelli usati per la configurazione finale, così da facilitarne la riproducibilità:
 
@@ -87,19 +87,22 @@ hdbscan_model = HDBSCAN(
 
 \begin{table}[H]
 \centering
-\footnotesize
-\begin{tabular}{rrrrrr}
+{\setlength{\tabcolsep}{4pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{rrrrrrr}
 \hline
-$n\_neighbors$ & $n\_topics$ & mean cluster size & std cluster size & topics $<100$ & topics $>500$ \\
+$n\_neighbors$ & $n\_topics$ & mean cluster size & std cluster size & topics $<100$ & topics $>500$ & total docs assigned \\
 \hline
-15  & 15 & 208.87 & 267.01 & 8  & 2 \\
-50  & 61 & 224.98 & 294.64 & 25 & 8 \\
-60  & 62 & 197.81 & 254.00 & 26 & 6 \\
-70  & 58 & 208.09 & 242.64 & 22 & 4 \\
-100 & 2  & 2396.50 & 2090.91 & 0  & 2 \\
+5   & 20 & 180.50 & 180.42 & 9 & 2 & 3610 \\
+15  & 15 & 208.87 & 267.01 & 8 & 2 & 3133 \\
+25  & 12 & 259.42 & 237.23 & 4 & 2 & 3113 \\
+35  & 12 & 235.33 & 176.29 & 4 & 1 & 2824 \\
+50  & 11 & 286.36 & 248.59 & 3 & 1 & 3150 \\
+100 & 2  & 2396.50 & 2090.91 & 0 & 2 & 4793 \\
 \hline
 \end{tabular}
-\caption{Sintesi degli esperimenti al variare di $n\_neighbors$: numero di topic trovati, dimensione media e deviazione standard dei cluster, oltre al conteggio dei topic piccoli ($<100$ documenti) e molto grandi ($>500$ documenti).}
+}}
+\caption{Sintesi degli esperimenti al variare di $n\_neighbors$: numero di topic trovati, dimensione media e deviazione standard dei cluster, oltre al conteggio dei topic piccoli ($<100$ documenti), di quelli molto grandi ($>500$ documenti) e al totale di documenti assegnati.}
 \label{tab:n-neighbors-summary}
 \end{table}
 
@@ -195,3 +198,42 @@ Spingendosi ulteriormente verso valori molto alti (\texttt{min\_samples} = 60) s
 
 Nel complesso, la configurazione con \texttt{min\_samples} = 15 si è dimostrata la più bilanciata: 
 garantisce la formazione di cluster stabili, coerenti e sufficientemente dettagliati, risultando quindi la scelta più appropriata per il corpus di annunci di lavoro considerato.
+
+\subsection{CountVectorizer}
+
+\noindent La configurazione del vettorizzatore influenza fortemente la qualità dei topic risultanti. 
+Tra i principali parametri utilizzabili si distinguono:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{p{3cm} p{9cm}}
+\textbf{Parametro} & \textbf{Descrizione} \\
+\texttt{stop\_words} & Elenco di parole da escludere (articoli, preposizioni, ecc.). Può assumere valori come \texttt{'english'} o una lista personalizzata di termini. \\
+\texttt{ngram\_range} & Tuple che definisce la lunghezza minima e massima delle n-gram; ad esempio \texttt{(1, 2)} include sia unigrammi che bigrammi, consentendo di catturare espressioni come \textit{data analysis}. \\
+\texttt{min\_df} & Numero minimo di documenti (o frazione) in cui un termine deve apparire per essere incluso nel vocabolario; filtra i termini troppo rari. \\
+\texttt{max\_df} & Numero massimo di documenti (o frazione) in cui un termine può apparire prima di essere escluso; filtra i termini troppo frequenti o generici. \\
+\end{tabular}
+\caption{Principali parametri del \texttt{CountVectorizer}.}
+\end{table}
+
+\noindent Alle normali \emph{stop words} inglesi abbiamo aggiunto alcune specifiche che rispecchiano il gergo del nostro dataset:
+
+\begin{lstlisting}[language=Python]
+custom_stopwords = [
+    # anni e numeri
+    "2024", "2025", "2026", "19xx", "20xx",
+
+    # frasi burocratiche / pattern ricorrenti
+    "regular", "job", "regular job", [...]
+    # termini amministrativi o HR generici
+    "eligibility", "degree", "foreign", "equivalent",[...]
+    # altri pattern burocratici o poco informativi
+    "agency", "equipment", "reports", "dashboards", "hoc",
+    "solutions",
+    # forme sinonimiche o doppioni rumorosi
+    "equivalency years", "years", "regular job code", "employment type regular",
+    "type regular job", "employment type", "regular job",
+    # placeholder testuali
+    "institutional", "equivalency", "perform essential",
+]
+\end{lstlisting}

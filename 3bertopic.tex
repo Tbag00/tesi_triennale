@@ -23,7 +23,7 @@ i modelli principali consigliati nella documentazione\footnote{\url{https://maar
 Ci sono molti modelli SBERT pre-addestrati tra cui scegliere, la documentazione ufficiale nei suoi esempi usa spesso all-MiniLM-L6-v2 un modello estremamente leggero e veloce, però non sufficientemente preciso nel catturare sfumature semantiche complesse o relazioni a lungo raggio.
 paraphrase-MiniLM-L12-v2 e paraphrase-mpnet-base-v2, sono più accurati, ma più specializzati nel catturare relazioni di parafrasi, fra testi molto simili, sono inoltre inadatti a testi particolarmente lunghi come gli annunci di lavoro.
 \textbf{all-mpnet-base-v2}, invece, ha una alta \textbf{precisione semantica}, e si comporta bene con documenti di lunghezza \textbf{medio-lunga}.
-Ha però un limite di lunghezza di \textbf{512 token}, con token in questo contesto ci riferiamo all' unità base che usano i modelli sentence transformers, i token sono composti da una parola o da una frazione di essa.
+Ha però un limite di lunghezza di \textbf{512 token}. Con token in questo contesto ci riferiamo all' unità base che usano i modelli sentence transformers, composti da una parola o da una frazione di essa.
 Ecco alcune informazioni sulla lunghezza del nostro dataset (dopo la pulizia):
 \begin{figure}[H]
 \centering
@@ -55,13 +55,13 @@ max & 19470.00 & 2739.00 & 3753.00 \\
 \noindent Le prime opzioni che abbiamo considerato sono:
 \begin{enumerate}
     \item Affidarsi ad un modello con un limite di dimensione input più alto (ad esempio \textbf{all-roberta-long-v1})
-    \item Frammentare le descrizioni e fare il topic modeling in segmenti di quest ultime.
+    \item Frammentare le descrizioni e fare il topic modeling in segmenti di quest'ultime.
 \end{enumerate}
 Il vantaggio della prima opzione è che i modelli \textit{long-context}, mantengono attenzione tra termini distanti, permettendo di cogliere relazioni semantiche a lungo raggio, cosa impossibile se si divide il testo in \textit{chunk}.
 Non è però una caratteristica che abbiamo ritenuto significativa, data la natura del nostro \textit{dataset}, infatti i nostri paragrafi hanno natura scollegata, uno potrebbe parlare di competenze e un altro di mansioni, la coerenza globale è più importante in testi di natura \textbf{discorsiva}.
 Inoltre se la lunghezza del testo è grande è probabile che contenga più temi, un unico embedding rischia di mescolare \textbf{sezioni semanticamente diverse}, ottenendo topic più grossolani.
-La seconda opzione invece oltre che generare topic più \textbf{puliti} e \textbf{interpretabili}, consente di aumentare molto il numero di documenti in input, questo è un vantaggio per dataset esegui come il nostro.
-Però anche questo caso presenta delle criticità: non avremmo i topic relativi agli annunci, questi ultimi andrebbero aggregati a posteriori per ottenere una \textbf{distribuzione di topic per documento}. In più in questo modo, gli annunci più lunghi hanno \textbf{più peso}, semplicemente perché hanno più paragrafi, la situazione si complica ulteriormente se i documenti contengono paragrafi simili, questo creerebbe dei \textbf{cluster} artefatti e quindi topic che non rispecchiano la natura del dataset. Un altro problema è che con questo metodo il modello è completamente ignaro della struttura globale dell'annuncio.
+La seconda opzione invece, oltre che generare topic più \textbf{puliti} e \textbf{interpretabili}, consente di aumentare molto il numero di documenti in input e questo è un vantaggio per dataset esegui come il nostro.
+Però anche questo caso presenta delle criticità: non avremmo i topic relativi agli annunci come uniche entità, ma saranno relativi ai segmenti e andrebbero aggregati a posteriori per ottenere una \textbf{distribuzione di topic per annuncio}. In più in questo modo, gli annunci più lunghi avranno \textbf{più peso}, semplicemente perché hanno più paragrafi. La situazione si complica ulteriormente se i documenti contengono paragrafi simili, questo creerebbe dei \textbf{cluster} artefatti e quindi topic che non rispecchiano la natura del dataset. Un altro problema è che con questo metodo il modello è completamente ignaro della struttura globale dell'annuncio.
 Questo approccio è più attuabile per risolvere un problema di \textbf{classificazione}, non per il \textit{topic modeling}.\medskip
 
 \noindent La soluzione che abbiamo scelto è dunque quella di \textit{mean-max-pooling}.
@@ -76,20 +76,20 @@ Questo approccio è più attuabile per risolvere un problema di \textbf{classifi
     \item normalizzare nuovamente il vettore concatenato.
 \end{enumerate}
 
-In questo modo si ottiene un embedding unico di dimensione doppia rispetto l'output dell'embedder che cattura sia il \textbf{significato generale} dell'annuncio, sia le \textbf{feature salienti} dei singoli paragrafi: queste due componenti producono vettori più \textbf{discriminativi} e quindi più facilmente separabili nello spazio semantico.
+In questo modo si ottiene un embedding unico di dimensione doppia rispetto l'output dell'embedder che può catturare sia il \textbf{significato generale} dell'annuncio, sia le \textbf{feature salienti} dei singoli paragrafi: queste due componenti possono produrre vettori più \textbf{discriminativi} e quindi più facilmente separabili nello spazio semantico.
 
-Per attuare questo approccio serve inoltre una strategia di segmentazione degli annunci che soddisfi al contempo \textbf{coerenza semantica} e criteri di lunghezza: il segmento non può essere troppo corto, altrimenti SBERT non ha il contesto per estrarre topic, e non può ovviamente superare la lunghezza massima consentita. Approfondiamo questo aspetto nel capitolo \textbf{Pre-processing}.
+Per attuare questo approccio serve inoltre una strategia di segmentazione degli annunci che soddisfi al contempo \textbf{coerenza semantica} e criteri di lunghezza: il segmento non può essere troppo corto, altrimenti SBERT non ha il contesto per estrarre topic singnificativi, e non può ovviamente superare la lunghezza massima consentita. Approfondiamo questo aspetto nel capitolo \textbf{Pre-processing}.
 \subsection{Dimensionality Reduction}
-I vettori generati dall'embedder hanno dimensione 768, ciò potrebbe rendere difficile il \emph{clustering} per questo è importante introdurre nella pipeline un algoritmo di riduzione della dimensione.
+I vettori generati dall'embedder hanno dimensione originale 768 e ciò potrebbe rendere difficile il \emph{clustering}. Per questo è importante introdurre nella pipeline un algoritmo di riduzione della dimensione.
 L'idea di questi algoritmi è quella di ridurre la dimensione di un insieme di vettori preservandone la \textbf{struttura topologica locale}.
 Di default BERTopic usa \textbf{UMAP}\footnote{\url{https://maartengr.github.io/BERTopic/getting_started/dim_reduction/dim_reduction.html}} per questo compito poiché \emph{preserva sia la struttura locale, che quella globale degli spazi ad alte dimensioni}.
-UMAP lavora costruendo un \textit{grafo fuzzy locale}: ogni punto viene connesso ai suoi n\_neighbors più vicini e la connessione è pesata in base alla distanza. Questo grafo rappresenta la topologia locale dello spazio originale.
+UMAP lavora costruendo un \textit{grafo fuzzy locale}: ogni punto viene connesso ai suoi \texttt{n\_neighbors} più vicini e la connessione è pesata in base alla distanza. Questo grafo rappresenta la topologia locale dello spazio originale.
 UMAP cerca poi una rappresentazione a bassa dimensione che minimizzi la differenza tra il grafo originale e il grafo proiettato.
 
 L'obiettivo è mantenere la densità e la vicinanza dei punti simili, consentendo allo stesso tempo di contrarre regioni sparse.
 Questo bilanciamento consente di preservare la struttura locale pur comprimendo lo spazio globale.
-Vediamo più nel dettaglio questi punti:
-\subsubsection{fuzzy simplicial complex}
+Vediamo più nel dettaglio questi punti.
+\subsubsection{Fuzzy simplicial complex}
 Per costruire il grafo iniziale ad alta dimensionalità, \textbf{UMAP} crea una struttura chiamata \textit{fuzzy simplicial complex}. In pratica, si tratta di una rappresentazione di un grafo pesato, in cui i pesi degli archi rappresentano la \textbf{probabilità che due punti siano connessi}.
 
 Per determinare la connessione tra due punti, UMAP\footnote{\url{https://pair-code.github.io/understanding-umap/}} estende un \textbf{raggio locale} a partire da ciascun punto e collega i punti quando i rispettivi raggi si sovrappongono. La scelta di questo raggio è cruciale:
@@ -110,7 +110,6 @@ Infine, imponendo che ogni punto sia connesso almeno al proprio vicino più pros
 I due parametri più importanti di UMAP sono \texttt{n\_neighbors} e \texttt{min\_dist}, poiché regolano l'equilibrio tra struttura \textit{locale} e \textit{globale} nella proiezione finale.\footnote{\url{https://pair-code.github.io/understanding-umap/}}
 
 \paragraph{\texttt{n\_neighbors}.} Determina il numero di vicini utilizzato per costruire il grafo fuzzy iniziale. Valori bassi enfatizzano le relazioni locali, isolando micro-strutture anche molto sottili; valori alti favoriscono invece la coerenza complessiva, preservando maggiormente la geometria globale dell'insieme di punti.
-
 Per visualizzare l'effetto di \texttt{n\_neighbors} consideriamo la proiezione bidimensionale di un modello 3D campionato con 50\,000 punti. Le immagini mostrano come la struttura globale emerga gradualmente all'aumentare del numero di vicini, mentre i dettagli fini sono preservati soltanto per valori più bassi.
 
 \begin{figure}[H]

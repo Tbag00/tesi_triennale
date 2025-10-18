@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1760741028.93283 "main.aux" "main.bbl" "main" 1760741224.92546 0
+["bibtex main"] 1760742369.42842 "main.aux" "main.bbl" "main" 1760742374.9432 0
   "./bibliografia.bib" 1759849052.98581 971 fa1a2006e640a6246255abf4be8f1e60 ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/unsrt.bst" 1292289607 18030 1376b4b231b50c66211e47e42eda2875 ""
-  "main.aux" 1760741224.56285 23525 2bb402b1a125794a420a3f4dc581ca9a "pdflatex"
+  "main.aux" 1760742374.5802 23517 07e95eb4ed26fe250d59bc27a82e081a "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1760741219.526 "/home/tommaso/tesi/tesi_triennale/main.tex" "main.pdf" "main" 1760741224.92565 0
+["pdflatex"] 1760742369.55416 "/home/tommaso/tesi/tesi_triennale/main.tex" "main.pdf" "main" 1760742374.94354 0
   "/etc/texmf/web2c/texmf.cnf" 1759787235.72431 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/tommaso/tesi/tesi_triennale/main.tex" 1760714855.16571 568 fd41b08983a12538e1235a02c97a4a75 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -170,7 +170,7 @@
   "1introduzione.tex" 1760694118.03056 6458 3fb2d7fb482a51f567ceebac14deff4e ""
   "2datacleaning.tex" 1760694118.03056 39689 180180d146df9ba2a515c74af6cdc18c ""
   "3bertopic.tex" 1760740409.09818 26271 e182be0268e1fb15083542eb0be0f933 ""
-  "3bertopic_implementation.tex" 1760741219.2316 15617 85a8369197c83083a8ce92f9ec37feb3 ""
+  "3bertopic_implementation.tex" 1760742363.59376 15090 be5207a76db22174d3b3ad73f57199a2 ""
   "4risultatifinali.tex" 1759845917.98724 282 08544455c4889dea4367d9ffb1789ca4 ""
   "5conclusioni.tex" 1759843656.64098 99 000ac90a5fbc2ff3d865f1cea06a2d85 ""
   "dedica.tex" 1760282121.0224 941 87a5af4f900c8e4d2d76ebc051fe1e8e ""
@@ -194,19 +194,18 @@
   "img/BERTopic/umap/n_neighbours5.png" 1760612508.90346 44874 7496f234c08f0c652af16755b007a3b8 ""
   "img/BERTopic/umap/num_topics_per_neighbors.png" 1760741195.16301 109586 c88dcb75140d1c32cf106f1f8127aa3f ""
   "img/BERTopic/umap/umap_100.png" 1760645272.77197 58384 51a358f95bcb74720ed0dcd2afe8f963 ""
-  "img/BERTopic/umap/umap_15.png" 1760645309.07268 69017 4444bcc0115e759f29d87b924e3b9f94 ""
-  "img/BERTopic/umap/umap_50.png" 1760645332.44514 69962 ea9edd6f44ea1f6bbae75d0b840d25f6 ""
+  "img/BERTopic/umap/umap_50.png" 1760741947.90455 57144 3abc10b703717098568c3eac406d5a65 ""
   "img/cleaning/dendrogramma_pulito.png" 1760315927.02427 92848 f53d120487ffa167ea86c79b63de6b91 ""
   "img/cleaning/garbage_barplot.png" 1759938598.43393 74864 7a8d42cef198406cb4fa3070be528d12 ""
   "img/cleaning/gerarchia_half_cleaning.png" 1760314875.10127 70864 670bb3981983e76275f8df452f65ec7c ""
   "img/cleaning/header_metrics_comparison.png" 1760289574.96262 85888 50a4ba73f51ce18450e07356da9220c0 ""
   "img/logoDMI.jpg" 1759843595.4165 70611 ec95c56f2b831fb97fbeb316f4ef0ecf ""
   "img/logoUniPg.jpg" 1759843595.4125 158221 58b7fcc5f36773d17dbfeab4360b61ed ""
-  "main.aux" 1760741224.56285 23525 2bb402b1a125794a420a3f4dc581ca9a "pdflatex"
-  "main.bbl" 1760741029.0585 825 25732c2ba0296ad84f1ba50d175eec3a "bibtex main"
-  "main.out" 1760741224.56685 5269 134c1bef8aad84b79dc193bad0af72fc "pdflatex"
+  "main.aux" 1760742374.5802 23517 07e95eb4ed26fe250d59bc27a82e081a "pdflatex"
+  "main.bbl" 1760742369.54491 825 25732c2ba0296ad84f1ba50d175eec3a "bibtex main"
+  "main.out" 1760742374.5842 5269 134c1bef8aad84b79dc193bad0af72fc "pdflatex"
   "main.tex" 1760714855.16571 568 fd41b08983a12538e1235a02c97a4a75 ""
-  "main.toc" 1760741224.56685 3986 63c653241a1ebb2e3b345516b0e92142 "pdflatex"
+  "main.toc" 1760742374.5842 3986 d62fdae60568441bdc495f2d228ef7a1 "pdflatex"
   "ringraziamenti.tex" 1759843662.00866 262 c5dc02d863aa9391f02b8e56c6bdd7c1 ""
   "settings/frontmatter.tex" 1760282196.33432 973 ac8d722b2f79b93460c771f5be0ceb5e ""
   "settings/prelude.tex" 1760311450.89077 2112 10dc5e42bccf8e3351da1e9af7ee4732 ""

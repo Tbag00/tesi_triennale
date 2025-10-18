@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.6)  18 OCT 2025 00:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.6)  18 OCT 2025 01:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -536,98 +536,94 @@ Underfull \hbox (badness 10000) in paragraph at lines 4--4
 ] [28] [29] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 ) [30]
-<./img/BERTopic/umap/num_topics_per_neighbors.png, id=466, 505.89pt x 361.35pt>
+<./img/BERTopic/umap/num_topics_per_neighbors.png, id=465, 505.89pt x 361.35pt>
 File: ./img/BERTopic/umap/num_topics_per_neighbors.png Graphic file (type png)
 <use ./img/BERTopic/umap/num_topics_per_neighbors.png>
-Package pdftex.def Info: ./img/BERTopic/umap/num_topics_per_neighbors.png  used on input line 113.
+Package pdftex.def Info: ./img/BERTopic/umap/num_topics_per_neighbors.png  used on input line 111.
 (pdftex.def)             Requested size: 234.00238pt x 167.14381pt.
 
-Underfull \hbox (badness 1694) in paragraph at lines 114--114
+Underfull \hbox (badness 1694) in paragraph at lines 112--112
 []\T1/cmr/m/n/12 Figura 3.2: |Nu-me-ro di to-pic ge-ne-ra-ti da HDB-SCAN al va-ria-re di
  []
 
-[31]
-Overfull \hbox (17.6089pt too wide) in paragraph at lines 117--118
+
+Overfull \hbox (17.6089pt too wide) in paragraph at lines 115--116
 \T1/cmr/m/n/12 I plot in Fi-gu-ra [][]3.3[][] mo-stra-no la pro-ie-zio-ne bi-di-men-sio-na-le ge-ne-ra-ta da \T1/cmtt/m/n/12 BERTopic.
  []
 
-<./img/BERTopic/umap/umap_15.png, id=480, 643.40375pt x 644.4075pt>
-File: ./img/BERTopic/umap/umap_15.png Graphic file (type png)
-<use ./img/BERTopic/umap/umap_15.png>
-Package pdftex.def Info: ./img/BERTopic/umap/umap_15.png  used on input line 123.
-(pdftex.def)             Requested size: 124.80286pt x 124.99524pt.
-<./img/BERTopic/umap/umap_50.png, id=481, 595.22375pt x 594.22pt>
+[31 <./img/BERTopic/umap/num_topics_per_neighbors.png>]
+<./img/BERTopic/umap/umap_50.png, id=481, 609.27625pt x 609.27625pt>
 File: ./img/BERTopic/umap/umap_50.png Graphic file (type png)
 <use ./img/BERTopic/umap/umap_50.png>
-Package pdftex.def Info: ./img/BERTopic/umap/umap_50.png  used on input line 128.
-(pdftex.def)             Requested size: 124.80286pt x 124.59041pt.
+Package pdftex.def Info: ./img/BERTopic/umap/umap_50.png  used on input line 121.
+(pdftex.def)             Requested size: 191.10214pt x 191.1049pt.
 <./img/BERTopic/umap/umap_100.png, id=482, 647.41875pt x 646.415pt>
 File: ./img/BERTopic/umap/umap_100.png Graphic file (type png)
 <use ./img/BERTopic/umap/umap_100.png>
-Package pdftex.def Info: ./img/BERTopic/umap/umap_100.png  used on input line 133.
-(pdftex.def)             Requested size: 124.80286pt x 124.60541pt.
-[32 <./img/BERTopic/umap/num_topics_per_neighbors.png>]
-Overfull \hbox (50.55487pt too wide) in paragraph at lines 150--160
+Package pdftex.def Info: ./img/BERTopic/umap/umap_100.png  used on input line 126.
+(pdftex.def)             Requested size: 191.10214pt x 190.79927pt.
+ [32 <./img/BERTopic/umap/umap_50.png> <./img/BERTopic/umap/umap_100.png>]
+Overfull \hbox (50.55487pt too wide) in paragraph at lines 143--153
  [][] 
  []
 
-[33 <./img/BERTopic/umap/umap_15.png> <./img/BERTopic/umap/umap_50.png> <./img/BERTopic/umap/umap_100.png>]
-<./img/BERTopic/hdbscan/ms5.png, id=497, 1204.5pt x 752.8125pt>
+[33]
+<./img/BERTopic/hdbscan/ms5.png, id=496, 1204.5pt x 752.8125pt>
 File: ./img/BERTopic/hdbscan/ms5.png Graphic file (type png)
 <use ./img/BERTopic/hdbscan/ms5.png>
-Package pdftex.def Info: ./img/BERTopic/hdbscan/ms5.png  used on input line 177.
+Package pdftex.def Info: ./img/BERTopic/hdbscan/ms5.png  used on input line 170.
 (pdftex.def)             Requested size: 93.60214pt x 58.49168pt.
-<./img/BERTopic/hdbscan/ms15.png, id=498, 1204.5pt x 752.8125pt>
+<./img/BERTopic/hdbscan/ms15.png, id=497, 1204.5pt x 752.8125pt>
 File: ./img/BERTopic/hdbscan/ms15.png Graphic file (type png)
 <use ./img/BERTopic/hdbscan/ms15.png>
-Package pdftex.def Info: ./img/BERTopic/hdbscan/ms15.png  used on input line 182.
+Package pdftex.def Info: ./img/BERTopic/hdbscan/ms15.png  used on input line 175.
 (pdftex.def)             Requested size: 93.60214pt x 58.49168pt.
-<./img/BERTopic/hdbscan/ms30.png, id=499, 1204.5pt x 752.8125pt>
+<./img/BERTopic/hdbscan/ms30.png, id=498, 1204.5pt x 752.8125pt>
 File: ./img/BERTopic/hdbscan/ms30.png Graphic file (type png)
 <use ./img/BERTopic/hdbscan/ms30.png>
-Package pdftex.def Info: ./img/BERTopic/hdbscan/ms30.png  used on input line 187.
+Package pdftex.def Info: ./img/BERTopic/hdbscan/ms30.png  used on input line 180.
 (pdftex.def)             Requested size: 93.60214pt x 58.49168pt.
-<./img/BERTopic/hdbscan/ms_60.png, id=500, 1204.5pt x 752.8125pt>
+<./img/BERTopic/hdbscan/ms_60.png, id=499, 1204.5pt x 752.8125pt>
 File: ./img/BERTopic/hdbscan/ms_60.png Graphic file (type png)
 <use ./img/BERTopic/hdbscan/ms_60.png>
-Package pdftex.def Info: ./img/BERTopic/hdbscan/ms_60.png  used on input line 192.
+Package pdftex.def Info: ./img/BERTopic/hdbscan/ms_60.png  used on input line 185.
 (pdftex.def)             Requested size: 93.60214pt x 58.49168pt.
- [34] [35 <./img/BERTopic/hdbscan/ms5.png> <./img/BERTopic/hdbscan/ms15.png> <./img/BERTopic/hdbscan/ms30.png> <./img/BERTopic/hdbscan/ms_60.png>]
-Overfull \hbox (18.80371pt too wide) in paragraph at lines 229--230
+ [34 <./img/BERTopic/hdbscan/ms5.png> <./img/BERTopic/hdbscan/ms15.png> <./img/BERTopic/hdbscan/ms30.png> <./img/BERTopic/hdbscan/ms_60.png>]
+Overfull \hbox (18.80371pt too wide) in paragraph at lines 222--223
 [][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (18.80371pt too wide) in paragraph at lines 231--232
+Overfull \hbox (18.80371pt too wide) in paragraph at lines 224--225
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (173.86719pt too wide) in paragraph at lines 234--235
+Overfull \hbox (173.86719pt too wide) in paragraph at lines 227--228
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[36]
-Overfull \hbox (11.75537pt too wide) in paragraph at lines 235--236
+[35]
+Overfull \hbox (11.75537pt too wide) in paragraph at lines 228--229
 [][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (4.70703pt too wide) in paragraph at lines 237--238
+Overfull \hbox (4.70703pt too wide) in paragraph at lines 230--231
 [][][][][][][][][][][][][][][][][][][][] 
  []
 
-) (./2datacleaning.tex [37]
+) (./2datacleaning.tex [36]
 Capitolo 4.
-[38
+[37
 
 ]
-<./img/cleaning/garbage_barplot.png, id=552, 1003.75pt x 501.875pt>
+<./img/cleaning/garbage_barplot.png, id=545, 1003.75pt x 501.875pt>
 File: ./img/cleaning/garbage_barplot.png Graphic file (type png)
 <use ./img/cleaning/garbage_barplot.png>
 Package pdftex.def Info: ./img/cleaning/garbage_barplot.png  used on input line 30.
 (pdftex.def)             Requested size: 390.0pt x 195.00294pt.
- [39 <./img/cleaning/garbage_barplot.png>] [40] [41]
+ [38 <./img/cleaning/garbage_barplot.png>] [39] [40]
 Overfull \hbox (75.19043pt too wide) in paragraph at lines 103--104
 [][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
@@ -637,12 +633,12 @@ Overfull \hbox (96.33545pt too wide) in paragraph at lines 104--105
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[42]
+[41]
 Overfull \hbox (4.70703pt too wide) in paragraph at lines 129--130
 [][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[43]
+[42]
 Overfull \hbox (7.34187pt too wide) in paragraph at lines 161--162
 \T1/cmr/m/n/12 Per con-fi-gu-ra-re il mo-del-lo (e l'al-le-na-men-to), spa-Cy ri-chie-de un fi-le \T1/cmtt/m/n/12 config.cfg\T1/cmr/m/n/12 ,
  []
@@ -657,13 +653,13 @@ Underfull \hbox (badness 1735) in paragraph at lines 173--173
 \T1/cmtt/m/n/12 spacy.ngram_suggester.v1 \T1/cmr/m/n/12 e va-lu-ta tut-ti gli span fi-no a 20 to-ken
  []
 
-[44] [45] [46] [47]
-<./img/cleaning/header_metrics_comparison.png, id=669, 433.62pt x 289.08pt>
+[43] [44] [45] [46]
+<./img/cleaning/header_metrics_comparison.png, id=662, 433.62pt x 289.08pt>
 File: ./img/cleaning/header_metrics_comparison.png Graphic file (type png)
 <use ./img/cleaning/header_metrics_comparison.png>
 Package pdftex.def Info: ./img/cleaning/header_metrics_comparison.png  used on input line 287.
 (pdftex.def)             Requested size: 292.5pt x 195.0103pt.
- [48] [49 <./img/cleaning/header_metrics_comparison.png>] [50] [51] [52] [53] [54] [55]
+ [47] [48 <./img/cleaning/header_metrics_comparison.png>] [49] [50] [51] [52] [53] [54]
 Overfull \hbox (23.00285pt too wide) in paragraph at lines 507--509
 [][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
@@ -678,29 +674,29 @@ Overfull \hbox (28.10165pt too wide) in paragraph at lines 520--521
 [][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[56]
-<./img/cleaning/gerarchia_half_cleaning.png, id=787, 1054.94125pt x 498.86375pt>
+[55]
+<./img/cleaning/gerarchia_half_cleaning.png, id=780, 1054.94125pt x 498.86375pt>
 File: ./img/cleaning/gerarchia_half_cleaning.png Graphic file (type png)
 <use ./img/cleaning/gerarchia_half_cleaning.png>
 Package pdftex.def Info: ./img/cleaning/gerarchia_half_cleaning.png  used on input line 539.
 (pdftex.def)             Requested size: 390.0pt x 184.42445pt.
- [57] [58 <./img/cleaning/gerarchia_half_cleaning.png>]
-<./img/cleaning/dendrogramma_pulito.png, id=824, 1262.7175pt x 587.19376pt>
+ [56] [57 <./img/cleaning/gerarchia_half_cleaning.png>]
+<./img/cleaning/dendrogramma_pulito.png, id=817, 1262.7175pt x 587.19376pt>
 File: ./img/cleaning/dendrogramma_pulito.png Graphic file (type png)
 <use ./img/cleaning/dendrogramma_pulito.png>
 Package pdftex.def Info: ./img/cleaning/dendrogramma_pulito.png  used on input line 580.
 (pdftex.def)             Requested size: 390.0pt x 181.35619pt.
- [59 <./img/cleaning/dendrogramma_pulito.png>]) (./4risultatifinali.tex [60]
+ [58 <./img/cleaning/dendrogramma_pulito.png>]) (./4risultatifinali.tex [59]
 Capitolo 5.
-) (./5conclusioni.tex [61
+) (./5conclusioni.tex [60
 
 ]
 Capitolo 6.
-) (./main.bbl [62
+) (./main.bbl [61
 
-]) (./ringraziamenti.tex [63
+]) (./ringraziamenti.tex [62
 
-]) [64
+]) [63
 
 ] (./main.aux)
  ***********
@@ -711,18 +707,18 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 134C1BEF8AAD84B79DC193BAD0AF72FC;5269.
  ) 
 Here is how much of TeX's memory you used:
- 15299 strings out of 474222
- 244056 string characters out of 5748733
+ 15289 strings out of 474222
+ 243722 string characters out of 5748733
  1959975 words of memory out of 5000000
- 36947 multiletter control sequences out of 15000+600000
+ 36938 multiletter control sequences out of 15000+600000
  585185 words of font info for 97 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  80i,19n,82p,1246b,2100s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbi1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0700.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm2074.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on main.pdf (64 pages, 4751153 bytes).
+Output written on main.pdf (63 pages, 4678973 bytes).
 PDF statistics:
- 1090 PDF objects out of 1200 (max. 8388607)
- 894 compressed objects within 9 object streams
- 378 named destinations out of 1000 (max. 500000)
- 429 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1083 PDF objects out of 1200 (max. 8388607)
+ 890 compressed objects within 9 object streams
+ 377 named destinations out of 1000 (max. 500000)
+ 424 words of extra memory for PDF output out of 10000 (max. 10000000)
 

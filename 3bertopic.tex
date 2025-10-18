@@ -1,8 +1,7 @@
 \chapter{BERTopic}
-L'avvento dei moderni \emph{LLM} ha portato ad un'evoluzione del \textbf{NLP} (Natural Language Processing) con la conseguente nascita di nuovi framework e tecniche per le analisi più disparate.
-Il \emph{topic modeling} non è esente da questo fenomeno, in particolare i modelli basati su \textbf{transformers} (cioè modelli che convertono testo in embeddings dipendenti dal contesto) si sono rilevati particolarmente efficaci nell'\emph{NLP}.
-\textbf{Modelli preaddestrati} sono molto utilizzati perché permettono di creare rappresentazioni \textbf{accurate} e \textbf{rappresentative} di testi, potendo fare affidamento su dataset di training molto grandi e molto diversificati.
-In questo contesto BERTopic è un \textit{framework} al passo con il corrente stato dell'arte, che offre alcuni vantaggi rispetto a tecniche antecedenti, fra cui permette di catturare il \textbf{significato semantico} dei documenti (riconosce ad esempio i sinonimi). Per dataset eterogenei e rumorosi come gli annunci di lavoro, questa capacità di individuare strutture semantiche latenti rende BERTopic una scelta particolarmente vantaggiosa rispetto ai modelli tradizionali. Inoltre in BERTopic specificare il il numero di classi è \textbf{opzionale}.
+Come detto in precedenza l'avvento dei moderni \emph{LLM} ha portato ad un'evoluzione del \textbf{NLP} con la conseguente nascita di nuovi framework e tecniche per le analisi più disparate.
+Il \emph{topic modeling} non è esente da questo fenomeno, in particolare i modelli basati su \textbf{transformers} (cioè modelli che convertono testo in embeddings dipendenti dal contesto) si sono rilevati particolarmente rilevanti; tra essi risaltano i \textbf{modelli preaddestrati}, molto utilizzati perché permettono di creare rappresentazioni \textbf{accurate} e \textbf{informative} di testi, potendo fare affidamento su dataset di training molto grandi e diversificati.
+In questo contesto BERTopic è un \textit{framework} al passo con il corrente stato dell'arte, che offre alcuni vantaggi rispetto a tecniche antecedenti, fra cui permette di catturare il \textbf{significato semantico} dei documenti (riconosce ad esempio i sinonimi). Per dataset eterogenei e rumorosi come gli annunci di lavoro, questa capacità di individuare strutture semantiche latenti rende BERTopic una scelta particolarmente vantaggiosa rispetto ai modelli tradizionali. Un'altra importante caratteristica è la possibilità di \textbf{non specificare il numero delle classi} a priori, ma di ricavarlo automaticamente.
 Inoltre BERTopic è composto da più \textit{submodules} con funzioni diverse, il che permette un'alta personalizzazione.
 
 \section{Funzionalità}
@@ -13,6 +12,7 @@ All'interno di Bert Topic è possibile distinguere alcune funzionalità particol
 \item Clustering
 \item CountVectorizer
 \item c-TF-IDF
+\item Maximal Marginal Relevance
 \end{enumerate}
 
 BERTopic permette l'utilizzo di algoritmi diversi per ogni funzionalità, per personalizzare il proprio \emph{topic model}, ad esempio il clustering può essere effettuato da \emph{HDBSCAN} o da \emph{k-Means}.

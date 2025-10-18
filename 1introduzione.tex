@@ -17,63 +17,10 @@ Uno dei \textit{framework} che utilizza questi nuovi strumenti è \textbf{BERTop
 L'obiettivo dello studio è quello di applicare il \textit{framework} su un \textit{dataset} di \textbf{annunci di lavoro}, per poter capire quali sono le \textbf{requisiti}, \textbf{mansioni} e \textbf{competenze} più richieste nel mercato del lavoro in ambito di \textbf{Data Analytics}.
 Abbiamo deciso di struttuare l'analisi come segue:
 \begin{enumerate}
-    \item Stato dell'arte e raccoglimento dei dati: Nel primo capitolo discuteremo di uno studio che prima di noi ha affrontato il topic modeling nello stesso dominio e a partire da questo imposteremo il raccoglimento del \textit{dataset}, di cui ne discuteremo le caratteristiche.
-    \item BERTopic: Successivamente discuteremo della struttura del \textit{framework}, spiegandone le caratteristiche e analizzandone i moduli che lo compongono.
-    \item Implementazione: In questo capitolo vedremo come abbiamo parametrizzato la nostra implementazione di BERTopic in base alla natura del \textit{dataset} e agli obiettivi dello studio.
-    \item Pre-processing: Discuteremo di come è stato trattato il \textit{dataset} grezzo per renderlo utilizzabile dal \textit{framework} e per estrarre gli argomenti inerenti allo studio.
-    \item Risultati: Analizzeremo i risultati emersi dallo studio per discuterne le implicazioni principali.
-    \item Conclusioni: Discuteremo i passaggi più cruciali dello studio volgendo l'attenzione a possibili miglioramenti, punti critici e possibili sviluppi futuri.
+    \item Analisi preliminare e acquisizione dei dati: Il capitolo iniziale riprende uno studio che ha già affrontato il topic modeling nello stesso dominio e, a partire da esso, definisce il processo di raccolta del \textit{dataset}, illustrandone le peculiarità.
+    \item BERTopic: Il capitolo seguente illustra la struttura del \textit{framework}, ne mette in evidenza gli elementi distintivi e approfondisce i moduli che lo compongono.
+    \item Implementazione: Qui vengono motivate le scelte di parametrizzazione adottate per BERTopic in relazione alla natura del \textit{dataset} e agli obiettivi della ricerca.
+    \item Pre-processing: Questo capitolo dettaglia il trattamento del \textit{dataset} grezzo necessario a renderlo compatibile con il \textit{framework} e a estrarre gli argomenti pertinenti allo studio.
+    \item Risultati: La sezione esamina gli esiti ottenuti, ne discute le implicazioni e mette in risalto gli aspetti più significativi.
+    \item Conclusioni: L'ultimo capitolo sintetizza i passaggi decisivi dell'indagine, evidenziando possibili miglioramenti, criticità e sviluppi futuri.
 \end{enumerate}
-
-\section{Stato dell'arte}
-
-\textit{Almgerbi, De Mauro, Kahlawi, Poggioni} presentano uno studio longitudinale sull'evoluzione delle competenze richieste negli \textbf{annunci di lavoro in ambito Data Analytics} tra il 2019 e il 2023. 
-La loro ricerca mira a catturare le dinamiche temporali nella domanda di competenze applicando il topic modeling basato su \textbf{Latent Dirichlet Allocation (LDA)} a grandi corpora di annunci di lavoro online (Online Job Advertisements, OJA).
-
-\subsection{Obiettivi e motivazioni}
-Gli autori sottolineano come la rapida trasformazione digitale e la diffusione dei Big Data abbiano generato una crescente domanda di professionisti competenti in statistica, programmazione, tecnologie cloud e intelligenza artificiale.
-Tuttavia, la crescita dell'offerta formativa accademica e professionale non procede allo stesso ritmo delle esigenze dell'industria.
-Poiché ruoli come \textit{Data Scientist}, \textit{Business Analyst} e \textit{Big Data Engineer} presentano competenze sovrapposte, lo studio adotta il termine più ampio \textbf{Data Analytics} per includere tutti questi ambiti professionali.
-Gli annunci di lavoro online vengono quindi trattati come una fonte affidabile e in tempo reale per monitorare l'andamento del mercato del lavoro.
-
-\subsection{Novità nella letteratura}
-Sebbene numerosi studi abbiano applicato tecniche di text mining o topic modeling agli annunci di lavoro, questo lavoro è il \textbf{primo a condurre un'analisi longitudinale su più anni}.
-La letteratura precedente si è concentrata su settori specifici (ad esempio marketing o IT) oppure ha impiegato strumenti proprietari e corpora statici.
-La metodologia proposta offre invece un quadro replicabile per \textbf{monitorare l'evoluzione delle competenze nel tempo}, fornendo indicazioni operative per le risorse umane e per le politiche formative.
-
-\subsection{Metodologia}
-Lo studio segue un processo articolato in quattro fasi:
-\begin{enumerate}
-    \item \textbf{Raccolta dati:} gli annunci sono stati estratti da diversi siti web nel 2019 e nel 2023 utilizzando le stesse sei keyword (\textit{big data, data science, business intelligence, data mining, machine learning, data analytics}), ottenendo un dataset bilanciato di 16\,060 annunci (8\,030 per anno).
-    \item \textbf{Pre-processing:} accurata pulizia del testo (rimozione di HTML e punteggiatura, filtraggio di stopword e n-gram), stemming, esclusione dei testi non in lingua inglese o troppo brevi e costruzione del dizionario/corpus per il topic modeling.
-    \item \textbf{Topic modeling:} esecuzione di più run LDA con $k=5$--$20$ topic; il numero ottimale ($k=12$) è stato selezionato combinando punteggi di coerenza e valutazione qualitativa degli esperti.
-    \item \textbf{Analisi:} interpretazione dei topic, confronto longitudinale (2019 vs.\ 2023) e studio dell'evoluzione del vocabolario.
-\end{enumerate}
-
-\subsection{Risultati}
-Sono stati individuati dodici topic distinti:
-\textit{Financial Applications, Sales and Marketing Applications, Foundational Statistics, Cybersecurity Applications, Project Management, Business Intelligence, Databases, Scientific Research Applications, Cloud and Big Data Engineering, Machine Learning, Software Engineering, Senior Management.}
-
-\noindent L'analisi comparativa ha messo in evidenza alcune tendenze chiave:
-\begin{itemize}
-    \item \textbf{Crescente specializzazione settoriale:} l'aumento della domanda in finanza (+6\%) e marketing (+10\%) evidenzia il passaggio da ruoli generalisti ad analisti focalizzati su domini specifici.
-    \item \textbf{Dalle competenze teoriche a quelle applicative:} il calo di \textit{Foundational Statistics} (--13\%) e la crescita di \textit{Machine Learning} (+12\%) indicano una transizione verso competenze pratiche in ambito AI e NLP.
-    \item \textbf{Commoditizzazione dell'infrastruttura:} la diminuzione di richieste per \textit{Database} (--39\%) e \textit{Cloud Engineering} (--7\%) suggerisce l'impatto di automazione e servizi cloud sempre più user-friendly.
-    \item \textbf{Maggiore bisogno di software e governance:} l'incremento di \textit{Software Engineering} (+13\%) e \textit{Senior Management} (+8\%) segnala l'importanza crescente di capacità di leadership, governo dei processi e integrazione software.
-\end{itemize}
-
-Inoltre l'analisi delle frequenze (termini con più di 500 occorrenze) mostra un chiaro cambio tecnologico:
-\noindent \textbf{Termini in crescita:} \textit{Databricks} (+551\%), \textit{PyTorch} (+226\%), \textit{NLP} (+130\%), \textit{Modelling} (+129\%), \textit{GCP} (+114\%), a testimonianza del ruolo crescente di framework cloud e machine learning.
-\noindent \textbf{Termini in diminuzione:} \textit{Hadoop} (--50\%), \textit{Java} (--51\%), \textit{SSRS} (--61\%), \textit{CSS} (--51\%), che rappresentano il declino di tecnologie legacy orientate all'infrastruttura.
-
-\subsection{Conclusioni}
-Il paper mostra come il mercato del lavoro in ambito Data Analytics stia evolvendo verso ruoli \textbf{specializzati, guidati dall'AI e orientati al software}.
-Le competenze di leadership, governance e integrazione dei sistemi acquistano peso accanto alle competenze tecniche.
-Gli autori propongono inoltre una \textbf{metodologia longitudinale di topic modeling replicabile} applicabile anche ad altri domini professionali.
-Tra i limiti figurano il bias intrinseco degli annunci online e la rapida obsolescenza dei trend tecnologici.
-Per il futuro si suggerisce l'integrazione di ulteriori fonti (sondaggi, curricula formativi) per anticipare meglio le competenze emergenti.
-
-\subsection{Rilevanza per questo progetto}
-Questo studio fornisce le basi concettuali e metodologiche per il nostro lavoro:
-In primis stabilisce il topic modeling longitudinale basato su LDA come benchmark per il confronto con i metodi moderni basati su embedding come \textbf{BERTopic};
-conferma l'importanza di analizzare le \textbf{dinamiche temporali} nei corpora di annunci di lavoro e enfatizza la combinazione tra metriche quantitative di coerenza e interpretabilità umana, principio mantenuto nel nostro approccio tramite UMAP, HDBSCAN e probabilità di topic.

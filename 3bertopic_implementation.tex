@@ -62,135 +62,160 @@ In questo modo si ottiene un embedding unico di dimensione doppia rispetto l'out
 
 Per attuare questo approccio serve inoltre una strategia di segmentazione degli annunci che soddisfi al contempo \textbf{coerenza semantica} e criteri di lunghezza: il segmento non può essere troppo corto, altrimenti SBERT non ha il contesto per estrarre topic singnificativi, e non può ovviamente superare la lunghezza massima consentita. Approfondiamo questo aspetto nel capitolo \textbf{Pre-processing}.
 
-\section{Dimensionality Reduction}
-\noindent Il parametro piùimportante di UMAP è \emph{n neighbors}. I valori con cui abbiamo sperimentato sono: 5, 15, 25, 35, 50 e 100 per calibrare il livello di granularità dei topic: valori molto bassi frammentano in gruppi minuti, mentre impostazioni alte tendono a fondere i cluster semantici più affini; una scelta intermedia (ad esempio \texttt{n\_neighbors} = 50) offre un equilibrio adeguato tra dettaglio locale e coerenza globale.
+\subsection*{Tuning congiunto di UMAP e HDBSCAN}
+Poiché sia il parametro \texttt{n\_neighbors} di UMAP che il parametro \texttt{min\_samples} di HDBSCAN influiscono pesantemente sul bilanciamento tra struttura \textbf{locale} e \textbf{globale}, abbiamo deciso di testarli combinandoli in più modi:
+\[
+n\_neighbors \in \{15, 25, 35, 50\}, \qquad
+min\_samples \in \{1, 5, 10, 15, 20, 25, 30\}.
+\]
+L'obiettivo era individuare la combinazione che producesse il miglior equilibrio tra:
+\begin{enumerate}
+    \item numero di cluster generati (\emph{n\_clusters}), indice della granularità semantica del modello;
+    \item percentuale di punti marcati come rumore (\emph{noise\_\%}), legata alla severità della densità richiesta da HDBSCAN;
+    \item probabilità media di appartenenza ai topic (\emph{mean\_topic\_prob}), che misura la coerenza semantica interna dei cluster.
+\end{enumerate}
 
-Per giungere a questa scelta sono stati provati diversi set di iperparametri; riportiamo di seguito quelli usati per la configurazione finale, così da facilitarne la riproducibilità:
+Per riproducibilità segnaliamo anche gli altri iperparametri dei due modelli (Figura~\ref{fig:umap-hdbscan-config}): l’impostazione \texttt{min\_dist = 0.1} mantiene gli embedding separabili quel tanto che basta da generare cluster ben delineati senza collasso delle regioni a bassa densità.
 
+\begin{figure}[H]
+\centering
 \begin{lstlisting}[language=Python]
 umap_model = UMAP(
-    n_neighbors=n,
     n_components=10,
-    min_dist=0.0,
-    metric="cosine",
-    random_state=1,
+    min_dist=0.1,
+    metric='euclidean',
+    random_state=1
 )
 hdbscan_model = HDBSCAN(
-    min_cluster_size=50,
-    min_samples=15,
-    metric="euclidean",
-    cluster_selection_method="eom",
+    min_cluster_size=25,
+    metric='euclidean',
+    cluster_selection_method='eom',
     prediction_data=True,
-    cluster_selection_epsilon=0.1,
+    cluster_selection_epsilon=0
 )
 \end{lstlisting}
+\caption{Configurazione utilizzata per UMAP e HDBSCAN durante il tuning intermedio. L’impostazione \texttt{min\_dist = 0.1} preserva la separabilità degli embedding evitando il collasso osservato con valori più bassi.}
+\label{fig:umap-hdbscan-config}
+\end{figure}
+
+\noindent
+I risultati principali sono riassunti nella Tabella~\ref{tab:tuning_umap_hdbscan}.
 
 \begin{table}[H]
 \centering
-{\setlength{\tabcolsep}{4pt}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{rrrrrrr}
-\hline
-$n\_neighbors$ & $n\_topics$ & mean cluster size & std cluster size & topics $<100$ & topics $>500$ & total docs assigned \\
-\hline
-5   & 20 & 180.50 & 180.42 & 9 & 2 & 3610 \\
-15  & 15 & 208.87 & 267.01 & 8 & 2 & 3133 \\
-25  & 12 & 259.42 & 237.23 & 4 & 2 & 3113 \\
-35  & 12 & 235.33 & 176.29 & 4 & 1 & 2824 \\
-50  & 11 & 286.36 & 248.59 & 3 & 1 & 3150 \\
-100 & 2  & 2396.50 & 2090.91 & 0 & 2 & 4793 \\
-\hline
+\caption{Risultati del tuning congiunto UMAP–HDBSCAN. Rimosse alcune righe per brevità}
+\label{tab:tuning_umap_hdbscan}
+\begin{tabular}{ccccc}
+\textbf{n\_neighbors} & \textbf{min\_samples} & \textbf{n\_clusters} & \textbf{noise [\%]} & \textbf{mean\_topic\_prob} \\
+15 & 1  & 47 & 40.23 & 0.560 \\
+15 & 10 & 27 & 58.05 & 0.527 \\
+15 & 15 & 22 & 53.89 & 0.483 \\
+25 & 5  & 2  & 2.00  & 0.886 \\
+25 & 10 & 25 & 48.37 & 0.469 \\
+25 & 20 & 2  & 5.81  & 0.826 \\
+35 & 1  & 43 & 38.55 & 0.543 \\
+35 & 10 & 22 & 49.65 & 0.466 \\
+35 & 15 & 7  & \textbf{22.77} & \textbf{0.538} \\
+50 & 10 & 21 & 56.28 & 0.482 \\
+50 & 15 & 14 & 52.04 & 0.469 \\
 \end{tabular}
-}}
-\caption{Sintesi degli esperimenti al variare di $n\_neighbors$: numero di topic trovati, dimensione media e deviazione standard dei cluster, oltre al conteggio dei topic piccoli ($<100$ documenti), di quelli molto grandi ($>500$ documenti) e al totale di documenti assegnati.}
-\label{tab:n-neighbors-summary}
 \end{table}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.6\textwidth]{BERTopic/umap/num_topics_per_neighbors.png}
-\caption{Numero di topic generati da HDBSCAN al variare di $n\_neighbors$: la scelta intermedia ($n\_neighbors=50$) massimizza la granularità senza collassare in pochi cluster.}
-\label{fig:num-topics-per-neighbors}
-\end{figure}
-\noindent I plot in Figura~\ref{fig:umap-neighbors-comparison} mostrano la proiezione bidimensionale generata da \texttt{BERTopic.\allowbreak visualize\_documents()} per tre configurazioni distinte. Con \texttt{n\_neighbors} = 15 UMAP costruisce un grafo molto \textbf{frammentato}: le connessioni tra i documenti sono deboli, molti punti rimangono isolati e HDBSCAN li etichetta come \textit{outlier}, generando quindi un topic \texttt{-1} (il topic dove vengono inseriti i documenti di cui si è incerti) estremamente popoloso (2224 documenti). All'estremo opposto (\texttt{n\_neighbors} = 100) il grafo è troppo \textbf{compatto}: le relazioni globali dominano e i topic tendono a fondersi. Con \texttt{n\_neighbors} = 50, invece, i cluster si addensano in regioni coerenti, evidenziando macro-categorie professionali distinte (marketing, cybersecurity, biomedical engineering, \emph{etc.}). L'incrocio tra indicatori numerici e analisi visiva conferma quindi \texttt{n\_neighbors} = 50 come valore finale.
+\noindent
+Dalla tabella emergono alcune tendenze chiare:
+\begin{enumerate}
+    \item All'aumentare di \texttt{min\_samples}, il numero di cluster decresce, segno di una maggiore severità nella definizione della densità locale, come previsto dal comportamento teorico di HDBSCAN.
+    \item Il rumore cresce progressivamente da circa 40\% fino a 55\%, indicando che i punti periferici vengono espulsi in modo coerente con la maggiore compattezza richiesta dai cluster.
+    \item La probabilità media di appartenenza ai topic mostra un andamento decrescente, passando da valori intorno a 0.55 per configurazioni più permissive fino a circa 0.43 per modelli più restrittivi.
+\end{enumerate}
 
-\begin{figure}[H]
-\centering
-\begin{subfigure}{0.49\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{BERTopic/umap/umap_50.png}
-    \caption{$n\_neighbors = 50$}
-\end{subfigure}\hfill
-\begin{subfigure}{0.49\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{BERTopic/umap/umap_100.png}
-    \caption{$n\_neighbors = 100$}
-\end{subfigure}
-\caption{Proiezioni generate da \texttt{BERTopic.\allowbreak visualize\_documents()}: i punti (embedding ridotti a 2 dimensioni) sono colorati in base al topic. Confronto tra \texttt{n\_neighbors} pari a 50 e 100.}
-\label{fig:umap-neighbors-comparison}
-\end{figure}
+\noindent
+Le configurazioni con \texttt{n\_neighbors = 25} presentano valori anomali (solo due cluster con \emph{mean\_topic\_prob} superiore a 0.8): in questi casi, UMAP ha compattato eccessivamente lo spazio delle rappresentazioni, portando HDBSCAN a fondere quasi tutti i punti in pochissimi cluster molto densi. Tali risultati, pur mostrando coerenza interna elevata, non sono semanticamente informativi e vengono scartati.
 
-\noindent Abbiamo fissato \texttt{min\_dist} a $0.0$ poiché l'algoritmo di \emph{clustering} (HDBSCAN) restituisce risultati migliori con cluster densi e ben separati: eventuali regioni vuote verrebbero classificate come outlier e assegnate al topic ``spazzatura'' (\texttt{-1}). Mantenere gli embedding compatti riduce la formazione di tali zone.
+\paragraph{Analisi comparativa.}
+Le configurazioni con \texttt{n\_neighbors = 15} producono un numero elevato di cluster (fino a 47), ma con livelli di rumore superiori al 50\%, sintomo di eccessiva frammentazione.  
+Al contrario, \texttt{n\_neighbors = 50} genera cluster più ampi e meno granulari, ma anche un leggero aumento del rumore, dovuto alla perdita di dettaglio nella struttura locale.
+Abbiamo dunque deciso di fare un altro tentativo restringendo però il dominio dei valori:
 
-\section{Clustering}
-Abbiamo però introdotto un parametro \texttt{min\_samples}: al suo crescere aumenta la \texttt{core\_distance} media e con essa i punti considerati rarefatti.
-Quindi più è alto \texttt{min\_samples}, più embedding verranno considerati come \textit{rumore}.
-Come per \texttt{n\_neighbors}, mostriamo qui dei confronti con diversi valori di \texttt{min\_samples}:
+\[
+n\_neighbors \in \{30, 35, 40 ,45, 50\}, \qquad
+min\_samples \in \{10, 15, 20, 25, 30\}.
+\]
+
+\noindent
+La Tabella~\ref{tab:tuning_seconda_iterazione} riporta i principali risultati ottenuti.
 
 \begin{table}[H]
 \centering
-\footnotesize
-\begin{tabular}{lrrrrrrr}
-\hline
-min\_samples & n\_topics & noise \% & mean size & median size & max size & top topic \% & outliers \\
-\hline
-5  & 12 & 42.28 & 257.67 & 190.0 & 882  & 28.53  & 2265 \\
-15 & 61 & 45.88 & 224.98 & 131.0 & 1581 & 11.52 & 11635 \\
-30 & 10 & 39.69 & 323.10 & 209.0 & 886  & 27.42  & 2126 \\
-60 & 2  & 14.80 & 2282.00 & 2282.0 & 3699 & 81.05  & 793  \\
-\hline
+\caption{Risultati della seconda iterazione di tuning congiunto UMAP–HDBSCAN.}
+\label{tab:tuning_seconda_iterazione}
+\begin{tabular}{ccccc}
+\textbf{n\_neighbors} & \textbf{min\_samples} & \textbf{n\_clusters} & \textbf{noise [\%]} & \textbf{mean\_topic\_prob} \\
+30 & 10 & 24 & 51.91 & 0.490 \\
+30 & 15 & 15 & 49.52 & 0.486 \\
+35 & 10 & 22 & 49.65 & 0.466 \\
+35 & 15 & 7  & 22.77 & 0.538 \\
+40 & 10 & 22 & 49.97 & 0.488 \\
+40 & 15 & 19 & 55.03 & 0.474 \\
+45 & 15 & 18 & 54.38 & 0.451 \\
+50 & 10 & 21 & 56.28 & 0.482 \\
+50 & 15 & 14 & 52.04 & 0.469 \\
 \end{tabular}
-\caption{Metriche chiave al variare di \texttt{min\_samples}: numero di topic (n\_topics), percentuale di rumore (noise), statistiche di dimensione dei cluster, quota del topic principale e conteggio degli outlier.}
-\label{tab:min-samples-summary}
 \end{table}
-Per valori molto bassi (\texttt{min\_samples} = 5) l'algoritmo tende a frammentare eccessivamente il corpus, generando numerosi micro-cluster spesso composti da pochi paragrafi. 
-Sebbene questa impostazione aumenti il livello di dettaglio, i topic risultano meno stabili e semanticamente meno coerenti.
 
-Aumentando il parametro a valori intermedi (\texttt{min\_samples} = 15) si ottiene un equilibrio tra granularità e stabilità. 
-I cluster formati risultano sufficientemente omogenei e interpretabili, mantenendo al contempo un numero di topic adeguato per una lettura tematica fine del corpus. 
-Questo valore rappresenta il compromesso ottimale tra dettaglio informativo e robustezza del clustering.
+\noindent
+I risultati mostrano un comportamento regolare e coerente con la teoria della densità:
+l’aumento del parametro \texttt{min\_samples} porta, in modo sistematico,
+a una diminuzione del numero di cluster e a un incremento del rumore,
+mentre la \emph{mean topic probability} rimane compresa in un intervallo stabile
+(0.46–0.49), con valori più alti in corrispondenza di configurazioni più compatte.
 
-Con valori più elevati (\texttt{min\_samples} = 30) l’algoritmo diventa più selettivo: la quantità di rumore aumenta e alcuni cluster tendono a fondersi, riducendo la capacità di distinguere tematiche affini ma distinte. 
-Spingendosi ulteriormente verso valori molto alti (\texttt{min\_samples} = 60) si osserva un drastico calo del numero di cluster e un incremento marcato dei punti etichettati come rumore, con il rischio di ottenere pochi macro-temi troppo generici.
+\paragraph{Analisi comparativa.}
+Si osserva come valori di \texttt{n\_neighbors} superiori a 40 tendano a
+compattare eccessivamente lo spazio latente, portando HDBSCAN a fondere
+i sottotemi in pochi cluster di grandi dimensioni.
+Al contrario, valori più bassi (intorno a 30–35) preservano una
+struttura locale più dettagliata, permettendo di identificare un numero
+maggiore di argomenti distinti con un livello di rumore ancora accettabile.
 
-\begin{figure}[H]
-\centering
-\begin{subfigure}{0.24\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{BERTopic/hdbscan/ms5.png}
-    \caption{\texttt{min\_samples} = 5}
-\end{subfigure}\hfill
-\begin{subfigure}{0.24\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{BERTopic/hdbscan/ms15.png}
-    \caption{\texttt{min\_samples} = 15}
-\end{subfigure}\hfill
-\begin{subfigure}{0.24\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{BERTopic/hdbscan/ms30.png}
-    \caption{\texttt{min\_samples} = 30}
-\end{subfigure}\hfill
-\begin{subfigure}{0.24\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{BERTopic/hdbscan/ms_60.png}
-    \caption{\texttt{min\_samples} = 60}
-\end{subfigure}
-\caption{Effetto di \texttt{min\_samples} sulla distribuzione dei topic: visualizzazioni prodotte da \texttt{BERTopic.visualize\_documents()} in configurazioni crescenti del parametro.}
-\label{fig:min-samples-umap}
-\end{figure}
+La configurazione
+\[
+n\_neighbors = 30, \quad min\_samples = 10
+\]
+ha prodotto $24$ cluster con una percentuale di rumore del $51.9\%$
+e una \emph{mean topic probability} di $0.49$,
+rappresentando così il miglior compromesso fra granularità e stabilità.
+Questa combinazione consente di ottenere una rappresentazione più articolata
+dei contenuti semantici del corpus, mantenendo al contempo una coerenza interna adeguata.
 
-Nel complesso, la configurazione con \texttt{min\_samples} = 15 si è dimostrata la più bilanciata: 
-garantisce la formazione di cluster stabili, coerenti e sufficientemente dettagliati, risultando quindi la scelta più appropriata per il corpus di annunci di lavoro considerato.
+\paragraph{Confronto con la prima iterazione.}
+Rispetto alla prima esplorazione, in cui la combinazione
+$n\_neighbors = 35$, $min\_samples = 15$ aveva prodotto solo $7$ cluster
+ad alta coesione (rumore 22\%),
+questa seconda iterazione mostra come una lieve riduzione di
+\texttt{min\_samples} e di \texttt{n\_neighbors} permetta di recuperare
+una maggiore granularità tematica senza compromettere in modo significativo
+la qualità dei cluster.
+In altre parole, la nuova configurazione genera topic più numerosi
+ma ancora interpretabili e semanticamente coerenti.
+
+\paragraph{Scelta finale.}
+Per l’analisi definitiva dei risultati si è quindi adottata la seguente configurazione:
+\[
+\boxed{
+n\_neighbors = 30, \quad min\_samples = 10, \quad min\_dist = 0.1, \quad metric = \text{euclidean}.
+}
+\]
+Questi valori offrono un equilibrio ottimale fra livello di dettaglio dei topic
+e stabilità del modello, evitando sia la frammentazione eccessiva,
+sia il collasso dei cluster osservato in configurazioni più estreme.
+
+\paragraph{Osservazione finale.}
+L’allineamento delle metriche tra UMAP e HDBSCAN (\texttt{euclidean}) e l’introduzione di un valore di \texttt{min\_dist = 0.1}
+si sono rivelati determinanti per ottenere risultati stabili e coerenti con la teoria della densità.
+Queste modifiche hanno eliminato i fenomeni di ``collasso dello spazio'' osservati nelle run precedenti
+(\emph{min\_dist = 0.0}), restituendo una distribuzione più realistica dei punti e un comportamento regolare
+del modello di clustering.
 
 \subsection{CountVectorizer}
 

@@ -1,56 +1,53 @@
 \babel@toc {italian}{}\relax 
 \babel@toc {italian}{}\relax 
 \contentsline {chapter}{\numberline {1}Introduzione}{5}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Cos'è il Topic Modeling}{5}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Stato dell'arte}{5}{section.1.2}%
-\contentsline {subsection}{\numberline {1.2.1}Obiettivi e motivazioni}{5}{subsection.1.2.1}%
-\contentsline {subsection}{\numberline {1.2.2}Novità nella letteratura}{6}{subsection.1.2.2}%
-\contentsline {subsection}{\numberline {1.2.3}Metodologia}{6}{subsection.1.2.3}%
-\contentsline {subsection}{\numberline {1.2.4}Risultati}{7}{subsection.1.2.4}%
-\contentsline {subsection}{\numberline {1.2.5}Conclusioni}{8}{subsection.1.2.5}%
-\contentsline {subsection}{\numberline {1.2.6}Rilevanza per questo progetto}{8}{subsection.1.2.6}%
-\contentsline {chapter}{\numberline {2}BERTopic}{9}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Funzionalità}{10}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}Embedding}{10}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}Dimensionality Reduction}{12}{subsection.2.1.2}%
-\contentsline {subsubsection}{Fuzzy simplicial complex}{12}{section*.3}%
-\contentsline {subsubsection}{Parametri}{13}{section*.5}%
-\contentsline {paragraph}{\texttt {n\_neighbors}.}{14}{section*.6}%
-\contentsline {paragraph}{\texttt {min\_dist}}{15}{section*.8}%
-\contentsline {subsection}{\numberline {2.1.3}Clustering}{15}{subsection.2.1.3}%
-\contentsline {subsection}{\numberline {2.1.4}CountVectorizer}{22}{subsection.2.1.4}%
-\contentsline {subsection}{\numberline {2.1.5}c-TF-IDF}{23}{subsection.2.1.5}%
-\contentsline {subsubsection}{Come viene usato il peso}{24}{section*.20}%
-\contentsline {subsection}{\numberline {2.1.6}Maximal Marginal Relevance (MMR)}{24}{subsection.2.1.6}%
-\contentsline {chapter}{\numberline {3}Implementazione di BERTopic}{26}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Embedding}{26}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Mean-max pooling}{28}{subsection.3.1.1}%
-\contentsline {paragraph}{Analisi comparativa.}{32}{section*.25}%
-\contentsline {paragraph}{Analisi comparativa.}{33}{section*.27}%
-\contentsline {paragraph}{Confronto con la prima iterazione.}{33}{section*.28}%
-\contentsline {paragraph}{Scelta finale.}{34}{section*.29}%
-\contentsline {paragraph}{Osservazione finale.}{34}{section*.30}%
-\contentsline {subsection}{\numberline {3.1.2}CountVectorizer}{34}{subsection.3.1.2}%
-\contentsline {chapter}{\numberline {4}Data Cleaning}{37}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Perché il Data Cleaning è necessario}{37}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Divisione in paragrafi}{40}{section.4.2}%
-\contentsline {subsubsection}{Riconoscere le intestazioni}{41}{section*.34}%
-\contentsline {subsection}{\numberline {4.2.1}Spacy}{41}{subsection.4.2.1}%
-\contentsline {subsubsection}{Suggester}{43}{section*.35}%
-\contentsline {subsubsection}{Tok2Vec}{43}{section*.37}%
-\contentsline {subsubsection}{Reducer}{45}{section*.40}%
-\contentsline {subsubsection}{Scorer}{46}{section*.42}%
-\contentsline {subsubsection}{Allenamento}{46}{section*.44}%
-\contentsline {subsection}{\numberline {4.2.2}Valutazione del modello}{48}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Fallback}{48}{subsection.4.2.3}%
-\contentsline {section}{\numberline {4.3}Classificazione paragrafi}{50}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Etichettatura}{50}{subsection.4.3.1}%
-\contentsline {subsubsection}{Allenamento}{53}{section*.48}%
-\contentsline {subsubsection}{Strategia di rimozione}{55}{section*.52}%
-\contentsline {section}{\numberline {4.4}Altre strategie di data cleaning usate}{56}{section.4.4}%
-\contentsline {subsubsection}{Pulizia tramite NER}{57}{section*.55}%
-\contentsline {subsubsection}{Risultato finale}{58}{section*.57}%
-\contentsline {section}{\numberline {4.5}Possibili miglioramenti}{59}{section.4.5}%
-\contentsline {chapter}{\numberline {5}Risultati finali}{60}{chapter.5}%
-\contentsline {chapter}{\numberline {6}Conclusioni}{61}{chapter.6}%
-\contentsline {chapter}{Ringraziamenti}{63}{chapter*.60}%
+\contentsline {section}{\numberline {1.1}Stato dell'arte}{7}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Obiettivi e motivazioni}{7}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Novità nella letteratura}{8}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.3}Metodologia}{8}{subsection.1.1.3}%
+\contentsline {subsection}{\numberline {1.1.4}Risultati}{9}{subsection.1.1.4}%
+\contentsline {subsection}{\numberline {1.1.5}Conclusioni}{10}{subsection.1.1.5}%
+\contentsline {subsection}{\numberline {1.1.6}Rilevanza per questo progetto}{10}{subsection.1.1.6}%
+\contentsline {chapter}{\numberline {2}BERTopic}{11}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Funzionalità}{12}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Embedding}{12}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Dimensionality Reduction}{14}{subsection.2.1.2}%
+\contentsline {subsubsection}{Fuzzy simplicial complex}{14}{section*.3}%
+\contentsline {subsubsection}{Parametri}{15}{section*.5}%
+\contentsline {paragraph}{\texttt {n\_neighbors}.}{16}{section*.6}%
+\contentsline {paragraph}{\texttt {min\_dist}}{17}{section*.8}%
+\contentsline {subsection}{\numberline {2.1.3}Clustering}{17}{subsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.1.4}CountVectorizer}{24}{subsection.2.1.4}%
+\contentsline {subsection}{\numberline {2.1.5}c-TF-IDF}{25}{subsection.2.1.5}%
+\contentsline {subsubsection}{Come viene usato il peso}{26}{section*.20}%
+\contentsline {subsection}{\numberline {2.1.6}Maximal Marginal Relevance (MMR)}{26}{subsection.2.1.6}%
+\contentsline {chapter}{\numberline {3}Implementazione di BERTopic}{28}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Embedding}{28}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Mean-max pooling}{30}{subsection.3.1.1}%
+\contentsline {paragraph}{Confronto con la prima iterazione.}{35}{section*.26}%
+\contentsline {paragraph}{Scelta finale.}{35}{section*.27}%
+\contentsline {paragraph}{Osservazione finale.}{36}{section*.28}%
+\contentsline {subsection}{\numberline {3.1.2}CountVectorizer}{36}{subsection.3.1.2}%
+\contentsline {chapter}{\numberline {4}Data Cleaning}{38}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Perché il Data Cleaning è necessario}{38}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Divisione in paragrafi}{41}{section.4.2}%
+\contentsline {subsubsection}{Riconoscere le intestazioni}{42}{section*.32}%
+\contentsline {subsection}{\numberline {4.2.1}Spacy}{42}{subsection.4.2.1}%
+\contentsline {subsubsection}{Suggester}{44}{section*.33}%
+\contentsline {subsubsection}{Tok2Vec}{44}{section*.35}%
+\contentsline {subsubsection}{Reducer}{46}{section*.38}%
+\contentsline {subsubsection}{Scorer}{47}{section*.40}%
+\contentsline {subsubsection}{Allenamento}{47}{section*.42}%
+\contentsline {subsection}{\numberline {4.2.2}Valutazione del modello}{49}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Fallback}{49}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}Classificazione paragrafi}{51}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Etichettatura}{51}{subsection.4.3.1}%
+\contentsline {subsubsection}{Allenamento}{54}{section*.46}%
+\contentsline {subsubsection}{Strategia di rimozione}{56}{section*.50}%
+\contentsline {section}{\numberline {4.4}Altre strategie di data cleaning usate}{57}{section.4.4}%
+\contentsline {subsubsection}{Pulizia tramite NER}{58}{section*.53}%
+\contentsline {subsubsection}{Risultato finale}{59}{section*.55}%
+\contentsline {section}{\numberline {4.5}Possibili miglioramenti}{60}{section.4.5}%
+\contentsline {chapter}{\numberline {5}Risultati finali}{61}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Conclusioni}{62}{chapter.6}%
+\contentsline {chapter}{Ringraziamenti}{64}{chapter*.58}%

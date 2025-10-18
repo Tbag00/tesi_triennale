@@ -1,8 +1,29 @@
 \chapter{Introduzione}
 
+A causa della digitalizzazione delle informazioni la mole di dati in \textit{linguaggio naturale} cresce e con essa la necessità di analizzarli, strutturarli ed estrarne informazioni automaticamente (o perlomeno semi-automaticamente).
+Questo processo è detto \textbf{text mining} e comprende un insieme di tecniche volte a trasformare testi non strutturati in conoscenza utile.
 
-\section{Cos'è il Topic Modeling}
-Descrivere in termini generali l'obiettivo del topic modeling, le tecniche classiche e i vantaggi rispetto ad approcci basati su keyword.
+Tra queste, il \textbf{topic modeling} occupa un ruolo centrale: si tratta di una tecnica di analisi automatica del testo che consente di individuare i temi ricorrenti all’interno di un insieme di documenti.
+L’obiettivo è rappresentare ogni testo come una combinazione di argomenti latenti (topics), ciascuno dei quali è descritto da un insieme di parole che tendono a comparire frequentemente.
+In questo modo, il topic modeling permette di esplorare grandi collezioni di testi, sintetizzandone la struttura semantica e facilitando attività come la classificazione, il clustering o la ricerca di contenuti affini.
+
+Fino a poco tempo fa, le tecniche di topic modelling si basavano su rappresentazioni relativamente semplici del testo, in particolare i modelli bag-of-words o TF-IDF, e su modelli probabilistici che ipotizzavano l’esistenza di argomenti latenti. Ad esempio, il modello di Latent Dirichlet Allocation (LDA) concepisce ogni documento come una miscela di \textit{K} argomenti, e ciascun argomento come una distribuzione sulle parole: in pratica, si stima quali parole co-occorrono insieme per dare forma a un “tema” e in che proporzione ogni documento tratta quei temi.
+
+Questa modalità ha consentito di esplorare ampie raccolte di testi non strutturati, consentendo l’estrazione automatica di strutture tematiche e la rappresentazione dei documenti in uno spazio a tema. Tuttavia, tali approcci presentano alcune limitazioni: l’ignorare il \textbf{contesto} e l’ordine delle parole, la difficoltà a gestire sinonimia o ambiguità, e la necessità di definire preliminarmente il numero di argomenti \textit{K}.
+
+Con l’introduzione delle architetture \textbf{Transformer} e dei \textbf{Large Language Models (LLM)}, il campo del \textbf{Natural Language Processing (NLP)} ha subito una profonda trasformazione: tali modelli permettono di apprendere rappresentazioni numeriche capaci di codificare il \textbf{significato semantico} dei testi e di preservarne il \textbf{contesto linguistico}, rivoluzionando di conseguenza anche il \textbf{topic modeling}.
+Uno dei \textit{framework} che utilizza questi nuovi strumenti è \textbf{BERTopic}:
+\textbf{BERTopic} sfrutta i transformer e il c-TF-IDF per creare cluster densi che consentono di ottenere topic facilmente interpretabili mantenendo le parole importanti nelle descrizioni dei topic.
+L'obiettivo dello studio è quello di applicare il \textit{framework} su un \textit{dataset} di \textbf{annunci di lavoro}, per poter capire quali sono le \textbf{requisiti}, \textbf{mansioni} e \textbf{competenze} più richieste nel mercato del lavoro in ambito di \textbf{Data Analytics}.
+Abbiamo deciso di struttuare l'analisi come segue:
+\begin{enumerate}
+    \item Stato dell'arte e raccoglimento dei dati: Nel primo capitolo discuteremo di uno studio che prima di noi ha affrontato il topic modeling nello stesso dominio e a partire da questo imposteremo il raccoglimento del \textit{dataset}, di cui ne discuteremo le caratteristiche.
+    \item BERTopic: Successivamente discuteremo della struttura del \textit{framework}, spiegandone le caratteristiche e analizzandone i moduli che lo compongono.
+    \item Implementazione: In questo capitolo vedremo come abbiamo parametrizzato la nostra implementazione di BERTopic in base alla natura del \textit{dataset} e agli obiettivi dello studio.
+    \item Pre-processing: Discuteremo di come è stato trattato il \textit{dataset} grezzo per renderlo utilizzabile dal \textit{framework} e per estrarre gli argomenti inerenti allo studio.
+    \item Risultati: Analizzeremo i risultati emersi dallo studio per discuterne le implicazioni principali.
+    \item Conclusioni: Discuteremo i passaggi più cruciali dello studio volgendo l'attenzione a possibili miglioramenti, punti critici e possibili sviluppi futuri.
+\end{enumerate}
 
 \section{Stato dell'arte}
 

@@ -75,7 +75,7 @@ L'obiettivo era individuare la combinazione che producesse il miglior equilibrio
     \item probabilità media di appartenenza ai topic (\emph{mean\_topic\_prob}), che misura la coerenza semantica interna dei cluster.
 \end{enumerate}
 
-Per riproducibilità segnaliamo anche gli altri iperparametri dei due modelli (Figura~\ref{fig:umap-hdbscan-config}): l’impostazione \texttt{min\_dist = 0.1} mantiene gli embedding separabili quel tanto che basta da generare cluster ben delineati senza collasso delle regioni a bassa densità.
+Per riproducibilità segnaliamo anche gli altri iperparametri dei due modelli (Figura~\ref{fig:umap-hdbscan-config}): l’impostazione \texttt{min\_dist = 0.1} mantiene gli embedding sufficientemente separati per generare cluster ben delineati senza il collasso delle regioni a bassa densità.
 
 \begin{figure}[H]
 \centering
@@ -115,7 +115,7 @@ I risultati principali sono riassunti nella Tabella~\ref{tab:tuning_umap_hdbscan
 25 & 20 & 2  & 5.81  & 0.826 \\
 35 & 1  & 43 & 38.55 & 0.543 \\
 35 & 10 & 22 & 49.65 & 0.466 \\
-35 & 15 & 7  & \textbf{22.77} & \textbf{0.538} \\
+35 & 15 & 7  & 22.77 & 0.538 \\
 50 & 10 & 21 & 56.28 & 0.482 \\
 50 & 15 & 14 & 52.04 & 0.469 \\
 \end{tabular}
@@ -132,7 +132,6 @@ Dalla tabella emergono alcune tendenze chiare:
 \noindent
 Le configurazioni con \texttt{n\_neighbors = 25} presentano valori anomali (solo due cluster con \emph{mean\_topic\_prob} superiore a 0.8): in questi casi, UMAP ha compattato eccessivamente lo spazio delle rappresentazioni, portando HDBSCAN a fondere quasi tutti i punti in pochissimi cluster molto densi. Tali risultati, pur mostrando coerenza interna elevata, non sono semanticamente informativi e vengono scartati.
 
-\paragraph{Analisi comparativa.}
 Le configurazioni con \texttt{n\_neighbors = 15} producono un numero elevato di cluster (fino a 47), ma con livelli di rumore superiori al 50\%, sintomo di eccessiva frammentazione.  
 Al contrario, \texttt{n\_neighbors = 50} genera cluster più ampi e meno granulari, ma anche un leggero aumento del rumore, dovuto alla perdita di dettaglio nella struttura locale.
 Abbiamo dunque deciso di fare un altro tentativo restringendo però il dominio dei valori:
@@ -163,14 +162,6 @@ La Tabella~\ref{tab:tuning_seconda_iterazione} riporta i principali risultati ot
 \end{tabular}
 \end{table}
 
-\noindent
-I risultati mostrano un comportamento regolare e coerente con la teoria della densità:
-l’aumento del parametro \texttt{min\_samples} porta, in modo sistematico,
-a una diminuzione del numero di cluster e a un incremento del rumore,
-mentre la \emph{mean topic probability} rimane compresa in un intervallo stabile
-(0.46–0.49), con valori più alti in corrispondenza di configurazioni più compatte.
-
-\paragraph{Analisi comparativa.}
 Si osserva come valori di \texttt{n\_neighbors} superiori a 40 tendano a
 compattare eccessivamente lo spazio latente, portando HDBSCAN a fondere
 i sottotemi in pochi cluster di grandi dimensioni.

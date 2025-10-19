@@ -47,5 +47,14 @@
 \contentsline {subsubsection}{Pulizia tramite NER}{59}{section*.52}%
 \contentsline {subsubsection}{Risultato finale}{60}{section*.54}%
 \contentsline {chapter}{\numberline {6}Risultati finali}{62}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Conclusioni}{63}{chapter.7}%
-\contentsline {chapter}{Ringraziamenti}{65}{chapter*.57}%
+\contentsline {paragraph}{Topic 1 — Frameworks e intelligenza artificiale applicata.}{63}{section*.57}%
+\contentsline {paragraph}{Topic 2 — Business Intelligence e visualizzazione dei dati.}{63}{section*.58}%
+\contentsline {paragraph}{Topic 3 — Data pipelines e infrastrutture cloud.}{64}{section*.59}%
+\contentsline {paragraph}{Topic 4 — Cybersecurity e settore governativo.}{64}{section*.60}%
+\contentsline {paragraph}{Topic 5 — Business Intelligence e sviluppo applicativo.}{64}{section*.61}%
+\contentsline {paragraph}{Topic 6 — Data science predittiva e modellazione.}{64}{section*.62}%
+\contentsline {paragraph}{Topic 7 — Healthcare data e regolamentazione sanitaria.}{65}{section*.63}%
+\contentsline {paragraph}{Interpretazione complessiva}{65}{section*.64}%
+\contentsline {section}{\numberline {6.1}visione dall'alto}{65}{section.6.1}%
+\contentsline {chapter}{\numberline {7}Conclusioni}{67}{chapter.7}%
+\contentsline {chapter}{Ringraziamenti}{69}{chapter*.66}%

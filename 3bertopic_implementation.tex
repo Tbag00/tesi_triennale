@@ -79,8 +79,7 @@ L'obiettivo era individuare la combinazione che producesse il miglior equilibrio
     \item probabilità media di appartenenza ai topic (\emph{mean\_topic\_prob}), che misura la coerenza semantica interna dei cluster.
 \end{enumerate}
 
-Per riproducibilità segnaliamo anche gli altri iperparametri dei due modelli (Figura~\ref{fig:umap-hdbscan-config}): l’impostazione \texttt{min\_dist = 0.1} mantiene gli embedding sufficientemente separati per generare cluster ben delineati senza il collasso delle regioni a bassa densità.
-
+Per riproducibilità segnaliamo anche gli altri iperparametri dei due modelli (Figura~\ref{fig:umap-hdbscan-config}): 
 \begin{figure}[H]
 \centering
 \begin{lstlisting}[language=Python]
@@ -98,82 +97,64 @@ hdbscan_model = HDBSCAN(
     cluster_selection_epsilon=0
 )
 \end{lstlisting}
-\caption{Configurazione utilizzata per UMAP e HDBSCAN durante il tuning intermedio. L’impostazione \texttt{min\_dist = 0.1} preserva la separabilità degli embedding evitando il collasso osservato con valori più bassi.}
+\caption{Configurazione utilizzata per UMAP e HDBSCAN durante il tuning intermedio.}
 \label{fig:umap-hdbscan-config}
 \end{figure}
 
 \noindent
-I risultati principali sono riassunti nella Tabella~\ref{tab:tuning_umap_hdbscan}.
+I risultati principali del tuning congiunto di \texttt{UMAP} e \texttt{HDBSCAN} sul dataset delle \textbf{descrizioni} complete sono riassunti nella Tabella~\ref{tab:tuning_umap_hdbscan_desc}.
 
 \begin{table}[H]
 \centering
-\caption{Risultati del tuning congiunto UMAP–HDBSCAN. Rimosse alcune righe per brevità}
-\label{tab:tuning_umap_hdbscan}
+\caption{Risultati del tuning congiunto UMAP–HDBSCAN sulle descrizioni. Rimosse alcune righe per brevità.}
+\label{tab:tuning_umap_hdbscan_desc}
 \begin{tabular}{ccccc}
 \textbf{n\_neighbors} & \textbf{min\_samples} & \textbf{n\_clusters} & \textbf{noise [\%]} & \textbf{mean\_topic\_prob} \\
-15 & 5  & 168 & 39.66 & 0.467 \\
-15 & 10 & 144 & 40.73 & 0.436 \\
-15 & 15 & 134 & 41.82 & 0.428 \\
-15 & 20 & 117 & 41.97 & 0.413 \\
-15 & 25 & 113 & 45.04 & 0.409 \\
-15 & 30 & 94  & 49.06 & 0.407 \\
-30 & 5  & 134 & 43.21 & 0.439 \\
-30 & 10 & 126 & 46.82 & 0.433 \\
-30 & 15 & 116 & 45.77 & 0.405 \\
-30 & 20 & 110 & 47.43 & 0.413 \\
-30 & 25 & 98  & 48.08 & 0.405 \\
-30 & 30 & 81  & 48.16 & 0.396 \\
-45 & 5  & 120 & 44.33 & 0.432 \\
-45 & 10 & 111 & 49.55 & 0.423 \\
-45 & 15 & 84  & 36.45 & 0.383 \\
-45 & 20 & 95  & 50.70 & 0.414 \\
-45 & 25 & 89  & 51.65 & 0.399 \\
-45 & 30 & 80  & 53.85 & 0.394 \\
-60 & 5  & 107 & 47.52 & 0.440 \\
-60 & 10 & 107 & 53.14 & 0.423 \\
-60 & 15 & 87  & 48.74 & 0.410 \\
-60 & 20 & 84  & 50.14 & 0.410 \\
-60 & 25 & 84  & 52.78 & 0.411 \\
-60 & 30 & 75  & 51.78 & 0.397 \\
+15 & 5  & 36 & 40.53 & 0.534 \\
+15 & 10 & 26 & 40.55 & 0.531 \\
+15 & 15 & 19 & 35.11 & 0.525 \\
+15 & 20 & 20 & 37.05 & 0.498 \\
+15 & 25 & 3  & 3.19  & 0.808 \\
+30 & 5  & 39 & 47.12 & 0.533 \\
+30 & 10 & 32 & 51.09 & 0.518 \\
+30 & 15 & 23 & 46.11 & 0.464 \\
+30 & 20 & 2  & 2.65  & 0.859 \\
+30 & 20 & 2  & 2.65  & 0.859 \\
+45 & 10 & 25 & 49.06 & 0.461 \\
+45 & 15 & 20 & 46.24 & 0.468 \\
+45 & 25 & 5  & 12.54 & 0.594 \\
+60 & 15 & 18 & 53.00 & 0.534 \\
+75 & 15 & 15 & 46.22 & 0.472 \\
 \end{tabular}
 \end{table}
 
 \noindent
-Dalla tabella emergono alcune tendenze chiare:
+Dalla tabella emergono tendenze chiare e coerenti con il comportamento teorico dei due algoritmi:
 \begin{enumerate}
-    \item All'aumentare di \texttt{min\_samples} e \texttt{n\_neighbors}, il numero di cluster decresce, segno di una maggiore severità nella definizione della densità locale, come previsto dal comportamento teorico di HDBSCAN e UMAP.
-    \item Il rumore cresce progressivamente da circa 40\% fino a 53\%, indicando che i punti periferici vengono espulsi in modo coerente con la maggiore compattezza richiesta dai cluster.
-    \item La probabilità media di appartenenza ai topic mostra un andamento decrescente, passando da valori intorno a 0.46 per configurazioni più permissive fino a circa 0.39 per modelli più restrittivi.
+    \item All’aumentare dei parametri \texttt{n\_neighbors} e \texttt{min\_samples} il numero di cluster tende a ridursi, poiché cresce la severità con cui \texttt{HDBSCAN} valuta la densità locale. Ciò produce strutture più compatte ma meno numerose.
+    \item il \textit{rumore} rimane sostanzialmente stabile in un intervallo compreso tra 40 \% e 50 \%, salvo calare bruscamente nei modelli estremi dove la clusterizzazione diventa troppo compatta.
+    \item La probabilità media di appartenenza ai topic (\texttt{mean\_topic\_prob}) decresce consistentemente tranne nei picchi in cui il modello collassa in pochi cluster in cui si hanno valori anormali
 \end{enumerate}
 
-\noindent
+\noindent Si osserva inoltre che nei valori in cui \texttt{n\_neighbors} è inferiore a 30 e \texttt{min\_samples} supera i 25, il modello collassa e si ottengono solo pochissimi cluster, quindi anche se il \textit{noise} e \textit{mean topic probability} appaiono molto buoni questi casi vanno scartati poiché non informativi.
 \subsubsection{Selezione delle run rappresentative}
 
-Dopo aver fissato il parametro di UMAP \texttt{min\_dist = 0}, sono state eseguite diverse combinazioni di valori per \texttt{n\_neighbors} e \texttt{min\_samples}, con l’obiettivo di individuare un compromesso ottimale tra granularità tematica, stabilità dei cluster e coesione semantica interna.  
-La riduzione della distanza minima ha prodotto una proiezione più densa e compatta, aumentando la sensibilità di \texttt{HDBSCAN} alle variazioni locali e quindi il numero complessivo di cluster individuati.  
-I risultati mostrano un rumore complessivo compreso fra il 40\% e il 50\%, un livello considerato accettabile per dati testuali eterogenei come le descrizioni di offerte di lavoro.
+Per valutare l’effetto combinato dei parametri di densità e della dimensionalità, sono state selezionate tre configurazioni rappresentative, corrispondenti a diversi livelli di astrazione e granularità tematica.  
+In tutte le run è stato fissato \texttt{min\_dist = 0}, in modo da favorire una proiezione più compatta e una maggiore sensibilità di \texttt{HDBSCAN} alle strutture locali.
 
-Tra tutte le configurazioni analizzate, sono state selezionate tre run rappresentative, ciascuna corrispondente a un diverso livello di astrazione:
+\textbf{Run A} (\texttt{n\_neighbors = 30, min\_samples = 5}) genera 39 cluster, con un livello di rumore moderato (47.12\%) e una coesione interna pari a 0.53.  
+È la configurazione più \emph{granulare} e adatta a un’analisi esplorativa, poiché consente di identificare un ampio ventaglio di sotto-temi semantici, inclusi pattern di linguaggio specifici o di nicchia.
 
-\noindent
-\textbf{Run A} (\texttt{n\_neighbors = 15, min\_samples = 5}) genera un elevato numero di cluster (168) con un livello di rumore contenuto, favorendo una segmentazione molto fine del corpus.  
-È la configurazione ideale per l’analisi esplorativa dei sotto-temi e per identificare pattern semantici ricorrenti all’interno delle descrizioni.
+\textbf{Run B} (\texttt{n\_neighbors = 45, min\_samples = 15}) produce 20 cluster con un rumore del 46\% e una probabilità media di 0.47.  
+Rappresenta il miglior compromesso tra granularità e compattezza, offrendo un numero gestibile di topic ben distinti e interpretabili.  
+È stata quindi adottata come \textbf{run principale} per le analisi qualitative successive.
 
-\medskip
-\textbf{Run B} (\texttt{n\_neighbors = 30, min\_samples = 5}) rappresenta il miglior compromesso fra granularità e compattezza.  
-Con 134 cluster e una probabilità media di 0.44, i topic risultano ben distinti ma ancora sufficientemente numerosi da descrivere la varietà del dominio.  
-Questa configurazione è stata considerata la \emph{run principale} per le analisi qualitative successive.
+\textbf{Run C} (\texttt{n\_neighbors = 30, min\_samples = 20}) individua soltanto 2 cluster, con un rumore trascurabile (2.6\%) e una coesione eccezionalmente elevata (0.86).  
+Pur sacrificando la varietà tematica, questa configurazione mostra come, in condizioni di alta densità, il modello riesca a identificare poche macro-aree estremamente coerenti, confermando la stabilità semantica complessiva del corpus.
 
-\medskip
-\textbf{Run C} (\texttt{n\_neighbors = 45, min\_samples = 10}) produce un numero inferiore di cluster (111), ognuno dei quali copre un insieme più ampio di testi.  
-Pur presentando un rumore leggermente maggiore (circa 50\%), offre una visione più sintetica e facilmente interpretabile, utile per la costruzione di mappe tematiche o per la discussione dei macro-argomenti emersi.
-
-\medskip
-In sintesi, le tre configurazioni selezionate permettono di osservare il comportamento del modello a diversi livelli di astrazione: dalla frammentazione più analitica (Run A), alla rappresentazione bilanciata (Run B), fino alla generalizzazione dei macro-temi (Run C).  
-Questa tripla prospettiva consente di confrontare direttamente la qualità e la coerenza semantica dei cluster emersi in relazione alla scelta degli iperparametri di UMAP e HDBSCAN.
-
-
-Queste combinazioni consentono di ottenere una rappresentazione più articolata dei contenuti semantici del corpus, mantenendo al contempo una coerenza interna adeguata.
+In sintesi, le tre configurazioni permettono di osservare il comportamento del modello a diversi livelli di astrazione:  
+la \textit{Run A} evidenzia la frammentazione analitica del dominio, la \textit{Run B} rappresenta un equilibrio ottimale tra granularità e interpretabilità, mentre la \textit{Run C} mostra la convergenza verso macro-temi generali di alta coesione.  
+Questa prospettiva multilivello consente di valutare in modo sistematico l’impatto degli iperparametri di \texttt{UMAP} e \texttt{HDBSCAN} sulla qualità e la struttura dei topic emersi.
 
 \subsection{CountVectorizer}
 

@@ -1,6 +1,6 @@
 \chapter{BERTopic}
 Come detto in precedenza l'avvento dei moderni \emph{LLM} ha portato ad un'evoluzione del \textbf{NLP} con la conseguente nascita di nuovi framework e tecniche per le analisi più disparate.
-Il \emph{topic modeling} non è esente da questo fenomeno, in particolare i modelli basati su \textbf{transformers} (cioè modelli che convertono testo in embeddings dipendenti dal contesto) si sono rilevati particolarmente rilevanti; tra essi risaltano i \textbf{modelli preaddestrati}, molto utilizzati perché permettono di creare rappresentazioni \textbf{accurate} e \textbf{informative} di testi, potendo fare affidamento su dataset di training molto grandi e diversificati.
+Il \emph{topic modeling} non è esente da questo fenomeno, in particolare i modelli basati su \textbf{transformers} (cioè modelli che convertono testo in embeddings dipendenti dal contesto) si sono rivelati particolarmente rilevanti; tra essi risaltano i \textbf{modelli preaddestrati}, molto utilizzati perché permettono di creare rappresentazioni \textbf{accurate} e \textbf{informative} di testi, potendo fare affidamento su dataset di training molto grandi e diversificati.
 In questo contesto BERTopic è un \textit{framework} al passo con il corrente stato dell'arte, che offre alcuni vantaggi rispetto a tecniche antecedenti, fra cui permette di catturare il \textbf{significato semantico} dei documenti (riconosce ad esempio i sinonimi). Per dataset eterogenei e rumorosi come gli annunci di lavoro, questa capacità di individuare strutture semantiche latenti rende BERTopic una scelta particolarmente vantaggiosa rispetto ai modelli tradizionali. Un'altra importante caratteristica è la possibilità di \textbf{non specificare il numero delle classi} a priori, ma di ricavarlo automaticamente.
 Inoltre BERTopic è composto da più \textit{submodules} con funzioni diverse, il che permette un'alta personalizzazione.
 
@@ -33,7 +33,7 @@ Il primo modulo è l’embedder, il cui compito è quello di trasformare i docum
 
 \noindent Nella Figura~\ref{fig:embedding-analogy} si osserva come la direzione del vettore $E(\text{man})-E(\text{woman})$ (dove $E(\cdot)$ è la funzione di embedding) catturi una proprietà semantica interpretabile.
 
-\noindent La dimensionalità di questo spazio dipende dal modello: \textit{all-mpnet-base-v2} produce vettori da 768 componenti, mentre modelli di grandi dimensioni come GPT-3 arrivano a 12\,288 dimensioni. Negli embedder moderni (ad esempio quelli basati su Transformer), ad esempio \textit{Sentence-BERT} (SBERT), MPNet o GPT, ogni token viene inoltre rappresentato \textit{in funzione del contesto} in cui compare. Di conseguenza la parola “bank” avrà embedding diversi se usata in “river bank” oppure in “investment bank”.
+\noindent La dimensionalità di questo spazio dipende dal modello: \textit{all-mpnet-base-v2} produce vettori da 768 componenti, mentre modelli di grandi dimensioni come GPT-3 arrivano a 12\,288 dimensioni. Negli embedder moderni, ad esempio \textit{Sentence-BERT} (SBERT), MPNet o GPT, ogni token viene inoltre rappresentato \textit{in funzione del contesto} in cui compare. Di conseguenza la parola “bank” avrà embedding diversi se usata in “river bank” oppure in “investment bank”.
 
 \noindent A partire dagli embedding dei token è possibile costruire \textit{sentence embeddings} che sintetizzano la struttura sintattico-semantica di un paragrafo. SBERT, in particolare, applica un meccanismo di pooling (tipicamente mean o max pooling)\footnote{\url{https://sbert.net/docs/package_reference/sentence_transformer/models.html}} alle rappresentazioni prodotte dal Transformer, ottenendo un unico vettore che compendia l’informazione distribuita sull’intera frase.
 
@@ -93,7 +93,7 @@ Per visualizzare l'effetto di \texttt{n\_neighbors} consideriamo la proiezione b
 \caption{Proiezione UMAP di un modello 3D con 50\,000 punti in un piano 2D. Fonti: \href{https://3d.si.edu/object/3d/mammuthus-primigenius-blumbach:341c96cd-f967-4540-8ed1-d3fc56d31f12}{Smithsonian 3D Digitization Program} e \href{https://www.maxnoichl.eu/projects/mammoth/}{Max Noichl}.}
 \label{fig:umap-mammoth}
 \end{figure}Si osservi come per valori ridotti di \texttt{n\_neighbors} la proiezione UMAP mantenga dettagli locali (curve delle zanne o delle zampe), ma perda la forma complessiva del mammut; all'aumentare del parametro la sagoma globale diventa riconoscibile, a scapito delle piccole variazioni geometriche.
-\paragraph{\texttt{min\_dist}} controlla la densità minima consentita nella proiezione a bassa dimensione. Un valore vicino a zero permette ai punti di collassare in regioni molto dense, mettendo in risalto cluster ben separati; aumentando il parametro, UMAP distribuisce i punti con maggiore uniformità, sacrificando la compattezza dei gruppi a favore di una rappresentazione più omogenea. La Figura~\ref{fig:umap-min-dist} mostra come diverse configurazioni di \texttt{min\_dist} modifichino la distribuzione dei punti: valori estremamente bassi generano isole molto concentrate, mentre impostazioni più elevate distendono l'intero spazio proiettato.
+\paragraph{\texttt{min\_dist}} controlla la densità nella proiezione a bassa dimensione. Un valore vicino a zero permette ai punti di collassare in regioni molto dense, mettendo in risalto cluster ben separati; aumentando il parametro, UMAP distribuisce i punti con maggiore uniformità, sacrificando la compattezza dei gruppi a favore di una rappresentazione più omogenea. La Figura~\ref{fig:umap-min-dist} mostra come diverse configurazioni di \texttt{min\_dist} modifichino la distribuzione dei punti: valori estremamente bassi generano isole molto concentrate, mentre impostazioni più elevate distendono l'intero spazio proiettato.
 \begin{figure}[H]
 \centering
 
@@ -176,7 +176,7 @@ il Minimum Spanning Tree dunque connette i punti più vicini secondo la loro den
 \subsubsection*{3. Costruzione della gerarchia dei cluster}
 
 A partire dal \textit{Minimum Spanning Tree} costruito nel passo precedente, HDBSCAN procede alla \textbf{costruzione di una gerarchia di cluster} basata sulle componenti connesse del grafo. 
-Questo processo consiste nel rimuovere progressivamente gli archi del MST in ordine crescente di peso, ovvero dalla connessione più ``debole'' (distanza maggiore) a quella più ``forte'' (distanza minore).
+Questo processo consiste nel rimuovere progressivamente gli archi del MST in ordine crescente di peso, ovvero dalla connessione più debole (distanza maggiore) a quella più forte (distanza minore).
 
 Man mano che gli archi vengono rimossi, il grafo si frammenta in un numero crescente di componenti connesse. 
 Ogni componente risultante viene interpretata come un potenziale cluster a un determinato livello di densità. 
@@ -195,7 +195,7 @@ Questa rappresentazione gerarchica è fondamentale per le fasi successive, poich
 
 \subsubsection*{4. Condensazione della gerarchia dei cluster}
 
-Una volta costruita la gerarchia completa delle componenti connesse, HDBSCAN applica un processo di \textbf{condensazione} basato sul parametro \texttt{min\_cluster\_size}. 
+Una volta costruita la gerarchia completa delle componenti connesse, HDBSCAN applica un processo di \textbf{condensazione} basato sul parametro\\\texttt{min\_cluster\_size}. 
 L'obiettivo è semplificare la struttura gerarchica, eliminando i rami instabili e i cluster di dimensioni troppo ridotte per essere considerati significativi.
 
 Durante questa fase, la gerarchia dei cluster viene attraversata e vengono mantenuti soltanto quei gruppi che rispettano la dimensione minima richiesta. 
@@ -230,7 +230,7 @@ Questo approccio consente di identificare automaticamente le strutture di densit
 \end{figure}
 
 \subsection{CountVectorizer}
-Nel topic modeling, dopo la creazione dei topic, si cerca una \textbf{rappresentazione} che descriva i topic in termini lessicali.
+Nel topic modeling, dopo la creazione dei topic, si cerca una \textbf{rappresentazione} che descriva i temi in termini lessicali.
 
 Il \texttt{CountVectorizer} rappresenta il primo passo per collegare la rappresentazione semantica dei documenti, ottenuta tramite gli \textit{embeddings}, a una rappresentazione lessicale interpretabile. 
 Il suo compito è quello di trasformare un insieme di testi in una matrice numerica in cui ogni riga rappresenta un documento e ogni colonna un termine del vocabolario; ciascun elemento \( M_{ij} \) indica quante volte il termine \( j \) compare nel documento \( i \).

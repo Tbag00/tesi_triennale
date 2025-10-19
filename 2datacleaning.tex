@@ -100,10 +100,11 @@ Un buon punto di partenza, ma non sufficiente. Per capire bene cosa eliminare do
 \begin{lstlisting}[language=python]
 JOB_CUES_PAT = re.compile(
     r"(?i)\b("
-    r"job\s+description|about\s+the\s+role|responsabilit|activit|"
-    r"requirements?|qualifications?|what\s+you'll\s+(do|be\s+doing)|"
+    r"job\s+description|about\s+the\s+role|
+        responsabilit|activit|"
+    r"requirements?|qualifications?|
+        what\s+you'll\s+(do|be\s+doing)|"
     r"skills|nice\s+to\s+have|profilo"
-    r")\b"
 )
 \end{lstlisting}
 
@@ -583,6 +584,3 @@ def remove_entities(texts, removable_entities={"ORG", "PERSON", "GPE"}):
 \end{figure}
 
 \noindent I riferimenti a \textbf{brand} e \textbf{luoghi statunitensi} scompaiono quasi del tutto e l'attenzione si concentra su mansioni, competenze e requisiti realmente utili per l'analisi del mercato del lavoro.
-\section{Possibili miglioramenti}
-Analizziamo quì i punti critici che potrebbero essere migliorati e speculiamo su quali altre strategie potrebbero essere attuate in uno sviluppo successivo dello studio:
-

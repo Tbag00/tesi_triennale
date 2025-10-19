@@ -155,18 +155,6 @@ I risultati mostrano un rumore complessivo compreso fra il 40\% e il 50\%, un li
 
 Tra tutte le configurazioni analizzate, sono state selezionate tre run rappresentative, ciascuna corrispondente a un diverso livello di astrazione:
 
-\begin{table}[H]
-\centering
-\begin{tabular}{lcccccc}
-\textbf{Tipo di run} & \textbf{n\_neighbors} & \textbf{min\_samples} & \textbf{n\_clusters} & \textbf{Noise (\%)} & \textbf{Mean prob.} & \textbf{Descrizione} \\
-Run A – Granulare & 15 & 5 & 168 & 39.6 & 0.467 & Alta risoluzione tematica, utile per l’analisi esplorativa. \\
-Run B – Equilibrata & 30 & 5 & 134 & 43.2 & 0.439 & Compromesso ottimale tra dettaglio e stabilità. \\
-Run C – Macro-temi & 45 & 10 & 111 & 49.5 & 0.423 & Cluster più ampi e coerenti, adatti a una visione sintetica. \\
-\end{tabular}
-\caption{Configurazioni rappresentative selezionate con \texttt{min\_dist = 0}.}
-\label{tab:runs_representative}
-\end{table}
-
 \noindent
 \textbf{Run A} (\texttt{n\_neighbors = 15, min\_samples = 5}) genera un elevato numero di cluster (168) con un livello di rumore contenuto, favorendo una segmentazione molto fine del corpus.  
 È la configurazione ideale per l’analisi esplorativa dei sotto-temi e per identificare pattern semantici ricorrenti all’interno delle descrizioni.

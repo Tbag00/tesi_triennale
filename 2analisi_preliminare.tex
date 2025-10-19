@@ -16,7 +16,7 @@ La metodologia proposta offre invece un quadro replicabile per \textbf{monitorar
 Lo studio segue un processo articolato in quattro fasi:
 \begin{enumerate}
     \item \textbf{Raccolta dati:} gli annunci sono stati estratti da diversi siti web nel 2019 e nel 2023 utilizzando le stesse sei keyword (\textit{big data, data science, business intelligence, data mining, machine learning, data analytics}), ottenendo un dataset bilanciato di 16\,060 annunci (8\,030 per anno).
-    \item \textbf{Pre-processing:} accurata pulizia del testo (rimozione di HTML e punteggiatura, filtraggio di stopword e n-gram), stemming, esclusione dei testi non in lingua inglese o troppo brevi e costruzione del dizionario/corpus per il topic modeling.
+    \item \textbf{Pre-processing:} accurata pulizia del testo (rimozione di HTML e punteggiatura, filtraggio di stopword e n-gram), stemming, esclusione dei testi non in lingua inglese o troppo brevi e costruzione del corpus per il topic modeling.
     \item \textbf{Topic modeling:} esecuzione di più run LDA con $k=5$--$20$ topic; il numero ottimale ($k=12$) è stato selezionato combinando punteggi di coerenza e valutazione qualitativa degli esperti.
     \item \textbf{Analisi:} interpretazione dei topic, confronto longitudinale (2019 vs.\ 2023) e studio dell'evoluzione del vocabolario.
 \end{enumerate}

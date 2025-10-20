@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.6)  20 OCT 2025 00:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.6)  20 OCT 2025 04:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -372,12 +372,12 @@ Package hyperref Info: Link coloring ON on input line 9.
 \openout3 = `main.out'.
 
  (./settings/frontmatter.tex
-<img/logoUniPg.jpg, id=132, 401.5pt x 401.5pt>
+<img/logoUniPg.jpg, id=156, 401.5pt x 401.5pt>
 File: img/logoUniPg.jpg Graphic file (type jpg)
 <use img/logoUniPg.jpg>
 Package pdftex.def Info: img/logoUniPg.jpg  used on input line 5.
 (pdftex.def)             Requested size: 58.49762pt x 58.49475pt.
-<img/logoDMI.jpg, id=133, 401.5pt x 401.5pt>
+<img/logoDMI.jpg, id=157, 401.5pt x 401.5pt>
 File: img/logoDMI.jpg Graphic file (type jpg)
 <use img/logoDMI.jpg>
 Package pdftex.def Info: img/logoDMI.jpg  used on input line 11.
@@ -424,7 +424,7 @@ Overfull \hbox (11.2075pt too wide) in paragraph at lines 25--26
 \T1/cmr/m/n/12 Ciascun to-ken è suc-ces-si-va-men-te con-ver-ti-to in un vet-to-re nu-me-ri-co, l'\T1/cmr/m/it/12 embedding\T1/cmr/m/n/12 .
  []
 
-<./img/BERTopic/embeddings/blog-king-queen-embeddings.jpg, id=248, 1116.17pt x 624.3325pt>
+<./img/BERTopic/embeddings/blog-king-queen-embeddings.jpg, id=278, 1116.17pt x 624.3325pt>
 File: ./img/BERTopic/embeddings/blog-king-queen-embeddings.jpg Graphic file (type jpg)
 <use ./img/BERTopic/embeddings/blog-king-queen-embeddings.jpg>
 Package pdftex.def Info: ./img/BERTopic/embeddings/blog-king-queen-embeddings.jpg  used on input line 29.
@@ -440,7 +440,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 44--44
  []
 
 [16]
-<img/BERTopic/umap/UMAP_projection.png, id=285, 2055.68pt x 1027.84pt>
+<img/BERTopic/umap/UMAP_projection.png, id=316, 2055.68pt x 1027.84pt>
 File: img/BERTopic/umap/UMAP_projection.png Graphic file (type png)
 <use img/BERTopic/umap/UMAP_projection.png>
 Package pdftex.def Info: img/BERTopic/umap/UMAP_projection.png  used on input line 63.
@@ -448,38 +448,38 @@ Package pdftex.def Info: img/BERTopic/umap/UMAP_projection.png  used on input li
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <12> not available
 (Font)              Font shape `T1/cmtt/m/n' tried instead on input line 71.
  [17 <./img/BERTopic/umap/UMAP_projection.png>]
-<./img/BERTopic/umap/mammoth_render.png, id=300, 4015.0pt x 4015.0pt>
+<./img/BERTopic/umap/mammoth_render.png, id=331, 4015.0pt x 4015.0pt>
 File: ./img/BERTopic/umap/mammoth_render.png Graphic file (type png)
 <use ./img/BERTopic/umap/mammoth_render.png>
 Package pdftex.def Info: ./img/BERTopic/umap/mammoth_render.png  used on input line 76.
 (pdftex.def)             Requested size: 195.0pt x 194.9417pt.
-<./img/BERTopic/umap/n_neighbours5.png, id=301, 1003.75pt x 1003.75pt>
+<./img/BERTopic/umap/n_neighbours5.png, id=332, 1003.75pt x 1003.75pt>
 File: ./img/BERTopic/umap/n_neighbours5.png Graphic file (type png)
 <use ./img/BERTopic/umap/n_neighbours5.png>
 Package pdftex.def Info: ./img/BERTopic/umap/n_neighbours5.png  used on input line 80.
 (pdftex.def)             Requested size: 124.80286pt x 124.79454pt.
-<./img/BERTopic/umap/n_neighbours20.png, id=302, 1003.75pt x 1003.75pt>
+<./img/BERTopic/umap/n_neighbours20.png, id=333, 1003.75pt x 1003.75pt>
 File: ./img/BERTopic/umap/n_neighbours20.png Graphic file (type png)
 <use ./img/BERTopic/umap/n_neighbours20.png>
 Package pdftex.def Info: ./img/BERTopic/umap/n_neighbours20.png  used on input line 85.
 (pdftex.def)             Requested size: 124.80286pt x 124.79454pt.
-<./img/BERTopic/umap/n_neighbours115.png, id=303, 1003.75pt x 1003.75pt>
+<./img/BERTopic/umap/n_neighbours115.png, id=334, 1003.75pt x 1003.75pt>
 File: ./img/BERTopic/umap/n_neighbours115.png Graphic file (type png)
 <use ./img/BERTopic/umap/n_neighbours115.png>
 Package pdftex.def Info: ./img/BERTopic/umap/n_neighbours115.png  used on input line 90.
 (pdftex.def)             Requested size: 124.80286pt x 124.79454pt.
  [18 <./img/BERTopic/umap/mammoth_render.png> <./img/BERTopic/umap/n_neighbours5.png> <./img/BERTopic/umap/n_neighbours20.png> <./img/BERTopic/umap/n_neighbours115.png>]
-<./img/BERTopic/umap/min_dist_001.png, id=323, 1003.75pt x 1003.75pt>
+<./img/BERTopic/umap/min_dist_001.png, id=353, 1003.75pt x 1003.75pt>
 File: ./img/BERTopic/umap/min_dist_001.png Graphic file (type png)
 <use ./img/BERTopic/umap/min_dist_001.png>
 Package pdftex.def Info: ./img/BERTopic/umap/min_dist_001.png  used on input line 102.
 (pdftex.def)             Requested size: 124.80286pt x 124.79454pt.
-<./img/BERTopic/umap/m_dist_5.png, id=324, 1003.75pt x 1003.75pt>
+<./img/BERTopic/umap/m_dist_5.png, id=354, 1003.75pt x 1003.75pt>
 File: ./img/BERTopic/umap/m_dist_5.png Graphic file (type png)
 <use ./img/BERTopic/umap/m_dist_5.png>
 Package pdftex.def Info: ./img/BERTopic/umap/m_dist_5.png  used on input line 107.
 (pdftex.def)             Requested size: 124.80286pt x 124.79454pt.
-<./img/BERTopic/umap/m_dist_8.png, id=325, 1003.75pt x 1003.75pt>
+<./img/BERTopic/umap/m_dist_8.png, id=355, 1003.75pt x 1003.75pt>
 File: ./img/BERTopic/umap/m_dist_8.png Graphic file (type png)
 <use ./img/BERTopic/umap/m_dist_8.png>
 Package pdftex.def Info: ./img/BERTopic/umap/m_dist_8.png  used on input line 112.
@@ -490,31 +490,31 @@ Underfull \hbox (badness 10000) in paragraph at lines 121--121
  []
 
 [19 <./img/BERTopic/umap/min_dist_001.png> <./img/BERTopic/umap/m_dist_5.png> <./img/BERTopic/umap/m_dist_8.png>]
-<./img/BERTopic/hdbscan/hdbscan_points.png, id=345, 784.9325pt x 541.02126pt>
+<./img/BERTopic/hdbscan/hdbscan_points.png, id=375, 784.9325pt x 541.02126pt>
 File: ./img/BERTopic/hdbscan/hdbscan_points.png Graphic file (type png)
 <use ./img/BERTopic/hdbscan/hdbscan_points.png>
 Package pdftex.def Info: ./img/BERTopic/hdbscan/hdbscan_points.png  used on input line 135.
 (pdftex.def)             Requested size: 253.49762pt x 174.7236pt.
  [20 <./img/BERTopic/hdbscan/hdbscan_points.png>] [21]
-<./img/BERTopic/hdbscan/hdbscan_MST.png, id=369, 713.66624pt x 506.89375pt>
+<./img/BERTopic/hdbscan/hdbscan_MST.png, id=399, 713.66624pt x 506.89375pt>
 File: ./img/BERTopic/hdbscan/hdbscan_MST.png Graphic file (type png)
 <use ./img/BERTopic/hdbscan/hdbscan_MST.png>
 Package pdftex.def Info: ./img/BERTopic/hdbscan/hdbscan_MST.png  used on input line 171.
 (pdftex.def)             Requested size: 253.49762pt x 180.05295pt.
  [22 <./img/BERTopic/hdbscan/hdbscan_MST.png (PNG copy)>]
-<./img/BERTopic/hdbscan/hdbscan_cluster_hierarchy.png, id=375, 760.8425pt x 521.95pt>
+<./img/BERTopic/hdbscan/hdbscan_cluster_hierarchy.png, id=405, 760.8425pt x 521.95pt>
 File: ./img/BERTopic/hdbscan/hdbscan_cluster_hierarchy.png Graphic file (type png)
 <use ./img/BERTopic/hdbscan/hdbscan_cluster_hierarchy.png>
 Package pdftex.def Info: ./img/BERTopic/hdbscan/hdbscan_cluster_hierarchy.png  used on input line 191.
 (pdftex.def)             Requested size: 253.49762pt x 173.9006pt.
  [23] [24 <./img/BERTopic/hdbscan/hdbscan_cluster_hierarchy.png (PNG copy)>]
-<./img/BERTopic/hdbscan/hdbscan_condensed.png, id=387, 751.80875pt x 521.95pt>
+<./img/BERTopic/hdbscan/hdbscan_condensed.png, id=417, 751.80875pt x 521.95pt>
 File: ./img/BERTopic/hdbscan/hdbscan_condensed.png Graphic file (type png)
 <use ./img/BERTopic/hdbscan/hdbscan_condensed.png>
 Package pdftex.def Info: ./img/BERTopic/hdbscan/hdbscan_condensed.png  used on input line 211.
 (pdftex.def)             Requested size: 253.49762pt x 175.99521pt.
  [25 <./img/BERTopic/hdbscan/hdbscan_condensed.png>]
-<./img/BERTopic/hdbscan/hdbsca_clusters.png, id=396, 751.80875pt x 521.95pt>
+<./img/BERTopic/hdbscan/hdbsca_clusters.png, id=426, 751.80875pt x 521.95pt>
 File: ./img/BERTopic/hdbscan/hdbsca_clusters.png Graphic file (type png)
 <use ./img/BERTopic/hdbscan/hdbsca_clusters.png>
 Package pdftex.def Info: ./img/BERTopic/hdbscan/hdbsca_clusters.png  used on input line 227.
@@ -555,22 +555,22 @@ Overfull \hbox (16.78406pt too wide) in paragraph at lines 139--140
 \T1/cmr/m/n/12 Si os-ser-va inol-tre che nei va-lo-ri in cui \T1/cmtt/m/n/12 n_neighbors \T1/cmr/m/n/12 è in-fe-rio-re a 30 e \T1/cmtt/m/n/12 min_samples
  []
 
-[36]) (./2datacleaning.tex [37] [38]
+) (./2datacleaning.tex [36] [37]
 Capitolo 5.
-[39
+[38
 
 ]
-<./img/cleaning/garbage_barplot.png, id=512, 1003.75pt x 501.875pt>
+<./img/cleaning/garbage_barplot.png, id=538, 1003.75pt x 501.875pt>
 File: ./img/cleaning/garbage_barplot.png Graphic file (type png)
 <use ./img/cleaning/garbage_barplot.png>
 Package pdftex.def Info: ./img/cleaning/garbage_barplot.png  used on input line 30.
 (pdftex.def)             Requested size: 390.0pt x 195.00294pt.
- [40 <./img/cleaning/garbage_barplot.png>] [41] [42] [43]
+ [39 <./img/cleaning/garbage_barplot.png>] [40] [41] [42]
 Overfull \hbox (4.70703pt too wide) in paragraph at lines 130--131
 [][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[44]
+[43]
 Overfull \hbox (7.34187pt too wide) in paragraph at lines 162--163
 \T1/cmr/m/n/12 Per con-fi-gu-ra-re il mo-del-lo (e l'al-le-na-men-to), spa-Cy ri-chie-de un fi-le \T1/cmtt/m/n/12 config.cfg\T1/cmr/m/n/12 ,
  []
@@ -585,13 +585,13 @@ Underfull \hbox (badness 1735) in paragraph at lines 174--174
 \T1/cmtt/m/n/12 spacy.ngram_suggester.v1 \T1/cmr/m/n/12 e va-lu-ta tut-ti gli span fi-no a 20 to-ken
  []
 
-[45] [46] [47] [48]
-<./img/cleaning/header_metrics_comparison.png, id=630, 433.62pt x 289.08pt>
+[44] [45] [46] [47]
+<./img/cleaning/header_metrics_comparison.png, id=656, 433.62pt x 289.08pt>
 File: ./img/cleaning/header_metrics_comparison.png Graphic file (type png)
 <use ./img/cleaning/header_metrics_comparison.png>
 Package pdftex.def Info: ./img/cleaning/header_metrics_comparison.png  used on input line 288.
 (pdftex.def)             Requested size: 292.5pt x 195.0103pt.
- [49] [50 <./img/cleaning/header_metrics_comparison.png>] [51] [52] [53] [54] [55] [56]
+ [48] [49 <./img/cleaning/header_metrics_comparison.png>] [50] [51] [52] [53] [54] [55]
 Overfull \hbox (23.00285pt too wide) in paragraph at lines 508--510
 [][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
@@ -606,34 +606,55 @@ Overfull \hbox (28.10165pt too wide) in paragraph at lines 521--522
 [][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[57]
-<./img/cleaning/gerarchia_half_cleaning.png, id=748, 1054.94125pt x 498.86375pt>
+[56]
+<./img/cleaning/gerarchia_half_cleaning.png, id=774, 1054.94125pt x 498.86375pt>
 File: ./img/cleaning/gerarchia_half_cleaning.png Graphic file (type png)
 <use ./img/cleaning/gerarchia_half_cleaning.png>
 Package pdftex.def Info: ./img/cleaning/gerarchia_half_cleaning.png  used on input line 540.
 (pdftex.def)             Requested size: 390.0pt x 184.42445pt.
- [58] [59 <./img/cleaning/gerarchia_half_cleaning.png>]
-<./img/cleaning/dendrogramma_pulito.png, id=785, 1262.7175pt x 587.19376pt>
+ [57] [58 <./img/cleaning/gerarchia_half_cleaning.png>]
+<./img/cleaning/dendrogramma_pulito.png, id=811, 1262.7175pt x 587.19376pt>
 File: ./img/cleaning/dendrogramma_pulito.png Graphic file (type png)
 <use ./img/cleaning/dendrogramma_pulito.png>
 Package pdftex.def Info: ./img/cleaning/dendrogramma_pulito.png  used on input line 581.
 (pdftex.def)             Requested size: 390.0pt x 181.35619pt.
-) (./4risultatifinali.tex [60 <./img/cleaning/dendrogramma_pulito.png>] [61]
+) (./4risultatifinali.tex [59 <./img/cleaning/dendrogramma_pulito.png>] [60]
 Capitolo 6.
-<img/topic_modeling/barchar30_5_head_7.png, id=811, 1002.74625pt x 546.04pt>
+<img/topic_modeling/barchar30_5_head_7.png, id=836, 1002.74625pt x 546.04pt>
 File: img/topic_modeling/barchar30_5_head_7.png Graphic file (type png)
 <use img/topic_modeling/barchar30_5_head_7.png>
-Package pdftex.def Info: img/topic_modeling/barchar30_5_head_7.png  used on input line 12.
+Package pdftex.def Info: img/topic_modeling/barchar30_5_head_7.png  used on input line 19.
 (pdftex.def)             Requested size: 358.79929pt x 195.38278pt.
-[62
+[61
 
-] [63 <./img/topic_modeling/barchar30_5_head_7.png>] [64] [65]) (./5conclusioni.tex [66]
+] [62 <./img/topic_modeling/barchar30_5_head_7.png>] [63] [64]
+<img/topic_modeling/size_dist_30_5.png, id=862, 433.62pt x 289.08pt>
+File: img/topic_modeling/size_dist_30_5.png Graphic file (type png)
+<use img/topic_modeling/size_dist_30_5.png>
+Package pdftex.def Info: img/topic_modeling/size_dist_30_5.png  used on input line 86.
+(pdftex.def)             Requested size: 358.79929pt x 239.21292pt.
+ [65 <./img/topic_modeling/size_dist_30_5.png>] [66] [67]) (./5conclusioni.tex [68]
 Capitolo 7.
-) (./main.bbl [67
+[69
 
-]) (./ringraziamenti.tex [68
+]) (./main.bbl [70]
+Underfull \hbox (badness 3168) in paragraph at lines 10--13
+[]\T1/cmr/m/n/12 Maarten Groo-ten-dor-st.  Ber-to-pic do-cu-men-ta-tion: Em-bed-dings,
+ []
 
-]) [69
+
+Underfull \hbox (badness 2884) in paragraph at lines 30--33
+[]\T1/cmr/m/n/12 Nils Rei-mers.  Sen-ten-ce tran-sfor-mers: Mo-del re-fe-ren-ce, 2024.
+ []
+
+[71
+
+]
+Underfull \hbox (badness 1622) in paragraph at lines 45--48
+[]\T1/cmr/m/n/12 Smithsonian 3D Di-gi-ti-za-tion Pro-gram.  Mam-mu-thus pri-mi-ge-nius
+ []
+
+) (./ringraziamenti.tex [72]) [73
 
 ] (./main.aux)
  ***********
@@ -641,21 +662,21 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 69C37A5BD47EEDB70FF9BEDE2F6257B7;4779.
+(rerunfilecheck)             Checksum: 3FED01D1179B0584D8EA068AC898DFFD;6228.
  ) 
 Here is how much of TeX's memory you used:
- 15240 strings out of 474222
- 241557 string characters out of 5748733
+ 15286 strings out of 474222
+ 242653 string characters out of 5748733
  1959975 words of memory out of 5000000
- 36876 multiletter control sequences out of 15000+600000
+ 36901 multiletter control sequences out of 15000+600000
  584871 words of font info for 96 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  80i,19n,82p,1246b,1375s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbi1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0700.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm2074.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on main.pdf (69 pages, 4149628 bytes).
+Output written on main.pdf (73 pages, 4200752 bytes).
 PDF statistics:
- 1078 PDF objects out of 1200 (max. 8388607)
- 895 compressed objects within 9 object streams
- 388 named destinations out of 1000 (max. 500000)
- 362 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1145 PDF objects out of 1200 (max. 8388607)
+ 955 compressed objects within 10 object streams
+ 409 named destinations out of 1000 (max. 500000)
+ 415 words of extra memory for PDF output out of 10000 (max. 10000000)
 

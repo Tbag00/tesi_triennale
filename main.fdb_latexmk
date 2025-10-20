@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1760913300.78212 "main.aux" "main.bbl" "main" 1760913306.46017 0
-  "./bibliografia.bib" 1760829790.45534 1560 40e6bc7f2cdbb2a8b436df352321b556 ""
+["bibtex main"] 1760928959.48908 "main.aux" "main.bbl" "main" 1760928964.59274 0
+  "./bibliografia.bib" 1760928954.06953 5442 7aafafd83bf20684e23185ec41b34e3c ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/unsrt.bst" 1292289607 18030 1376b4b231b50c66211e47e42eda2875 ""
-  "main.aux" 1760913306.01128 22750 3dcba51d62be5035621b1b5c2ca822e3 "pdflatex"
+  "main.aux" 1760928964.2018 24182 64d5501dcef2120cc6a489ca5afa6aa1 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1760913300.92456 "/home/tommaso/tesi/tesi_triennale/main.tex" "main.pdf" "main" 1760913306.46041 0
+["pdflatex"] 1760928959.6153 "/home/tommaso/tesi/tesi_triennale/main.tex" "main.pdf" "main" 1760928964.59307 0
   "/etc/texmf/web2c/texmf.cnf" 1759787235.72431 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/tommaso/tesi/tesi_triennale/main.tex" 1760913276.9385 597 525489d910c2a7c0e7b1de850d195c30 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -166,11 +166,11 @@
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1759787332 8212934 1f31c896aee701a90eb7624b8dc4e089 ""
   "1introduzione.tex" 1760869478.86712 4274 8a326d9f96abd0bbfdd211562f7ec571 ""
   "2analisi_preliminare.tex" 1760869856.46572 8679 4da286cdbdeaaff4ff392514b04b9214 ""
-  "2datacleaning.tex" 1760883170.24012 39489 1a4f9012d3dead14fd5371f867df4a6d ""
+  "2datacleaning.tex" 1760926234.47921 39456 5cb78ea22c944e15f56b79012831f4ef ""
   "3bertopic.tex" 1760888194.43254 26293 bb6dbe3ea2e11895d5751d35ee5d969d ""
-  "3bertopic_implementation.tex" 1760908303.20865 13315 75775eb2ace5fc8c7c6c4945a3466fd4 ""
-  "4risultatifinali.tex" 1760913294.99099 8350 1159b73dfb368b04dc2c635c8bc45130 ""
-  "5conclusioni.tex" 1759843656.64098 99 000ac90a5fbc2ff3d865f1cea06a2d85 ""
+  "3bertopic_implementation.tex" 1760926098.09554 11585 0fa2fcf58cd64404e940ea4ec28035cb ""
+  "4risultatifinali.tex" 1760925387.07641 12621 8b9e0776d0c40ecac7bfb9460ac4f593 ""
+  "5conclusioni.tex" 1760928802.02543 2564 aa87aa13f52bd88990a62d994a242969 ""
   "dedica.tex" 1760282121.0224 941 87a5af4f900c8e4d2d76ebc051fe1e8e ""
   "img/BERTopic/embeddings/blog-king-queen-embeddings.jpg" 1760707877.51762 108734 ebd61d77aa5a8721225887626ee7f6b7 ""
   "img/BERTopic/hdbscan/hdbsca_clusters.png" 1760712639.35144 38894 232c2a85c809c75c99eedb05ed39b7c3 ""
@@ -193,12 +193,13 @@
   "img/logoDMI.jpg" 1759843595.4165 70611 ec95c56f2b831fb97fbeb316f4ef0ecf ""
   "img/logoUniPg.jpg" 1759843595.4125 158221 58b7fcc5f36773d17dbfeab4360b61ed ""
   "img/topic_modeling/barchar30_5_head_7.png" 1760912813.17402 60945 51cea231ef5c423b3954928f7499c135 ""
-  "main.aux" 1760913306.01128 22750 3dcba51d62be5035621b1b5c2ca822e3 "pdflatex"
-  "main.bbl" 1760913300.91115 842 b6b0e9868a8cf49cd84636eed69c42ac "bibtex main"
-  "main.out" 1760913306.01128 4779 69c37a5bd47eedb70ff9bede2f6257b7 "pdflatex"
+  "img/topic_modeling/size_dist_30_5.png" 1760924940.48439 56757 2c63d57d24e32a4537266be17f3638c4 ""
+  "main.aux" 1760928964.2018 24182 64d5501dcef2120cc6a489ca5afa6aa1 "pdflatex"
+  "main.bbl" 1760928959.60568 2558 ca989dcdfaa7d6bcb1b295b0fa57239a "bibtex main"
+  "main.out" 1760928964.2018 6228 3fed01d1179b0584d8ea068ac898dffd "pdflatex"
   "main.tex" 1760913276.9385 597 525489d910c2a7c0e7b1de850d195c30 ""
-  "main.toc" 1760913306.01528 4661 3dd2f66b2a5d58c3d10d39a078b0babd "pdflatex"
-  "ringraziamenti.tex" 1759843662.00866 262 c5dc02d863aa9391f02b8e56c6bdd7c1 ""
+  "main.toc" 1760928964.2018 5093 7ab69e5596f81304bd746c72e192c06e "pdflatex"
+  "ringraziamenti.tex" 1760928935.02501 244 0148354ec09e5e84ff07628956819e00 ""
   "settings/frontmatter.tex" 1760282196.33432 973 ac8d722b2f79b93460c771f5be0ceb5e ""
   "settings/prelude.tex" 1760311450.89077 2112 10dc5e42bccf8e3351da1e9af7ee4732 ""
   (generated)

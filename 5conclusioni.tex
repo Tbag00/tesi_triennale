@@ -1,2 +1,18 @@
 \chapter{Conclusioni}
-Sintetizzare i risultati principali e delineare i possibili sviluppi futuri.
+L'analisi condotta in questo studio ha evidenziato come i lavori nell'ambito di \textbf{Data Analytics} coprano un raggio di mansioni e abilità ben più ampio del settore \textbf{IT}.
+L'intero processo di \textbf{Natural Language Processing} ha integrato tecniche di \textbf{machine learning non supervisionato} (nella ricognizione degli \textit{headers} e nella classificazione dei paragrafi) e di modelli di embedding e di clustering al passo con l'attuale stato dell'arte.
+Il lavoro ha inoltre messo in luce alcune \textbf{criticità metodologiche}, in particolare legate al processo di pulizia e alla frammentazione dei testi. L’uso di embedding sentence-level comporta inevitabilmente una perdita parziale del contesto discorsivo, mentre la natura non supervisionata dell’algoritmo limita il controllo diretto sull’aggregazione dei topic. Tuttavia, la pipeline proposta si è dimostrata efficace nel sintetizzare corpus ottenuto tramite \textit{parsing}, restituendo una rappresentazione leggibile e coerente della domanda di competenze nel mercato del lavoro.
+Infatti l’analisi delle parole chiave e della gerarchia dei topic evidenzia
+la presenza di cinque macro–ambiti concettuali ricorrenti,
+ognuno riconducibile a specifici domini professionali
+o a tipologie di competenze richieste negli annunci:
+\begin{enumerate}
+    \item \textbf{Business Intelligence e Data Analytics.}
+    \item \textbf{Data Engineering e infrastrutture cloud.}
+    \item \textbf{People e HR Analytics.}
+    \item \textbf{Compliance, Governance e Sicurezza.}
+    \item \textbf{Healthcare e Bioinformatics.}
+\end{enumerate}
+Tra i possibili \textbf{sviluppi futuri}, si segnalano l’adozione di modelli \textbf{long-sequence} come \texttt{all-roberta-long-v1} per ridurre la necessità di suddivisione in paragrafi e l’integrazione con metriche di valutazione automatica della coerenza semantica. Inoltre, l’approccio potrebbe essere esteso all’analisi temporale o geografica delle offerte, con l’obiettivo di identificare trend emergenti e correlazioni tra competenze richieste e aree industriali.
+
+In conclusione, la tesi ha contribuito a dimostrare l’efficacia del \textbf{Topic Modeling neurale} come strumento per l’analisi esplorativa di grandi insiemi testuali. L’integrazione tra tecniche di riduzione dimensionale, clustering e rappresentazioni semantiche ha permesso di estrarre conoscenza utile da dati non strutturati, fornendo una base metodologica potenzialmente applicabile in diversi contesti di analisi del linguaggio.

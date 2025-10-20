@@ -25,36 +25,40 @@
 \contentsline {subsection}{\numberline {4.1.1}Mean-max pooling}{32}{subsection.4.1.1}%
 \contentsline {subsubsection}{Min\_dist}{33}{section*.23}%
 \contentsline {subsubsection}{N\_neighbors e min\_dist}{33}{section*.24}%
-\contentsline {subsubsection}{Selezione delle run rappresentative}{36}{section*.27}%
-\contentsline {subsection}{\numberline {4.1.2}CountVectorizer}{37}{subsection.4.1.2}%
-\contentsline {chapter}{\numberline {5}Data Cleaning}{39}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Perché il Data Cleaning è necessario}{39}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Divisione in paragrafi}{42}{section.5.2}%
-\contentsline {subsubsection}{Riconoscere le intestazioni}{43}{section*.31}%
-\contentsline {subsection}{\numberline {5.2.1}Spacy}{44}{subsection.5.2.1}%
-\contentsline {subsubsection}{Suggester}{45}{section*.32}%
-\contentsline {subsubsection}{Tok2Vec}{45}{section*.34}%
-\contentsline {subsubsection}{Reducer}{47}{section*.37}%
-\contentsline {subsubsection}{Scorer}{48}{section*.39}%
-\contentsline {subsubsection}{Allenamento}{48}{section*.41}%
-\contentsline {subsection}{\numberline {5.2.2}Valutazione del modello}{50}{subsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.2.3}Fallback}{50}{subsection.5.2.3}%
-\contentsline {section}{\numberline {5.3}Classificazione paragrafi}{52}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Etichettatura}{52}{subsection.5.3.1}%
-\contentsline {subsubsection}{Allenamento}{55}{section*.45}%
-\contentsline {subsubsection}{Strategia di rimozione}{57}{section*.49}%
-\contentsline {section}{\numberline {5.4}Altre strategie di data cleaning usate}{58}{section.5.4}%
-\contentsline {subsubsection}{Pulizia tramite NER}{59}{section*.52}%
-\contentsline {subsubsection}{Risultato finale}{60}{section*.54}%
-\contentsline {chapter}{\numberline {6}Risultati finali}{62}{chapter.6}%
-\contentsline {paragraph}{Topic 1 — Frameworks e intelligenza artificiale applicata.}{63}{section*.57}%
-\contentsline {paragraph}{Topic 2 — Business Intelligence e visualizzazione dei dati.}{63}{section*.58}%
-\contentsline {paragraph}{Topic 3 — Data pipelines e infrastrutture cloud.}{64}{section*.59}%
-\contentsline {paragraph}{Topic 4 — Cybersecurity e settore governativo.}{64}{section*.60}%
-\contentsline {paragraph}{Topic 5 — Business Intelligence e sviluppo applicativo.}{64}{section*.61}%
-\contentsline {paragraph}{Topic 6 — Data science predittiva e modellazione.}{64}{section*.62}%
-\contentsline {paragraph}{Topic 7 — Healthcare data e regolamentazione sanitaria.}{65}{section*.63}%
-\contentsline {paragraph}{Interpretazione complessiva}{65}{section*.64}%
-\contentsline {section}{\numberline {6.1}visione dall'alto}{65}{section.6.1}%
-\contentsline {chapter}{\numberline {7}Conclusioni}{67}{chapter.7}%
-\contentsline {chapter}{Ringraziamenti}{69}{chapter*.66}%
+\contentsline {subsubsection}{Selezione della run rappresentativa}{36}{section*.27}%
+\contentsline {subsection}{\numberline {4.1.2}CountVectorizer}{36}{subsection.4.1.2}%
+\contentsline {chapter}{\numberline {5}Pre-processing}{38}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Perché il Pre-processing è necessario}{38}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Divisione in paragrafi}{41}{section.5.2}%
+\contentsline {subsubsection}{Riconoscere le intestazioni}{42}{section*.31}%
+\contentsline {subsection}{\numberline {5.2.1}Spacy}{43}{subsection.5.2.1}%
+\contentsline {subsubsection}{Suggester}{44}{section*.32}%
+\contentsline {subsubsection}{Tok2Vec}{44}{section*.34}%
+\contentsline {subsubsection}{Reducer}{46}{section*.37}%
+\contentsline {subsubsection}{Scorer}{47}{section*.39}%
+\contentsline {subsubsection}{Allenamento}{47}{section*.41}%
+\contentsline {subsection}{\numberline {5.2.2}Valutazione del modello}{49}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Fallback}{49}{subsection.5.2.3}%
+\contentsline {section}{\numberline {5.3}Classificazione paragrafi}{51}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Etichettatura}{51}{subsection.5.3.1}%
+\contentsline {subsubsection}{Allenamento}{54}{section*.45}%
+\contentsline {subsubsection}{Strategia di rimozione}{56}{section*.49}%
+\contentsline {section}{\numberline {5.4}Altre strategie di data cleaning usate}{57}{section.5.4}%
+\contentsline {subsubsection}{Pulizia tramite NER}{58}{section*.52}%
+\contentsline {subsubsection}{Risultato finale}{59}{section*.54}%
+\contentsline {chapter}{\numberline {6}Risultati finali}{61}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Topic principali}{62}{section.6.1}%
+\contentsline {paragraph}{Topic 1: Frameworks e intelligenza artificiale applicata.}{62}{section*.57}%
+\contentsline {paragraph}{Topic 2 e 5: Business Intelligence e visualizzazione dei dati.}{63}{section*.58}%
+\contentsline {paragraph}{Topic 3: Data pipelines e infrastrutture cloud.}{63}{section*.59}%
+\contentsline {paragraph}{Topic 4: Cybersecurity e settore governativo.}{63}{section*.60}%
+\contentsline {paragraph}{Topic 6: Data science predittiva e modellazione.}{63}{section*.61}%
+\contentsline {paragraph}{Topic 7: Healthcare data e regolamentazione sanitaria.}{64}{section*.62}%
+\contentsline {subsection}{\numberline {6.1.1}Topic 0: residuo amministrativo e rumore testuale}{64}{subsection.6.1.1}%
+\contentsline {section}{\numberline {6.2}Cluster secondari}{65}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Gestione aziendale, HR e processi organizzativi}{65}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Finanza e assicurazioni}{66}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}Formazione e ricerca scientifica}{67}{subsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.2.4}Estensioni tecniche e ingegneristiche}{67}{subsection.6.2.4}%
+\contentsline {chapter}{\numberline {7}Conclusioni}{69}{chapter.7}%
+\contentsline {chapter}{Ringraziamenti}{73}{chapter*.66}%

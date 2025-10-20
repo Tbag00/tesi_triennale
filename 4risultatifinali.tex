@@ -1,38 +1,44 @@
 \chapter{Risultati finali}
-Come detto durante il \textit{fine-tuning} dei parametri, vedremo esecuzioni con parametri diversi, per estrapolare più informazioni dal dataset.\\
-La prima run è stata di tipo esplorativo, abbiamo scelto infatti la configurazione con \texttt{n\_neighbors} = 30 e \texttt{min\_samples} = 5 poiché è quella che massimizza il numero dei topic.
-Dei \textbf{39 topic} emersi ce ne sono sette che hanno un numero di documenti superiore a 100 (escluso il topic -1).
-L’analisi dei topic iniziali della run consente di delineare i principali assi tematici
-che strutturano il corpus. I sette cluster riportati di seguito rappresentano aree
+L’applicazione del modello di \textbf{topic modeling} al corpus di annunci di lavoro ha prodotto una struttura articolata composta da trentanove cluster tematici distinti (escludendo il rumore).
+
+L’obiettivo di questa fase è interpretare la \textbf{struttura tematica del mercato del lavoro} che emerge dal corpus.
+L’analisi dei cluster consente infatti di evidenziare i principali assi semantici che attraversano il dominio digitale e tecnologico: dall’intelligenza artificiale alla gestione dei dati, dalle infrastrutture cloud alla sicurezza informatica.
+
+L’interpretazione dei risultati è condotta in due livelli:
+nella prima parte vengono analizzati i \textbf{topic principali}, ovvero quelli con il maggior numero di documenti, che delineano le aree centrali e più rappresentative del corpus;
+nella seconda parte vengono invece discussi i \textbf{cluster secondari}, di dimensioni ridotte ma di particolare interesse interpretativo, in quanto rivelano nicchie professionali, domini emergenti o residui di rumore semantico.
+Questa distinzione consente di combinare una lettura quantitativa con una qualitativa, mettendo in luce sia le tendenze generali sia le specificità che caratterizzano il linguaggio del lavoro nel settore digitale.
+\section{Topic principali}
+Dei 39 topic emersi ce ne sono sette che hanno un numero di documenti superiore a 100 (escluso il topic -1).
+I cluster riportati di seguito rappresentano aree
 coerenti e distintive, che coprono i domini dell’intelligenza artificiale,
 dell’ingegneria dei dati, della sicurezza informatica e della gestione
 dei dati sanitari.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.92\textwidth]{img/topic_modeling/barchar30_5_head_7.png}
-\caption{Distribuzione dei documenti nei principali topic della configurazione esplorativa (\texttt{n\_neighbors = 30}, \texttt{min\_samples = 5}).}
+\caption{Barchart dei 7 topic principali con relative parole chiave, la lunghezza della barra rappresenta il peso della parola all'interno del topic}
 \label{fig:topic-barplot-overview}
 \end{figure}
-\noindent
-\paragraph{Topic 1 — Frameworks e intelligenza artificiale applicata.}
-Le parole chiave \emph{frameworks}, \emph{AI/ML}, \emph{agents}, \emph{workflows}
-e \emph{automation} delineano un gruppo di annunci centrato sulla progettazione
+\paragraph{Topic 1: Frameworks e intelligenza artificiale applicata.}
+Le parole chiave \emph{frameworks}, \emph{AI/ML}, \emph{agents}, \emph{workflows},
+\emph{pytorch} e \emph{automation} delineano un gruppo di annunci centrato sulla progettazione
 di sistemi di intelligenza artificiale e sulla costruzione di pipeline automatizzate.
 Il riferimento a ``frameworks'' e ``workflows'' suggerisce l’impiego di architetture modulari
 e strumenti per la gestione di processi complessi di apprendimento automatico.
-Si tratta di un ambito che combina competenze di sviluppo software e di
-machine learning applicato.
+Altri parole frequenti sono \emph{scalable} e \emph{cloud}, termini relativi a tecnologie cloud compaiono in un altro cluster con più di 100 documenti, ciò suggerisce che le competenze legate alle \textbf{architetture distribuite} e alla \textbf{scalabilità} dei sistemi rappresentano un requisito particolarmente richiesto nel mercato del lavoro
 
-\paragraph{Topic 2 — Business Intelligence e visualizzazione dei dati.}
-Questo topic raccoglie ruoli orientati all’analisi e alla rappresentazione
+\paragraph{Topic 2 e 5: Business Intelligence e visualizzazione dei dati.}
+Questi due topic raccolgono ruoli orientati all’analisi e alla rappresentazione
 dei dati aziendali, con parole chiave come \emph{business intelligence},
-\emph{tableau}, \emph{report}, \emph{visualization} e \emph{dashboard}.
+\emph{tableau}, \emph{report}, \emph{visualization} e \emph{dashboard}, \emph{ETL}.
 Gli annunci fanno riferimento a profili analitici responsabili della creazione
 di metriche e reportistica a supporto delle decisioni manageriali.
 L’insieme riflette la crescente integrazione tra analisi dei dati e processi di
 business decision–making.
+Il topic 5 presenta molte parole chiave in comune con il 2, ciò è coerente con la natura esplorativa di questa analisi che è orientata alla separazione di cluster più grandi per cercare di ottenere dettagli più specifici, che però in questo caso non sono emersi.
 
-\paragraph{Topic 3 — Data pipelines e infrastrutture cloud.}
+\paragraph{Topic 3: Data pipelines e infrastrutture cloud.}
 Le parole \emph{pipelines}, \emph{AWS}, \emph{Hadoop}, \emph{ETL} e \emph{big data}
 individuano un cluster di natura infrastrutturale, relativo alla gestione
 dei flussi di dati e all’implementazione di architetture distribuite.
@@ -41,23 +47,13 @@ responsabili della costruzione di sistemi di integrazione e trasformazione del d
 Il tema è adiacente alla Business Intelligence, ma si concentra sugli aspetti
 più tecnici e operativi dell’ecosistema dei dati.
 
-\paragraph{Topic 4 — Cybersecurity e settore governativo.}
+\paragraph{Topic 4: Cybersecurity e settore governativo.}
 Questo cluster è caratterizzato da parole chiave come \emph{cyber},
 \emph{security clearance}, \emph{government}, \emph{defense} e \emph{information systems}.
 Raccoglie annunci legati alla sicurezza informatica in contesti pubblici o militari,
-spesso soggetti a procedure di autorizzazione governativa.
-L’insieme esprime un dominio altamente specializzato, con focus sulla protezione
-dei sistemi informativi e sulla gestione della sicurezza istituzionale.
+spesso soggetti a procedure di autorizzazione governativa, sono ad esempio molto presenti annunci della Vandenberg Space Force Base.
 
-\paragraph{Topic 5 — Business Intelligence e sviluppo applicativo.}
-Il quinto topic si colloca in continuità con la BI, ma con una connotazione più tecnica.
-Le parole chiave \emph{business intelligence}, \emph{developer}, \emph{requirements},
-\emph{reporting} e \emph{duties} indicano la componente implementativa
-delle soluzioni analitiche. Gli annunci fanno riferimento a sviluppatori responsabili
-dell’integrazione dei dati e della manutenzione dei sistemi informativi aziendali,
-in contrapposizione ai profili più analitici del topic 2.
-
-\paragraph{Topic 6 — Data science predittiva e modellazione.}
+\paragraph{Topic 6: Data science predittiva e modellazione.}
 Le parole \emph{predictive}, \emph{data scientists}, \emph{datasets}, \emph{modelling}
 e \emph{insights} descrivono un’area dedicata all’analisi predittiva e alla modellazione statistica.
 Gli annunci richiedono competenze di machine learning supervisionato,
@@ -66,68 +62,80 @@ Questo cluster rappresenta la componente più sperimentale e scientifica
 del dominio dei dati, in contrapposizione agli aspetti infrastrutturali
 del topic 3.
 
-\paragraph{Topic 7 — Healthcare data e regolamentazione sanitaria.}
+\paragraph{Topic 7: Healthcare data e regolamentazione sanitaria.}
 Il settimo topic è riconducibile al dominio sanitario e biomedico.
 Le parole chiave \emph{care}, \emph{healthcare data}, \emph{analyses},
 \emph{regulatory} e \emph{medical} indicano ruoli legati alla gestione dei dati clinici
 e alle procedure di conformità normativa.
-Gli annunci appartengono prevalentemente a contesti ospedalieri o a enti regolatori,
-dove la componente analitica si intreccia con la conoscenza delle normative
-sui sistemi di cartelle cliniche elettroniche (EHR).
+Gli annunci appartengono prevalentemente a contesti ospedalieri.
+\subsection{Topic 0: residuo amministrativo e rumore testuale}
+Il primo cluster emerso, caratterizzato dai termini \emph{procedures}, \emph{applicants}, \emph{administrative} e \emph{provides}, non rappresenta un’area tematica coerente in senso stretto.
+L’analisi dei documenti appartenenti a questo gruppo mostra la presenza di frammenti testuali ricorrenti, formule burocratiche e sezioni descrittive relative alle procedure di candidatura o ai requisiti amministrativi.
 
-\paragraph{Interpretazione complessiva}
-La distribuzione dei topic mostra una chiara separazione tra
-ambiti analitici, tecnici e regolatori, che riflette la struttura
-del mercato del lavoro nei settori ad alta intensità di dati.
-La vicinanza semantica tra i cluster di \emph{Business Intelligence},
-\emph{Data Engineering} e \emph{HR Analytics} indica una filiera comune
-nella gestione dei dati aziendali, mentre i rami dedicati a
-\emph{Compliance} e \emph{Healthcare} rappresentano domini specialistici
-con lessici e competenze distinti.
+È probabile che questo cluster sia il risultato di un processo di \textbf{cleaning non ottimale}, in cui porzioni testuali non informative (ad esempio indicazioni su \emph{how to apply}, \emph{EEO statements}, \emph{background check}, ecc.) non siano state completamente rimosse prima della fase di embedding.
+Il modello ha quindi isolato tali ricorrenze in un gruppo distinto, riconoscendone la coesione lessicale ma non la rilevanza semantica.
 
-\section{visione dall'alto}
-L’analisi delle parole chiave e della gerarchia dei topic evidenzia
-la presenza di cinque macro–ambiti concettuali ricorrenti,
-ognuno riconducibile a specifici domini professionali
-o a tipologie di competenze richieste negli annunci.
-\begin{enumerate}
-    \item \textbf{Business Intelligence e Data Analytics.}
-    Questa area include i topic relativi all’analisi dei dati e alla reportistica aziendale,
-    con termini quali \emph{business intelligence}, \emph{tableau}, \emph{sql server},
-    \emph{data warehouse}, \emph{reporting} e \emph{dashboard}.
-    Si tratta di un gruppo semantico centrato sulla trasformazione del dato in informazione
-    utile al supporto decisionale, che riflette la crescente richiesta di competenze analitiche
-    e di strumenti di visualizzazione nei contesti aziendali.
+La presenza di questo topic, pur non informativa dal punto di vista analitico, è utile come indicatore diagnostico della pipeline di preprocessing: suggerisce la necessità di un filtraggio più rigoroso delle sezioni amministrative, al fine di evitare che elementi non descrittivi dei contenuti lavorativi influiscano sulla segmentazione tematica del corpus.
 
-    \item \textbf{Data Engineering e infrastrutture cloud.}
-    I topic associati a questa categoria ruotano attorno a pipeline di elaborazione
-    e architetture distribuite, con riferimenti ad ambienti quali \emph{AWS}, \emph{ETL},
-    \emph{Hadoop}, \emph{Redshift} e \emph{data pipelines}.
-    L’insieme rappresenta la dimensione più tecnica della filiera dei dati,
-    focalizzata sulla gestione dei flussi informativi e sull’implementazione
-    di infrastrutture scalabili.
+\section{Cluster secondari}
+Accanto ai cluster principali, sono stati individuati ulteriori topic minori che, pur avendo dimensioni più ridotte, offrono informazioni non trascurabili.
+Tra questi emergono alcuni topic che si distinguono, che aggiungono informazioni importanti al quadro generale oppure che delineano una macroarea non emersa dai primi 7 topic
 
-    \item \textbf{People e HR Analytics.}
-    Una parte significativa del corpus riguarda la gestione delle risorse umane
-    attraverso metodologie di analisi quantitativa.
-    Termini come \emph{recruitment}, \emph{relations}, \emph{performance management}
-    e \emph{people analytics} identificano un filone legato
-    all’applicazione di strumenti analitici in ambito organizzativo.
-    Questa area risulta tematicamente contigua alla Business Intelligence,
-    ma con una prospettiva interna all’organizzazione.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth]{img/topic_modeling/size_dist_30_5.png}
+\caption{Distribuzione delle dimensioni dei topic identificati dal modello, la maggior parte dei topic ha dimensioni pari o inferiori a 50}
+\label{fig:secondary-topic-size}
+\end{figure}
 
-    \item \textbf{Compliance, Governance e Sicurezza.}
-    Il modello ha individuato un gruppo di topic di natura normativa e procedurale,
-    caratterizzato da parole chiave quali \emph{procedures}, \emph{regulations},
-    \emph{governance}, \emph{applicants} e \emph{security clearance}.
-    L’insieme riflette ruoli amministrativi o di controllo,
-    connessi alla gestione della conformità e alla sicurezza delle informazioni.
+\subsection{Gestione aziendale, HR e processi organizzativi}
+\textit{Topic: 9, 10, 15, 18, 22} \\
+Quest’area raccoglie i cluster che descrivono la dimensione organizzativa
+e relazionale del mondo del lavoro.
+Include i temi della gestione del personale (\emph{HR analytics},
+\emph{recruitment}, \emph{training}), della comunicazione interna,
+del marketing digitale e della consulenza.
+Al suo interno compaiono anche i domini industriali e logistici
+(\emph{supply chain}, \emph{operations}, \emph{continuous improvement}),
+che rappresentano la declinazione operativa dei processi aziendali.
 
-    \item \textbf{Healthcare e Bioinformatics.}
-    Sono emersi diversi cluster afferenti al dominio sanitario e biomedico,
-    con termini come \emph{healthcare data}, \emph{EHR}, \emph{bioinformatics},
-    \emph{biomedical} e \emph{imaging}.
-    L’analisi suggerisce la coesistenza di due sottorami: uno orientato alla gestione
-    dei dati clinici e amministrativi, e uno più tecnico, riferito alle
-    applicazioni computazionali in ambito biomedico.
-\end{enumerate}
+tra questi topic risalta il topic 9, descritto dai termini \emph{social}, \emph{digital marketing},
+\emph{creators} e \emph{partnerships}, che delineano il dominio della comunicazione
+digitale e della promozione online.
+Si tratta di annunci rivolti a profili creativi o manageriali,
+responsabili della gestione di campagne digitali, della produzione di contenuti
+e delle collaborazioni con partner o influencer.
+Questo è uno dei cluster più distinti dal resto del corpus ed è rappresentato da 75 documenti, un numero abbastanza alto, questo potrebbe indicare una svolta nelle strategie di comunicazione delle imprese.
+
+\subsection{Finanza e assicurazioni}
+\textit{Topic: 13, 14} \\
+Questa macroarea raccoglie due cluster distinti ma fortemente correlati, che descrivono ruoli nel campo dell’analisi economico–finanziaria e nel settore assicurativo.
+Il \textit{topic 13}, caratterizzato dai termini \emph{business analyst}, \emph{forecasting}, \emph{financial reporting} e \emph{budgeting}, rappresenta profili orientati alla pianificazione finanziaria e al monitoraggio delle performance economiche.
+Gli annunci fanno riferimento a ruoli che richiedono competenze di analisi dei dati economici e di modellazione predittiva per il supporto alle decisioni aziendali.
+
+Il \textit{topic 14}, descritto dalle parole \emph{underwriting}, \emph{property}, \emph{auto} e \emph{guidelines}, è invece riconducibile al settore assicurativo, in particolare alla valutazione dei rischi e alla gestione delle polizze.
+La presenza di questi due cluster suggerisce che le competenze quantitative e di analisi finanziaria restano un asse importante nella domanda di lavoro, anche in contesti tradizionali come quello assicurativo.
+
+\subsection{Formazione e ricerca scientifica}
+\textit{Topic: 19, 20} \\
+Questi due cluster delineano un’area che collega il mondo accademico e la ricerca applicata.
+Il \textit{topic 19} è dominato da termini come \emph{faculty} e \emph{courses}, fa riferimento a ruoli nel settore dell’istruzione e della formazione digitale.
+Gli annunci comprendono docenti universitari, tutor e progettisti didattici coinvolti nella realizzazione di corsi online e percorsi formativi in ambito STEM.
+
+Il \textit{topic 20}, che include parole come \emph{computational}, \emph{bioinformatics}, \emph{biomedical} e \emph{imaging}, estende questa dimensione verso la ricerca scientifica, in particolare nel dominio biomedico e bioinformatico.
+L’emergere di questo cluster testimonia la presenza di una domanda non trascurabile di figure specializzate nella gestione e analisi di dati biologici e clinici, un ambito ad alta interdisciplinarità che unisce competenze informatiche e scientifiche.
+
+\subsection{Estensioni tecniche e ingegneristiche}
+\textit{Topic: 16} \\
+Il \textit{topic 16}, contraddistinto dalle parole \emph{machine learning engineer}, \emph{critical product} e \emph{AI models}, rappresenta un’estensione naturale dei cluster principali dedicati all’intelligenza artificiale.
+Si tratta di un gruppo più ristretto di annunci focalizzati su ruoli di \emph{machine learning engineer} e \emph{AI developer}, spesso inseriti in team di ricerca e sviluppo di prodotti innovativi.
+La presenza di questo cluster, pur di dimensioni ridotte, conferma la forte specializzazione tecnica richiesta per integrare modelli di apprendimento automatico all’interno di sistemi produttivi e applicazioni aziendali.
+\noindent
+
+\section*{Conclusioni}
+
+L’analisi condotta ha permesso di identificare, attraverso il modello di \textbf{topic modeling} basato su BERTopic, una struttura tematica complessa e coerente all’interno del corpus di annunci di lavoro.
+I sette cluster principali delineano i pilastri del mercato occupazionale contemporaneo nei settori tecnologici e digitali, mostrando come le competenze in \textbf{intelligenza artificiale}, \textbf{data engineering}, \textbf{cybersecurity} e \textbf{gestione dei dati sanitari} rappresentino oggi le aree di maggiore centralità e specializzazione.
+
+I cluster secondari, pur di dimensioni più ridotte, ampliano il quadro emerso evidenziando la presenza di domini trasversali, come la \textbf{formazione digitale}, la \textbf{bioinformatica}, la \textbf{finanza} e la \textbf{consulenza aziendale}.
+Essi mostrano come la domanda di lavoro data–driven si estenda ormai ben oltre i confini dell’informatica tradizionale, coinvolgendo ambiti interdisciplinari e settori di applicazione diversificati.

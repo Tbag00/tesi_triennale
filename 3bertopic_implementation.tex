@@ -137,25 +137,14 @@ Dalla tabella emergono tendenze chiare e coerenti con il comportamento teorico d
 \end{enumerate}
 
 \noindent Si osserva inoltre che nei valori in cui \texttt{n\_neighbors} è inferiore a 30 e \texttt{min\_samples} supera i 25, il modello collassa e si ottengono solo pochissimi cluster, quindi anche se il \textit{noise} e \textit{mean topic probability} appaiono molto buoni questi casi vanno scartati poiché non informativi.
-\subsubsection{Selezione delle run rappresentative}
+\subsubsection{Selezione della run rappresentativa}
 
-Per valutare l’effetto combinato dei parametri di densità e della dimensionalità, sono state selezionate tre configurazioni rappresentative, corrispondenti a diversi livelli di astrazione e granularità tematica.  
-In tutte le run è stato fissato \texttt{min\_dist = 0}, in modo da favorire una proiezione più compatta e una maggiore sensibilità di \texttt{HDBSCAN} alle strutture locali.
+La configurazione finale adottata è:
+\[
+n\_neighbors = 30, \quad min\_samples = 5
+\]
 
-\textbf{Run A} (\texttt{n\_neighbors = 30, min\_samples = 5}) genera 39 cluster, con un livello di rumore moderato (47.12\%) e una coesione interna pari a 0.53.  
-È la configurazione più \emph{granulare} e adatta a un’analisi esplorativa, poiché consente di identificare un ampio ventaglio di sotto-temi semantici, inclusi pattern di linguaggio specifici o di nicchia.
-
-\textbf{Run B} (\texttt{n\_neighbors = 45, min\_samples = 15}) produce 20 cluster con un rumore del 46\% e una probabilità media di 0.47.  
-Rappresenta il miglior compromesso tra granularità e compattezza, offrendo un numero gestibile di topic ben distinti e interpretabili.  
-È stata quindi adottata come \textbf{run principale} per le analisi qualitative successive.
-
-\textbf{Run C} (\texttt{n\_neighbors = 30, min\_samples = 20}) individua soltanto 2 cluster, con un rumore trascurabile (2.6\%) e una coesione eccezionalmente elevata (0.86).  
-Pur sacrificando la varietà tematica, questa configurazione mostra come, in condizioni di alta densità, il modello riesca a identificare poche macro-aree estremamente coerenti, confermando la stabilità semantica complessiva del corpus.
-
-In sintesi, le tre configurazioni permettono di osservare il comportamento del modello a diversi livelli di astrazione:  
-la \textit{Run A} evidenzia la frammentazione analitica del dominio, la \textit{Run B} rappresenta un equilibrio ottimale tra granularità e interpretabilità, mentre la \textit{Run C} mostra la convergenza verso macro-temi generali di alta coesione.  
-Questa prospettiva multilivello consente di valutare in modo sistematico l’impatto degli iperparametri di \texttt{UMAP} e \texttt{HDBSCAN} sulla qualità e la struttura dei topic emersi.
-
+Genera 39 cluster, presenta un livello di rumore moderato (47.12\%) e una coesione interna pari a 0.53. L’elevata granularità ha permesso di mettere in evidenza sotto-temi specifici e nicchie professionali, fornendo un quadro ricco da cui estrarre le interpretazioni discusse nel capitolo Risultati finali.
 \subsection{CountVectorizer}
 
 \noindent La configurazione del vettorizzatore influenza fortemente la qualità dei topic risultanti. 

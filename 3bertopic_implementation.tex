@@ -62,11 +62,11 @@ In questo modo si ottiene un embedding unico di dimensione doppia rispetto l'out
 
 Per attuare questo approccio serve inoltre una strategia di segmentazione degli annunci che soddisfi al contempo \textbf{coerenza semantica} e criteri di lunghezza: il segmento non può essere troppo corto, altrimenti SBERT non ha il contesto per estrarre topic singnificativi, e non può ovviamente superare la lunghezza massima consentita. Approfondiamo questo aspetto nel capitolo \textbf{Pre-processing}.
 
-\subsection*{Tuning congiunto di UMAP e HDBSCAN}
-\subsubsection{Min\_dist}
+\section{Tuning congiunto di UMAP e HDBSCAN}
+\subsection{Min\_dist}
 Questo parametro UMAP controlla la vicinanza dei punti nello spazio a dimensione ridotta, teoricamente impostarlo al minimo (0) permetterebbe ad HDBSCAN di costruire i cluster in modo più netto e definito. Abbiamo comunque testato altri valori del parametro, per confermare questa assunzione abbiamo svolto alcuni test e abbiamo notato che i cluster risultano più bilanciati e con una più netta separazione.
 Ad esempio fissando \texttt{n\_neighbors}=30 e \texttt{min\_samples}=10 abbiamo ottenuto che riducendo \texttt{min\_dist} da 0.1 a 0, il topic più grande è sceso da 628 documenti a 278, inoltre i nomi delle classi si sovrappongono più raramente, segno di una migliore \textbf{separabilità}
-\subsubsection{N\_neighbors e min\_dist}
+\subsection{N\_neighbors e min\_samples}
 Poiché sia il parametro \texttt{n\_neighbors} di UMAP che il parametro \texttt{min\_samples} di HDBSCAN influiscono pesantemente sul bilanciamento tra struttura \textbf{locale} e \textbf{globale}, abbiamo deciso di testarli combinandoli in più modi:
 \[
 n\_neighbors \in \{15, 30, 45, 60, 75\}, \qquad
@@ -137,7 +137,7 @@ Dalla tabella emergono tendenze chiare e coerenti con il comportamento teorico d
 \end{enumerate}
 
 \noindent Si osserva inoltre che nei valori in cui \texttt{n\_neighbors} è inferiore a 30 e \texttt{min\_samples} supera i 25, il modello collassa e si ottengono solo pochissimi cluster, quindi anche se il \textit{noise} e \textit{mean topic probability} appaiono molto buoni questi casi vanno scartati poiché non informativi.
-\subsubsection{Selezione della run rappresentativa}
+\subsection{Selezione della run rappresentativa}
 
 La configurazione finale adottata è:
 \[

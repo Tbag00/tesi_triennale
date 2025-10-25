@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1761325959.10203 "main.aux" "main.bbl" "main" 1761326109.77812 0
+["bibtex main"] 1761325959.10203 "main.aux" "main.bbl" "main" 1761407698.13706 0
   "./bibliografia.bib" 1760928954.06953 5442 7aafafd83bf20684e23185ec41b34e3c ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/unsrt.bst" 1292289607 18030 1376b4b231b50c66211e47e42eda2875 ""
-  "main.aux" 1761326109.39788 24410 c2b9a5f962b6a93aab6ab3dbdf84be88 "pdflatex"
+  "main.aux" 1761326302.6854 24410 c2b9a5f962b6a93aab6ab3dbdf84be88 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1761326104.29215 "/home/tommaso/tesi/tesi_triennale/main.tex" "main.pdf" "main" 1761326109.77843 0
+["pdflatex"] 1761326297.95409 "/home/tommaso/tesi/tesi_triennale/main.tex" "main.pdf" "main" 1761407698.13852 0
   "/etc/texmf/web2c/texmf.cnf" 1759787235.72431 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/tommaso/tesi/tesi_triennale/main.tex" 1761301529.41745 597 525489d910c2a7c0e7b1de850d195c30 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -194,12 +194,12 @@
   "img/logoUniPg.jpg" 1759843595.4125 158221 58b7fcc5f36773d17dbfeab4360b61ed ""
   "img/topic_modeling/barchar30_5_head_7.png" 1760912813.17402 60945 51cea231ef5c423b3954928f7499c135 ""
   "img/topic_modeling/size_dist_30_5.png" 1760924940.48439 56757 2c63d57d24e32a4537266be17f3638c4 ""
-  "main.aux" 1761326109.39788 24410 c2b9a5f962b6a93aab6ab3dbdf84be88 "pdflatex"
+  "main.aux" 1761326302.6854 24410 c2b9a5f962b6a93aab6ab3dbdf84be88 "pdflatex"
   "main.bbl" 1761325959.22955 2558 ca989dcdfaa7d6bcb1b295b0fa57239a "bibtex main"
-  "main.out" 1761326109.40188 7018 7506041205e85db1d60d5f738d3fd5a7 "pdflatex"
+  "main.out" 1761326302.6894 7018 7506041205e85db1d60d5f738d3fd5a7 "pdflatex"
   "main.tex" 1761301529.41745 597 525489d910c2a7c0e7b1de850d195c30 ""
-  "main.toc" 1761326109.40188 5254 c46ed3e9cb0cbf03905f6b5cc57b5b2c "pdflatex"
-  "ringraziamenti.tex" 1761326104.0662 1563 48062ddf9b13acd775568fa53fb77013 ""
+  "main.toc" 1761326302.6934 5254 c46ed3e9cb0cbf03905f6b5cc57b5b2c "pdflatex"
+  "ringraziamenti.tex" 1761326297.70956 1562 4e1d518cc49d24cf38142e97a6d3f91f ""
   "settings/frontmatter.tex" 1760282196.33432 973 ac8d722b2f79b93460c771f5be0ceb5e ""
   "settings/prelude.tex" 1760311450.89077 2112 10dc5e42bccf8e3351da1e9af7ee4732 ""
   (generated)
